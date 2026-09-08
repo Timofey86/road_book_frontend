@@ -1,8 +1,7 @@
 import {createFileRoute, Outlet, redirect} from '@tanstack/react-router'
+import {currentUserQueryOptions} from "../../../../entities/user";
 
-import {currentUserQueryOptions} from "../../../entities/user";
-
-export const Route = createFileRoute('/_authenticated')({
+export const Route = createFileRoute('/_app/_authenticated')({
     beforeLoad: async ({context}) => {
             const user = await context.queryClient.ensureQueryData(
                 currentUserQueryOptions

@@ -1,0 +1,147 @@
+.sidebar {
+    position: sticky;
+    top: 0;
+
+    height: 100vh;
+    padding: 20px 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 32px;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.link {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 12px;
+
+    color: #374151;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.link:hover {
+    background: #f3f6f4;
+}
+
+.active {
+    color: #047857;
+    background: #ecf7f2;
+}
+
+.createButton {
+    margin-top: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+    padding: 10px 12px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #047857;
+    color: #ffffff;
+
+    font: inherit;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.account {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px;
+
+    border-radius: 8px;
+    background: #f7f8f8;
+}
+
+.user img,
+.avatarFallback {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+}
+
+.avatar {
+    object-fit: cover;
+}
+
+.avatarFallback {
+    display: grid;
+    place-items: center;
+
+    background: #047857;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.user div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.user span {
+    margin-top: 2px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 8px 10px;
+
+    border: 0;
+    background: transparent;
+
+    color: #4b5563;
+    font: inherit;
+
+    cursor: pointer;
+}
