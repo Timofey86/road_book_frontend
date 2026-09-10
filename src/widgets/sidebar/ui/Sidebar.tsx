@@ -2,85 +2,112 @@ import {
     Compass,
     Heart,
     LogOut,
-    Map,
+    MapPinned,
     Plus,
     Settings,
     User,
 } from 'lucide-react';
-import { Link, useNavigate } from '@tanstack/react-router';
-import { useQuery } from '@tanstack/react-query';
-import { currentUserQueryOptions } from '../../../entities/user';
-import { useLogoutMutation } from '../../../features/auth';
+import logo from '../../../shared/assets/logo-icon.svg';
+import {Link, useNavigate} from '@tanstack/react-router';
+import {useQuery} from '@tanstack/react-query';
+import {currentUserQueryOptions} from '../../../entities/user';
+import {useLogoutMutation} from '../../../features/auth';
 import styles from './Sidebar.module.css';
 
 export function Sidebar() {
     const navigate = useNavigate();
-    const { data: user } = useQuery(currentUserQueryOptions);
+    const {data: user} = useQuery(currentUserQueryOptions);
     const logoutMutation = useLogoutMutation();
 
     const handleLogout = () => {
         logoutMutation.mutate(undefined, {
             onSuccess: () => {
-                navigate({ to: '/login' });
+                navigate({to: '/login'});
             },
         });
     };
 
     return (
         <aside className={styles.sidebar}>
-            <div>
-                <div className={styles.logo}>
-                    <Map size={28} />
-                    <span>RoadBook</span>
-                </div>
-
-                <nav className={styles.navigation}>
-                    <Link
-                        to="/"
-                        className={styles.link}
-                        activeProps={{
-                            className: `${styles.link} ${styles.active}`,
-                        }}
-                    >
-                        <Compass size={20} />
-                        Explore
-                    </Link>
-
-                    {user && (
-                        <>
-                            <Link
-                                to="/profile"
-                                className={styles.link}
-                                activeProps={{
-                                    className: `${styles.link} ${styles.active}`,
-                                }}
-                            >
-                                <User size={20} />
-                                Profile
-                            </Link>
-
-                            <button className={styles.link}>
-                                <Heart size={20} />
-                                Favorites
-                            </button>
-
-                            <button className={styles.link}>
-                                <Settings size={20} />
-                                Settings
-                            </button>
-
-                            <button className={styles.createButton}>
-                                <Plus size={18} />
-                                Create Route
-                            </button>
-                        </>
-                    )}
-                </nav>
+            <div className={styles.logo}>
+                <img
+                    src={logo}
+                    alt=""
+                    className={styles.logoImage}
+                />
+                <span>RoadBook</span>
             </div>
 
+            <nav className={styles.navigation}>
+                <Link
+                    to="/"
+                    className={styles.link}
+                    activeProps={{
+                        className: `${styles.link} ${styles.active}`,
+                    }}
+                >
+                    <Compass size={20}/>
+                    Explore
+                </Link>
+
+                {user && (
+                    <>
+                        <button
+                            type="button"
+                            className={styles.link}
+                        >
+                            <MapPinned size={20}/>
+                            My Routes
+                        </button>
+
+                        <button
+                            type="button"
+                            className={styles.link}
+                        >
+                            <Heart size={20}/>
+                            Favorites
+                        </button>
+
+                        <button
+                            type="button"
+                            className={styles.createButton}
+                        >
+                            <Plus size={18}/>
+                            Create Route
+                        </button>
+                    </>
+                )}
+            </nav>
+
+
             {user && (
-                <div className={styles.account}>
-                    <div className={styles.user}>
+                <>
+                    <div className={styles.accountSection}>
+                        <span className={styles.sectionTitle}>
+                            Account
+                        </span>
+
+                        <Link
+                            to="/profile"
+                            className={styles.link}
+                            activeProps={{
+                                className: `${styles.link} ${styles.active}`,
+                            }}
+                        >
+                            <User size={20}/>
+                            Profile
+                        </Link>
+
+                        <button
+                            type="button"
+                            className={styles.link}
+                        >
+                            <Settings size={20}/>
+                            Settings
+                        </button>
+                    </div>
+
+                    <div className={styles.userCard}>
                         {user.avatarUrl ? (
                             <img
                                 src={user.avatarUrl}
@@ -93,10 +120,22 @@ export function Sidebar() {
                             </div>
                         )}
 
-                        <div>
+                        <div className={styles.userInfo}>
                             <strong>{user.name}</strong>
                             <span>View profile</span>
                         </div>
+                    </div>
+
+                    <div className={styles.language}>
+                        <span>Language</span>
+
+                        <select
+                            defaultValue={user.preferredLanguage}
+                            aria-label="Language"
+                        >
+                            <option value="en">EN</option>
+                            <option value="ru">RU</option>
+                        </select>
                     </div>
 
                     <button
@@ -105,10 +144,10 @@ export function Sidebar() {
                         onClick={handleLogout}
                         disabled={logoutMutation.isPending}
                     >
-                        <LogOut size={18} />
+                        <LogOut size={18}/>
                         Log out
                     </button>
-                </div>
+                </>
             )}
         </aside>
     )

@@ -2,12 +2,11 @@
     position: sticky;
     top: 0;
 
-    height: 100vh;
-    padding: 20px 16px;
-
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+
+    height: 100vh;
+    padding: 20px 16px;
 
     background: #ffffff;
     border-right: 1px solid #e5e7eb;
@@ -18,10 +17,16 @@
     align-items: center;
     gap: 10px;
 
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 
     font-size: 22px;
     font-weight: 700;
+}
+
+.logoImage {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
 }
 
 .navigation {
@@ -39,13 +44,16 @@
 
     padding: 10px 12px;
 
-    color: #374151;
-    background: transparent;
     border: 0;
     border-radius: 8px;
 
+    background: transparent;
+    color: #374151;
+
     font: inherit;
+    text-align: left;
     text-decoration: none;
+
     cursor: pointer;
 }
 
@@ -54,19 +62,19 @@
 }
 
 .active {
-    color: #047857;
     background: #ecf7f2;
+    color: #047857;
 }
 
 .createButton {
-    margin-top: 16px;
+    width: 100%;
 
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
 
-    width: 100%;
+    margin-top: 14px;
     padding: 10px 12px;
 
     border: 0;
@@ -81,27 +89,46 @@
     cursor: pointer;
 }
 
-.account {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.createButton:hover {
+    background: #036c4d;
 }
 
-.user {
+.accountSection {
+    margin-top: 28px;
+}
+
+.sectionTitle {
+    display: block;
+
+    margin-bottom: 8px;
+    padding: 0 12px;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.userCard {
     display: flex;
     align-items: center;
     gap: 10px;
 
+    margin-top: 24px;
     padding: 10px;
 
-    border-radius: 8px;
-    background: #f7f8f8;
+    border-radius: 10px;
+    background: #f8faf9;
 }
 
-.user img,
+.avatar,
 .avatarFallback {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
 
     border-radius: 50%;
 }
@@ -116,18 +143,58 @@
 
     background: #047857;
     color: #ffffff;
+
     font-weight: 600;
 }
 
-.user div:last-child {
+.userInfo {
     display: flex;
     flex-direction: column;
+
+    min-width: 0;
 }
 
-.user span {
+.userInfo strong {
+    overflow: hidden;
+
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.userInfo span {
     margin-top: 2px;
+
     color: #6b7280;
-    font-size: 12px;
+    font-size: 11px;
+}
+
+.language {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 14px;
+    padding: 10px 12px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+.language select {
+    border: 0;
+    outline: none;
+
+    background: transparent;
+    color: #374151;
+
+    font: inherit;
+
+    cursor: pointer;
 }
 
 .logout {
@@ -135,13 +202,28 @@
     align-items: center;
     gap: 10px;
 
-    padding: 8px 10px;
+    width: 100%;
+
+    margin-top: 10px;
+    padding: 10px 12px;
 
     border: 0;
-    background: transparent;
+    border-radius: 8px;
 
-    color: #4b5563;
+    background: transparent;
+    color: #374151;
+
     font: inherit;
+    text-align: left;
 
     cursor: pointer;
+}
+
+.logout:hover {
+    background: #f3f4f6;
+}
+
+.logout:disabled {
+    opacity: 0.5;
+    cursor: default;
 }
