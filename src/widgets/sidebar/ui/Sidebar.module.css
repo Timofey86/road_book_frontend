@@ -169,53 +169,23 @@
     font-size: 11px;
 }
 
-.language {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-top: 14px;
-    padding: 10px 12px;
-
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-
-    color: #6b7280;
-
-    font-size: 13px;
-}
-
-.language select {
-    border: 0;
-    outline: none;
-
-    background: transparent;
-    color: #374151;
-
-    font: inherit;
-
-    cursor: pointer;
+.languageRow {
+    margin-top: 10px;
 }
 
 .logout {
     display: flex;
     align-items: center;
     gap: 10px;
-
     width: 100%;
-
     margin-top: 10px;
     padding: 10px 12px;
-
     border: 0;
     border-radius: 8px;
-
     background: transparent;
     color: #374151;
-
     font: inherit;
     text-align: left;
-
     cursor: pointer;
 }
 

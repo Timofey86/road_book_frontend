@@ -1,5 +1,6 @@
 import {createFileRoute, Outlet, redirect} from '@tanstack/react-router'
 import {currentUserQueryOptions} from "../../../entities/user";
+import {GuestLayout} from "../../../widgets/guest-layout";
 
 export const Route = createFileRoute('/_guest')({
     beforeLoad: async ({ context }) => {
@@ -12,9 +13,13 @@ export const Route = createFileRoute('/_guest')({
             });
         }
     },
-  component: GuestLayout,
+  component: GuestRoute,
 })
 
-function GuestLayout() {
-    return <Outlet />;
+function GuestRoute() {
+    return (
+        <GuestLayout>
+            <Outlet />
+        </GuestLayout>
+    );
 }

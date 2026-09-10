@@ -13,11 +13,13 @@ import {useQuery} from '@tanstack/react-query';
 import {currentUserQueryOptions} from '../../../entities/user';
 import {useLogoutMutation} from '../../../features/auth';
 import styles from './Sidebar.module.css';
+import {LanguageSwitcher} from "../../../shared/ui/language-switcher";
 
 export function Sidebar() {
     const navigate = useNavigate();
     const {data: user} = useQuery(currentUserQueryOptions);
     const logoutMutation = useLogoutMutation();
+
 
     const handleLogout = () => {
         logoutMutation.mutate(undefined, {
@@ -126,16 +128,8 @@ export function Sidebar() {
                         </div>
                     </div>
 
-                    <div className={styles.language}>
-                        <span>Language</span>
-
-                        <select
-                            defaultValue={user.preferredLanguage}
-                            aria-label="Language"
-                        >
-                            <option value="en">EN</option>
-                            <option value="ru">RU</option>
-                        </select>
+                    <div className={styles.languageRow}>
+                        <LanguageSwitcher />
                     </div>
 
                     <button

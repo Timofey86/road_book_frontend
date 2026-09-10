@@ -1,0 +1,68 @@
+{
+  "guest": {
+    "title": "Спланируйте своё следующее автопутешествие.",
+    "description": "Находите интересные маршруты, создавайте собственные поездки и делитесь ими с другими путешественниками."
+  },
+
+  "sidebar": {
+    "language": "Язык"
+  },
+
+  "auth": {
+    "login": {
+      "title": "С возвращением",
+      "subtitle": "Войдите, чтобы продолжить работу с RoadBook.",
+      "email": "Email",
+      "password": "Пароль",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "Введите пароль",
+      "submit": "Войти",
+      "submitting": "Вход...",
+      "noAccount": "Ещё нет аккаунта?",
+      "createAccount": "Создать аккаунт"
+    },
+
+    "register": {
+      "title": "Создать аккаунт",
+      "subtitle": "Присоединяйтесь к RoadBook и делитесь своими маршрутами.",
+      "name": "Имя",
+      "email": "Email",
+      "password": "Пароль",
+      "confirmPassword": "Повторите пароль",
+      "bio": "О себе",
+      "namePlaceholder": "Иван Иванов",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "Создайте пароль",
+      "confirmPasswordPlaceholder": "Повторите пароль",
+      "bioPlaceholder": "Расскажите немного о себе",
+      "passwordHint": "Минимум 8 символов, включая заглавную букву, строчную букву и цифру.",
+      "submit": "Создать аккаунт",
+      "submitting": "Создание аккаунта...",
+      "alreadyHaveAccount": "Уже есть аккаунт?",
+      "signIn": "Войти"
+    },
+
+    "validation": {
+      "nameMinLength": "Имя должно содержать не менее 2 символов.",
+      "nameMaxLength": "Имя должно содержать не более 100 символов.",
+      "emailRequired": "Введите email.",
+      "emailInvalid": "Введите корректный email.",
+      "passwordMinLength": "Пароль должен содержать не менее 8 символов.",
+      "passwordMaxLength": "Пароль должен содержать не более 72 символов.",
+      "passwordFormat": "Пароль должен содержать хотя бы одну заглавную букву, одну строчную букву и одну цифру.",
+      "confirmPasswordRequired": "Повторите пароль.",
+      "passwordsDoNotMatch": "Пароли не совпадают.",
+      "bioMaxLength": "Описание должно содержать не более 500 символов."
+    },
+
+    "errors": {
+      "loginFailed": "Не удалось выполнить вход.",
+      "registrationFailed": "Не удалось создать аккаунт."
+    },
+
+    "common": {
+      "showPassword": "Показать пароль",
+      "hidePassword": "Скрыть пароль"
+    }
+  }
+}

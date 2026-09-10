@@ -1,8 +1,16 @@
 import axios, {type AxiosError, type InternalAxiosRequestConfig} from "axios";
+import i18n from '../i18n/config';
 
 export const apiClient = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true,
+});
+
+apiClient.interceptors.request.use((config) => {
+    config.headers['Accept-Language'] =
+        i18n.resolvedLanguage ?? 'en';
+
+    return config;
 });
 
 interface RetryRequestConfig extends InternalAxiosRequestConfig {

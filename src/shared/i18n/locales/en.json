@@ -1,0 +1,68 @@
+{
+  "guest": {
+    "title": "Plan your next road trip.",
+    "description": "Discover inspiring routes, create your own trips and share them with other travelers."
+  },
+
+  "sidebar": {
+    "language": "Language"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to continue to RoadBook.",
+      "email": "Email",
+      "password": "Password",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "Enter your password",
+      "submit": "Sign in",
+      "submitting": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create account"
+    },
+
+    "register": {
+      "title": "Create account",
+      "subtitle": "Join RoadBook and start sharing your routes.",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "bio": "Bio",
+      "namePlaceholder": "John Doe",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "Create a password",
+      "confirmPasswordPlaceholder": "Repeat your password",
+      "bioPlaceholder": "Tell us something about yourself",
+      "passwordHint": "At least 8 characters, including uppercase, lowercase and a number.",
+      "submit": "Create account",
+      "submitting": "Creating account...",
+      "alreadyHaveAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+
+    "validation": {
+      "nameMinLength": "Name must contain at least 2 characters.",
+      "nameMaxLength": "Name must contain at most 100 characters.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Enter a valid email address.",
+      "passwordMinLength": "Password must contain at least 8 characters.",
+      "passwordMaxLength": "Password must contain at most 72 characters.",
+      "passwordFormat": "Password must contain at least one uppercase letter, one lowercase letter and one number.",
+      "confirmPasswordRequired": "Please confirm your password.",
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "bioMaxLength": "Bio must contain at most 500 characters."
+    },
+
+    "errors": {
+      "loginFailed": "Unable to sign in.",
+      "registrationFailed": "Registration failed."
+    },
+
+    "common": {
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    }
+  }
+}
