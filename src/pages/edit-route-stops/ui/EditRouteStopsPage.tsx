@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import styles from './EditRouteStopsPage.module.css';
-import {routeDetailsQueryOptions} from "../../../entities/route";
+import {routeDetailsQueryOptions, useBuildRouteMutation} from "../../../entities/route";
 import {AddRouteStop} from "../../../features/add-route-stop";
 import {
     DndContext,
@@ -15,8 +15,9 @@ import {
     SortableContext,
     verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import {useReorderRouteStopsMutation} from "../../../entities/route-stop";
+import {useReorderRouteStopsMutation, useDeleteRouteStopMutation} from "../../../entities/route-stop";
 import {SortableStopItem} from "../../../features/edit-route-stops/ui/SortableStopItem.tsx";
+import {formatDuration} from "../../../shared/lib/formatDuration.ts";
 
 interface EditRouteStopsPageProps {
     routeId: number;
@@ -32,6 +33,8 @@ export function EditRouteStopsPage({
     } = useQuery(routeDetailsQueryOptions(routeId));
 
     const reorderMutation = useReorderRouteStopsMutation(routeId);
+    const deleteStopMutation = useDeleteRouteStopMutation(routeId);
+    const buildRouteMutation = useBuildRouteMutation(routeId);
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -40,6 +43,18 @@ export function EditRouteStopsPage({
             },
         }),
     );
+
+    const handleDeleteStop = (stopId: number) => {
+        deleteStopMutation.mutate({
+            routeId,
+            stopId,
+        });
+    };
+
+    const handleBuildRoute = () => {
+        buildRouteMutation.mutate();
+    };
+
 
     const handleDragEnd = (event: DragEndEvent) => {
 
@@ -89,13 +104,23 @@ export function EditRouteStopsPage({
         );
     }
 
-    if (isError) {
+    if (isError || !route) {
         return (
             <div className={styles.page}>
                 Failed to load route.
             </div>
         );
     }
+
+    const hasBuiltRoute =
+        route.totalDistanceMeters !== null &&
+        route.totalDurationSeconds !== null;
+
+    const buildButtonLabel = buildRouteMutation.isPending
+        ? 'Building route...'
+        : hasBuiltRoute && !route.isRouteActual
+            ? 'Rebuild route'
+            : 'Build route';
 
     return (
         <div className={styles.page}>
@@ -153,12 +178,71 @@ export function EditRouteStopsPage({
                                     <SortableStopItem
                                         key={stop.id}
                                         stop={stop}
+                                        onDelete={handleDeleteStop}
+                                        isDeleting={deleteStopMutation.isPending}
                                     />
                                 ))}
                             </div>
                         </SortableContext>
                     </DndContext>
                 )}
+                <div className={styles.buildSection}>
+                    <button
+                        type="button"
+                        className={styles.buildButton}
+                        onClick={handleBuildRoute}
+                        disabled={
+                            route.stops.length < 2 ||
+                            buildRouteMutation.isPending
+                        }
+                    >
+                        {buildButtonLabel}
+                    </button>
+
+                    {route.stops.length < 2 && (
+                        <span className={styles.buildHint}>
+                            Add at least two stops to build the route.
+                        </span>
+                    )}
+
+                    {buildRouteMutation.isError && (
+                        <span className={styles.buildError}>
+                            Failed to build route.
+                        </span>
+                    )}
+                </div>
+
+                {route.totalDistanceMeters !== null &&
+                    route.totalDurationSeconds !== null && (
+                        <div className={styles.routeStats}>
+                            <div>
+                                <strong>
+                                    {(route.totalDistanceMeters / 1000).toFixed(1)} km
+                                </strong>
+                                <span>Distance</span>
+                            </div>
+
+                            <div>
+                                <strong>
+                                    {formatDuration(route.totalDurationSeconds)}
+                                </strong>
+                                <span>Duration</span>
+                            </div>
+
+                            <div
+                                className={`${styles.statusCard} ${
+                                    route.isRouteActual
+                                        ? styles.statusReady
+                                        : styles.statusOutdated
+                                }`}
+                            >
+                                <strong>
+                                    {route.isRouteActual ? 'Ready' : 'Needs rebuild'}
+                                </strong>
+                                <span>Status</span>
+                            </div>
+                        </div>
+                    )}
             </section>
         </div>
     )

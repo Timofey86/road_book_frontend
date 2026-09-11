@@ -109,3 +109,17 @@ export interface RouteDetails {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface RouteBuildGeometry {
+    type: 'LineString';
+    coordinates: [number, number][];
+}
+
+export interface RouteBuildResponse {
+    id: number;
+    totalDistanceMeters: number;
+    totalDurationSeconds: number;
+    routeGeometry: RouteBuildGeometry;
+    routeBuiltAt: string;
+    isRouteActual: boolean;
+}

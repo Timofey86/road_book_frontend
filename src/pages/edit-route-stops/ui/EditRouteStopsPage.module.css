@@ -80,16 +80,110 @@
     gap: 10px;
 }
 
-.stop {
+.buildSection {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 14px;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
 }
 
-.stop span {
+.buildButton {
+    min-height: 42px;
+    padding: 0 18px;
+    border: 1px solid #047857;
+    border-radius: 8px;
+    background: #047857;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.buildButton:hover:not(:disabled) {
+    background: #036b4d;
+    border-color: #036b4d;
+}
+
+.buildButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.buildHint {
     color: #6b7280;
     font-size: 13px;
+}
+
+.buildError {
+    color: #dc2626;
+    font-size: 13px;
+}
+
+.routeStats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.routeStats > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+.routeStats strong {
+    color: #111827;
+}
+
+.routeStats span {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.statusCard {
+    transition:
+            background-color 0.15s ease,
+            border-color 0.15s ease;
+}
+
+.routeStats > .statusReady {
+    border-color: #a7f3d0;
+    background: #ecfdf5;
+}
+
+.statusReady strong {
+    color: #047857;
+}
+
+.routeStats > .statusOutdated {
+    border-color: #fecaca;
+    background: #fef2f2;
+}
+
+.statusOutdated strong {
+    color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+    .page {
+        padding: 20px;
+    }
+
+    .section {
+        padding: 18px;
+    }
+
+    .routeStats {
+        grid-template-columns: 1fr;
+    }
+
+    .buildSection {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
