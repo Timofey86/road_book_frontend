@@ -1,0 +1,46 @@
+.stop {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.dragging {
+    opacity: 0.65;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+
+.dragHandle {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    padding: 4px;
+    border: 0;
+    background: transparent;
+    color: #9ca3af;
+    cursor: grab;
+}
+
+.dragHandle:active {
+    cursor: grabbing;
+}
+
+.content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.content strong {
+    color: #111827;
+}
+
+.content span {
+    color: #6b7280;
+    font-size: 13px;
+}

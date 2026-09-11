@@ -1,0 +1,123 @@
+.wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.searchWrapper {
+    position: relative;
+}
+
+.searchWrapper input {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 0 100px 0 40px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #111827;
+    font: inherit;
+}
+
+.searchWrapper input:focus {
+    border-color: #047857;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(4 120 87 / 10%);
+}
+
+.searchIcon {
+    position: absolute;
+    top: 50%;
+    left: 13px;
+    color: #9ca3af;
+    transform: translateY(-50%);
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    color: #9ca3af;
+    font-size: 12px;
+    transform: translateY(-50%);
+}
+
+.results {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 10%);
+}
+
+.result {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 12px;
+    border: 0;
+    border-bottom: 1px solid #f3f4f6;
+    background: #ffffff;
+    color: #374151;
+    text-align: left;
+    cursor: pointer;
+}
+
+.result:last-child {
+    border-bottom: 0;
+}
+
+.result:hover {
+    background: #f9fafb;
+}
+
+.result:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.resultContent {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.resultContent strong {
+    color: #111827;
+    font-size: 14px;
+}
+
+.resultContent span {
+    overflow: hidden;
+    color: #6b7280;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.message {
+    padding: 14px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.error {
+    margin-top: 8px;
+    color: #dc2626;
+    font-size: 13px;
+}

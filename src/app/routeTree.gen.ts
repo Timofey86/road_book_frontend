@@ -16,6 +16,8 @@ import { Route as AppAuthenticatedRouteRouteImport } from './routes/_app/_authen
 import { Route as GuestLoginRouteImport } from './routes/_guest/login'
 import { Route as GuestRegisterRouteImport } from './routes/_guest/register'
 import { Route as AppAuthenticatedProfileRouteImport } from './routes/_app/_authenticated/profile'
+import { Route as AppAuthenticatedRoutesCreateRouteImport } from './routes/_app/_authenticated/routes/create'
+import { Route as AppAuthenticatedRoutesRouteIdEditStopsRouteImport } from './routes/_app/_authenticated/routes/$routeId/edit/stops'
 
 const AppRouteRoute = AppRouteRouteImport.update({
   id: '/_app',
@@ -49,18 +51,34 @@ const AppAuthenticatedProfileRoute = AppAuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AppAuthenticatedRouteRoute,
 } as any)
+const AppAuthenticatedRoutesCreateRoute =
+  AppAuthenticatedRoutesCreateRouteImport.update({
+    id: '/routes/create',
+    path: '/routes/create',
+    getParentRoute: () => AppAuthenticatedRouteRoute,
+  } as any)
+const AppAuthenticatedRoutesRouteIdEditStopsRoute =
+  AppAuthenticatedRoutesRouteIdEditStopsRouteImport.update({
+    id: '/routes/$routeId/edit/stops',
+    path: '/routes/$routeId/edit/stops',
+    getParentRoute: () => AppAuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
   '/login': typeof GuestLoginRoute
   '/register': typeof GuestRegisterRoute
   '/profile': typeof AppAuthenticatedProfileRoute
+  '/routes/create': typeof AppAuthenticatedRoutesCreateRoute
+  '/routes/$routeId/edit/stops': typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AppIndexRoute
   '/login': typeof GuestLoginRoute
   '/register': typeof GuestRegisterRoute
   '/profile': typeof AppAuthenticatedProfileRoute
+  '/routes/create': typeof AppAuthenticatedRoutesCreateRoute
+  '/routes/$routeId/edit/stops': typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,12 +89,26 @@ export interface FileRoutesById {
   '/_guest/register': typeof GuestRegisterRoute
   '/_app/': typeof AppIndexRoute
   '/_app/_authenticated/profile': typeof AppAuthenticatedProfileRoute
+  '/_app/_authenticated/routes/create': typeof AppAuthenticatedRoutesCreateRoute
+  '/_app/_authenticated/routes/$routeId/edit/stops': typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register' | '/profile'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/profile'
+    | '/routes/create'
+    | '/routes/$routeId/edit/stops'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register' | '/profile'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/profile'
+    | '/routes/create'
+    | '/routes/$routeId/edit/stops'
   id:
     | '__root__'
     | '/_app'
@@ -86,6 +118,8 @@ export interface FileRouteTypes {
     | '/_guest/register'
     | '/_app/'
     | '/_app/_authenticated/profile'
+    | '/_app/_authenticated/routes/create'
+    | '/_app/_authenticated/routes/$routeId/edit/stops'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -144,15 +178,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAuthenticatedProfileRouteImport
       parentRoute: typeof AppAuthenticatedRouteRoute
     }
+    '/_app/_authenticated/routes/create': {
+      id: '/_app/_authenticated/routes/create'
+      path: '/routes/create'
+      fullPath: '/routes/create'
+      preLoaderRoute: typeof AppAuthenticatedRoutesCreateRouteImport
+      parentRoute: typeof AppAuthenticatedRouteRoute
+    }
+    '/_app/_authenticated/routes/$routeId/edit/stops': {
+      id: '/_app/_authenticated/routes/$routeId/edit/stops'
+      path: '/routes/$routeId/edit/stops'
+      fullPath: '/routes/$routeId/edit/stops'
+      preLoaderRoute: typeof AppAuthenticatedRoutesRouteIdEditStopsRouteImport
+      parentRoute: typeof AppAuthenticatedRouteRoute
+    }
   }
 }
 
 interface AppAuthenticatedRouteRouteChildren {
   AppAuthenticatedProfileRoute: typeof AppAuthenticatedProfileRoute
+  AppAuthenticatedRoutesCreateRoute: typeof AppAuthenticatedRoutesCreateRoute
+  AppAuthenticatedRoutesRouteIdEditStopsRoute: typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
 }
 
 const AppAuthenticatedRouteRouteChildren: AppAuthenticatedRouteRouteChildren = {
   AppAuthenticatedProfileRoute: AppAuthenticatedProfileRoute,
+  AppAuthenticatedRoutesCreateRoute: AppAuthenticatedRoutesCreateRoute,
+  AppAuthenticatedRoutesRouteIdEditStopsRoute:
+    AppAuthenticatedRoutesRouteIdEditStopsRoute,
 }
 
 const AppAuthenticatedRouteRouteWithChildren =

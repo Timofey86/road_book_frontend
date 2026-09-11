@@ -37,3 +37,75 @@ export interface RoutesPaginatedResponse {
     items: RouteListItem[];
     meta: PaginationMeta;
 }
+
+export interface RouteStop {
+    id: number;
+    routeId: number;
+    name: string;
+    address: string | null;
+    latitude: number;
+    cityName: string | null;
+    countryName: string | null;
+    countryCode: string | null;
+    longitude: number;
+    position: number;
+    description: string | null;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface RouteResponse {
+    id: number;
+    userId: number;
+    title: string;
+    slug: string;
+    description: string | null;
+    coverUrl: string | null;
+    totalDistanceMeters: number | null;
+    totalDurationSeconds: number | null;
+    isRouteActual: boolean;
+    createdAt: string;
+    updatedAt: string;
+    stops: RouteStop[];
+    tags: RouteTag[];
+}
+
+export interface CreateRoutePayload {
+    title: string;
+    description?: string;
+    tags?: string[];
+}
+
+export interface RoutePhoto {
+    id: number;
+    routeId: number;
+    url: string;
+    caption: string | null;
+    position: number;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface RouteDetails {
+    id: number;
+    userId: number;
+    title: string;
+    slug: string;
+    description: string | null;
+    coverUrl: string | null;
+    totalDistanceMeters: number | null;
+    totalDurationSeconds: number | null;
+    routeGeometry: object | null;
+    routeBuiltAt: string | null;
+    isRouteActual: boolean;
+    author: RouteAuthor;
+    stops: RouteStop[];
+    tags: RouteTag[];
+    photos: RoutePhoto[];
+    likesCount: number;
+    isLiked: boolean;
+    isFavorite: boolean;
+    commentsCount: number;
+    createdAt: string;
+    updatedAt: string;
+}
