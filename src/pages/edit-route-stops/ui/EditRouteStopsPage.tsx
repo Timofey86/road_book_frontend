@@ -18,14 +18,13 @@ import {
 import {useReorderRouteStopsMutation, useDeleteRouteStopMutation} from "../../../entities/route-stop";
 import {SortableStopItem} from "../../../features/edit-route-stops/ui/SortableStopItem.tsx";
 import {formatDuration} from "../../../shared/lib/formatDuration.ts";
+import {RouteMap} from "../../../features/route-map";
 
 interface EditRouteStopsPageProps {
     routeId: number;
 }
 
-export function EditRouteStopsPage({
-                                       routeId
-                                   }: EditRouteStopsPageProps) {
+export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
     const {
         data: route,
         isPending,
@@ -118,9 +117,11 @@ export function EditRouteStopsPage({
 
     const buildButtonLabel = buildRouteMutation.isPending
         ? 'Building route...'
-        : hasBuiltRoute && !route.isRouteActual
-            ? 'Rebuild route'
-            : 'Build route';
+        : route.isRouteActual
+            ? 'Route is up to date'
+            : hasBuiltRoute
+                ? 'Rebuild route'
+                : 'Build route';
 
     return (
         <div className={styles.page}>
@@ -193,7 +194,8 @@ export function EditRouteStopsPage({
                         onClick={handleBuildRoute}
                         disabled={
                             route.stops.length < 2 ||
-                            buildRouteMutation.isPending
+                            buildRouteMutation.isPending ||
+                            route.isRouteActual
                         }
                     >
                         {buildButtonLabel}
@@ -242,7 +244,15 @@ export function EditRouteStopsPage({
                                 <span>Status</span>
                             </div>
                         </div>
+
                     )}
+
+                {route.routeGeometry && route.isRouteActual && (
+                    <RouteMap
+                        geometry={route.routeGeometry}
+                        stops={route.stops}
+                    />
+                )}
             </section>
         </div>
     )

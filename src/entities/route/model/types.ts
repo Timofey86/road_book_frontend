@@ -86,6 +86,11 @@ export interface RoutePhoto {
     updatedAt: string;
 }
 
+export interface RouteBuildGeometry {
+    type: 'LineString';
+    coordinates: [number, number][];
+}
+
 export interface RouteDetails {
     id: number;
     userId: number;
@@ -95,7 +100,7 @@ export interface RouteDetails {
     coverUrl: string | null;
     totalDistanceMeters: number | null;
     totalDurationSeconds: number | null;
-    routeGeometry: object | null;
+    routeGeometry: RouteBuildGeometry | null;
     routeBuiltAt: string | null;
     isRouteActual: boolean;
     author: RouteAuthor;

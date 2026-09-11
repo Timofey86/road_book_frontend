@@ -1,5 +1,6 @@
 import {createRoot} from 'react-dom/client'
 import './app/styles/index.css'
+import 'leaflet/dist/leaflet.css';
 import './shared/i18n/config';
 import {RouterProvider} from "@tanstack/react-router";
 import {router} from './app/router';
