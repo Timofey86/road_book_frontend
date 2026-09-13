@@ -49,12 +49,12 @@ export function Header() {
                             Sign in
                         </Link>
 
-                        {/*<Link*/}
-                        {/*    to="/register"*/}
-                        {/*    className={styles.signUp}*/}
-                        {/*>*/}
-                        {/*    Sign up*/}
-                        {/*</Link>*/}
+                        <Link
+                            to="/register"
+                            className={styles.signUp}
+                        >
+                            Sign up
+                        </Link>
                     </>
                 )}
             </div>

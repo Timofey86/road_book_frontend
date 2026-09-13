@@ -17,6 +17,8 @@ import { Route as GuestLoginRouteImport } from './routes/_guest/login'
 import { Route as GuestRegisterRouteImport } from './routes/_guest/register'
 import { Route as AppAuthenticatedProfileRouteImport } from './routes/_app/_authenticated/profile'
 import { Route as AppAuthenticatedRoutesCreateRouteImport } from './routes/_app/_authenticated/routes/create'
+import { Route as AppRoutesRouteIdIndexRouteImport } from './routes/_app/routes/$routeId/index'
+import { Route as AppAuthenticatedRoutesRouteIdEditIndexRouteImport } from './routes/_app/_authenticated/routes/$routeId/edit/index'
 import { Route as AppAuthenticatedRoutesRouteIdEditStopsRouteImport } from './routes/_app/_authenticated/routes/$routeId/edit/stops'
 
 const AppRouteRoute = AppRouteRouteImport.update({
@@ -57,6 +59,17 @@ const AppAuthenticatedRoutesCreateRoute =
     path: '/routes/create',
     getParentRoute: () => AppAuthenticatedRouteRoute,
   } as any)
+const AppRoutesRouteIdIndexRoute = AppRoutesRouteIdIndexRouteImport.update({
+  id: '/routes/$routeId/',
+  path: '/routes/$routeId/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppAuthenticatedRoutesRouteIdEditIndexRoute =
+  AppAuthenticatedRoutesRouteIdEditIndexRouteImport.update({
+    id: '/routes/$routeId/edit/',
+    path: '/routes/$routeId/edit/',
+    getParentRoute: () => AppAuthenticatedRouteRoute,
+  } as any)
 const AppAuthenticatedRoutesRouteIdEditStopsRoute =
   AppAuthenticatedRoutesRouteIdEditStopsRouteImport.update({
     id: '/routes/$routeId/edit/stops',
@@ -70,7 +83,9 @@ export interface FileRoutesByFullPath {
   '/register': typeof GuestRegisterRoute
   '/profile': typeof AppAuthenticatedProfileRoute
   '/routes/create': typeof AppAuthenticatedRoutesCreateRoute
+  '/routes/$routeId/': typeof AppRoutesRouteIdIndexRoute
   '/routes/$routeId/edit/stops': typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
+  '/routes/$routeId/edit/': typeof AppAuthenticatedRoutesRouteIdEditIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AppIndexRoute
@@ -78,7 +93,9 @@ export interface FileRoutesByTo {
   '/register': typeof GuestRegisterRoute
   '/profile': typeof AppAuthenticatedProfileRoute
   '/routes/create': typeof AppAuthenticatedRoutesCreateRoute
+  '/routes/$routeId': typeof AppRoutesRouteIdIndexRoute
   '/routes/$routeId/edit/stops': typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
+  '/routes/$routeId/edit': typeof AppAuthenticatedRoutesRouteIdEditIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -90,7 +107,9 @@ export interface FileRoutesById {
   '/_app/': typeof AppIndexRoute
   '/_app/_authenticated/profile': typeof AppAuthenticatedProfileRoute
   '/_app/_authenticated/routes/create': typeof AppAuthenticatedRoutesCreateRoute
+  '/_app/routes/$routeId/': typeof AppRoutesRouteIdIndexRoute
   '/_app/_authenticated/routes/$routeId/edit/stops': typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
+  '/_app/_authenticated/routes/$routeId/edit/': typeof AppAuthenticatedRoutesRouteIdEditIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +119,9 @@ export interface FileRouteTypes {
     | '/register'
     | '/profile'
     | '/routes/create'
+    | '/routes/$routeId/'
     | '/routes/$routeId/edit/stops'
+    | '/routes/$routeId/edit/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -108,7 +129,9 @@ export interface FileRouteTypes {
     | '/register'
     | '/profile'
     | '/routes/create'
+    | '/routes/$routeId'
     | '/routes/$routeId/edit/stops'
+    | '/routes/$routeId/edit'
   id:
     | '__root__'
     | '/_app'
@@ -119,7 +142,9 @@ export interface FileRouteTypes {
     | '/_app/'
     | '/_app/_authenticated/profile'
     | '/_app/_authenticated/routes/create'
+    | '/_app/routes/$routeId/'
     | '/_app/_authenticated/routes/$routeId/edit/stops'
+    | '/_app/_authenticated/routes/$routeId/edit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -185,6 +210,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAuthenticatedRoutesCreateRouteImport
       parentRoute: typeof AppAuthenticatedRouteRoute
     }
+    '/_app/routes/$routeId/': {
+      id: '/_app/routes/$routeId/'
+      path: '/routes/$routeId'
+      fullPath: '/routes/$routeId/'
+      preLoaderRoute: typeof AppRoutesRouteIdIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/_authenticated/routes/$routeId/edit/': {
+      id: '/_app/_authenticated/routes/$routeId/edit/'
+      path: '/routes/$routeId/edit'
+      fullPath: '/routes/$routeId/edit/'
+      preLoaderRoute: typeof AppAuthenticatedRoutesRouteIdEditIndexRouteImport
+      parentRoute: typeof AppAuthenticatedRouteRoute
+    }
     '/_app/_authenticated/routes/$routeId/edit/stops': {
       id: '/_app/_authenticated/routes/$routeId/edit/stops'
       path: '/routes/$routeId/edit/stops'
@@ -199,6 +238,7 @@ interface AppAuthenticatedRouteRouteChildren {
   AppAuthenticatedProfileRoute: typeof AppAuthenticatedProfileRoute
   AppAuthenticatedRoutesCreateRoute: typeof AppAuthenticatedRoutesCreateRoute
   AppAuthenticatedRoutesRouteIdEditStopsRoute: typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
+  AppAuthenticatedRoutesRouteIdEditIndexRoute: typeof AppAuthenticatedRoutesRouteIdEditIndexRoute
 }
 
 const AppAuthenticatedRouteRouteChildren: AppAuthenticatedRouteRouteChildren = {
@@ -206,6 +246,8 @@ const AppAuthenticatedRouteRouteChildren: AppAuthenticatedRouteRouteChildren = {
   AppAuthenticatedRoutesCreateRoute: AppAuthenticatedRoutesCreateRoute,
   AppAuthenticatedRoutesRouteIdEditStopsRoute:
     AppAuthenticatedRoutesRouteIdEditStopsRoute,
+  AppAuthenticatedRoutesRouteIdEditIndexRoute:
+    AppAuthenticatedRoutesRouteIdEditIndexRoute,
 }
 
 const AppAuthenticatedRouteRouteWithChildren =
@@ -216,11 +258,13 @@ const AppAuthenticatedRouteRouteWithChildren =
 interface AppRouteRouteChildren {
   AppAuthenticatedRouteRoute: typeof AppAuthenticatedRouteRouteWithChildren
   AppIndexRoute: typeof AppIndexRoute
+  AppRoutesRouteIdIndexRoute: typeof AppRoutesRouteIdIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppAuthenticatedRouteRoute: AppAuthenticatedRouteRouteWithChildren,
   AppIndexRoute: AppIndexRoute,
+  AppRoutesRouteIdIndexRoute: AppRoutesRouteIdIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(

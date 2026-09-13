@@ -1,0 +1,85 @@
+.page {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+.header {
+    margin-bottom: 24px;
+}
+
+.eyebrow {
+    color: #047857;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.header h1 {
+    margin: 4px 0 8px;
+    color: #111827;
+    font-size: 30px;
+}
+
+.header p {
+    margin: 0;
+    color: #6b7280;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.sectionHeader h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 20px;
+}
+
+.sectionHeader p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.editStopsButton {
+    padding: 9px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: #374151;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.editStopsButton:hover {
+    background: #f9fafb;
+}
+
+.routeInfo {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.routeInfo strong {
+    color: #111827;
+    font-size: 24px;
+}
+
+.routeInfo span {
+    color: #6b7280;
+    font-size: 14px;
+}

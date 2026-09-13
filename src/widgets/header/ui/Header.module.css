@@ -61,7 +61,7 @@
     font-weight: 600;
 }
 
-.signIn {
+.signIn, .signUp {
     padding: 8px 16px;
     border: 1px solid #047857;
     border-radius: 8px;
@@ -70,6 +70,6 @@
     text-decoration: none;
 }
 
-.signIn:hover {
+.signIn:hover, .signUp:hover {
     background: #ecf7f2;
 }

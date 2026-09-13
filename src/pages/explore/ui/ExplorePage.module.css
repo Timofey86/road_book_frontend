@@ -25,6 +25,7 @@
         minmax(320px, 1fr)
     );
     gap: 20px;
+    align-items: stretch;
 
 }
 
@@ -33,7 +34,6 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
-
     margin-top: auto;
     padding-top: 28px;
     padding-bottom: 48px;
@@ -41,13 +41,10 @@
 
 .pagination button {
     padding: 8px 14px;
-
     border: 1px solid #d1d5db;
     border-radius: 8px;
-
     background: #ffffff;
     color: #374151;
-
     font: inherit;
     cursor: pointer;
 }

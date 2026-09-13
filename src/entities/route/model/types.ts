@@ -1,3 +1,5 @@
+import type { PaginatedResponse } from '../../../shared/api/types';
+
 export interface RouteAuthor {
     id: number;
     name: string;
@@ -10,32 +12,14 @@ export interface RouteTag {
     slug: string;
 }
 
-export interface RouteListItem {
+export interface RoutePhoto {
     id: number;
-    title: string;
-    slug: string;
-    description: string | null;
-    coverUrl: string | null;
-    author: RouteAuthor;
-    tags: RouteTag[];
-    totalDistanceMeters: number | null;
-    totalDurationSeconds: number | null;
-    stopsCount: number;
-    likesCount: number;
-    commentsCount: number;
+    routeId: number;
+    url: string;
+    caption: string | null;
+    position: number;
     createdAt: string;
-}
-
-export interface PaginationMeta {
-    page: number;
-    limit: number;
-    totalItems: number;
-    totalPages: number;
-}
-
-export interface RoutesPaginatedResponse {
-    items: RouteListItem[];
-    meta: PaginationMeta;
+    updatedAt: string;
 }
 
 export interface RouteStop {
@@ -54,6 +38,27 @@ export interface RouteStop {
     updatedAt: string;
 }
 
+export interface RouteBuildGeometry {
+    type: 'LineString';
+    coordinates: [number, number][];
+}
+
+export interface RouteListItem {
+    id: number;
+    title: string;
+    slug: string;
+    description: string | null;
+    coverUrl: string | null;
+    author: RouteAuthor;
+    tags: RouteTag[];
+    totalDistanceMeters: number | null;
+    totalDurationSeconds: number | null;
+    stopsCount: number;
+    likesCount: number;
+    commentsCount: number;
+    createdAt: string;
+}
+
 export interface RouteResponse {
     id: number;
     userId: number;
@@ -68,27 +73,6 @@ export interface RouteResponse {
     updatedAt: string;
     stops: RouteStop[];
     tags: RouteTag[];
-}
-
-export interface CreateRoutePayload {
-    title: string;
-    description?: string;
-    tags?: string[];
-}
-
-export interface RoutePhoto {
-    id: number;
-    routeId: number;
-    url: string;
-    caption: string | null;
-    position: number;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export interface RouteBuildGeometry {
-    type: 'LineString';
-    coordinates: [number, number][];
 }
 
 export interface RouteDetails {
@@ -115,9 +99,10 @@ export interface RouteDetails {
     updatedAt: string;
 }
 
-export interface RouteBuildGeometry {
-    type: 'LineString';
-    coordinates: [number, number][];
+export interface CreateRoutePayload {
+    title: string;
+    description?: string;
+    tags?: string[];
 }
 
 export interface RouteBuildResponse {
@@ -128,3 +113,17 @@ export interface RouteBuildResponse {
     routeBuiltAt: string;
     isRouteActual: boolean;
 }
+
+export interface RouteCoverResponse {
+    coverUrl: string;
+}
+
+export interface PaginationMeta {
+    page: number;
+    limit: number;
+    totalItems: number;
+    totalPages: number;
+}
+
+export type RoutesPaginatedResponse = PaginatedResponse<RouteListItem>;
+
