@@ -5,6 +5,7 @@ import {uploadRouteCover} from "../api/uploadRouteCover.ts";
 import type {UpdateRoutePayload, UpdateRouteTagsPayload} from "./types.ts";
 import {updateRoute} from "../api/updateRoute.ts";
 import {updateRouteTags} from "../api/updateRouteTags.ts";
+import {deleteRoute} from "../api/deleteRoute.ts";
 
 export function useCreateRouteMutation() {
     return useMutation({
@@ -90,6 +91,26 @@ export function useUpdateRouteTagsMutation(
                     queryKey: ['routes'],
                 }),
             ]);
+        },
+    });
+}
+
+export function useDeleteRouteMutation(
+    routeId: number,
+) {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: () => deleteRoute(routeId),
+
+        onSuccess: async () => {
+            queryClient.removeQueries({
+                queryKey: ['route', routeId],
+            });
+
+            await queryClient.invalidateQueries({
+                queryKey: ['routes'],
+            });
         },
     });
 }

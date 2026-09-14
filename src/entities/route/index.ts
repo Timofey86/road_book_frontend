@@ -7,6 +7,7 @@ export {
     useUploadRouteCoverMutation,
     useUpdateRouteMutation,
     useUpdateRouteTagsMutation,
+    useDeleteRouteMutation
 } from './model/mutations';
 export { routeDetailsQueryOptions } from './model/queries';
 

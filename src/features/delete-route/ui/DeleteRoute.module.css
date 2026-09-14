@@ -1,0 +1,100 @@
+.dangerSection {
+    padding: 22px;
+    border: 1px solid #fecaca;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.dangerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.dangerContent h2 {
+    margin: 0 0 4px;
+    color: #b91c1c;
+    font-size: 18px;
+}
+
+.dangerContent p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.deleteButton,
+.confirmDeleteButton {
+    border: 0;
+    border-radius: 8px;
+    background: #dc2626;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.deleteButton {
+    flex-shrink: 0;
+    padding: 9px 14px;
+}
+
+.deleteButton:hover,
+.confirmDeleteButton:hover:not(:disabled) {
+    background: #b91c1c;
+}
+
+
+/* Modal content */
+
+.message {
+    margin: 0;
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.message strong {
+    color: #111827;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 24px;
+}
+
+.cancelButton,
+.confirmDeleteButton {
+    min-height: 40px;
+    padding: 0 14px;
+}
+
+.cancelButton {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #374151;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancelButton:hover:not(:disabled) {
+    background: #f9fafb;
+}
+
+.confirmDeleteButton:disabled,
+.cancelButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.error {
+    margin: 12px 0 0;
+    color: #b91c1c;
+    font-size: 14px;
+}

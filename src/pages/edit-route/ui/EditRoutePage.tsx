@@ -1,11 +1,16 @@
 import styles from './EditRoutePage.module.css';
-import {routeDetailsQueryOptions, useUpdateRouteMutation, useUpdateRouteTagsMutation} from "../../../entities/route";
+import {
+    routeDetailsQueryOptions,
+    useUpdateRouteMutation,
+    useUpdateRouteTagsMutation
+} from "../../../entities/route";
 import {useQuery} from "@tanstack/react-query";
 import {UploadRouteCover} from "../../../features/upload-route-cover";
 import {Link} from "@tanstack/react-router";
 import {type FormEvent, useEffect, useState} from "react";
 import {appRoutes} from "../../../shared/lib/routes.ts";
 import {ArrowLeft} from "lucide-react";
+import {DeleteRoute} from "../../../features/delete-route";
 
 interface EditRoutePageProps {
     routeId: number;
@@ -19,14 +24,13 @@ export function EditRoutePage({routeId}: EditRoutePageProps) {
         routeDetailsQueryOptions(routeId),
     );
 
-    const updateRouteMutation = useUpdateRouteMutation(routeId);
-
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [tags, setTags] = useState<string[]>([]);
     const [tagInput, setTagInput] = useState('');
 
     const updateTagsMutation = useUpdateRouteTagsMutation(routeId);
+    const updateRouteMutation = useUpdateRouteMutation(routeId);
 
     useEffect(() => {
         if (!route) {
@@ -349,6 +353,11 @@ export function EditRoutePage({routeId}: EditRoutePageProps) {
                     <span>stops</span>
                 </div>
             </section>
+
+            <DeleteRoute
+                routeId={route.id}
+                routeTitle={route.title}
+            />
         </div>
     )
 }
