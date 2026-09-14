@@ -1,13 +1,10 @@
 .layout {
     display: grid;
     grid-template-columns: 240px minmax(0, 1fr);
-
     width: 100%;
     max-width: 1440px;
     min-height: 100vh;
-
     margin: 0 auto;
-
     background: #ffffff;
 }
 

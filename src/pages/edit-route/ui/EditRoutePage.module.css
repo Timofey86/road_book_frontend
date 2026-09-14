@@ -5,6 +5,21 @@
     padding: 32px;
 }
 
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.backLink:hover {
+    color: #047857;
+}
+
 .header {
     margin-bottom: 24px;
 }
@@ -24,6 +39,179 @@
 .header p {
     margin: 0;
     color: #6b7280;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.field > span {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #111827;
+    font: inherit;
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: #047857;
+    box-shadow: 0 0 0 3px rgb(4 120 87 / 10%);
+}
+
+.formActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.saveButton {
+    min-height: 40px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #047857;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.saveButton:hover:not(:disabled) {
+    background: #036c4d;
+}
+
+.saveButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.success {
+    color: #047857;
+    font-size: 13px;
+}
+
+.tagsField {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fieldLabel {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 9px;
+    border-radius: 999px;
+    background: #ecfdf5;
+    color: #047857;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.tag button {
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #047857;
+    font: inherit;
+    cursor: pointer;
+}
+
+.tag button:hover {
+    background: rgb(4 120 87 / 10%);
+}
+
+.tagInputRow {
+    display: flex;
+    gap: 8px;
+}
+
+.tagInputRow input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.addTagButton,
+.saveTagsButton {
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.addTagButton {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #374151;
+}
+
+.saveTagsButton {
+    border: 0;
+    background: #047857;
+    color: #ffffff;
+}
+
+.addTagButton:disabled,
+.saveTagsButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.tagsFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.tagsFooter > span {
+    color: #6b7280;
+    font-size: 12px;
 }
 
 .section {

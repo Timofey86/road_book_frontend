@@ -5,6 +5,21 @@
     padding: 32px;
 }
 
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.backLink:hover {
+    color: #047857;
+}
+
 /* Hero */
 
 .hero {
@@ -57,6 +72,48 @@
     left: 30px;
     z-index: 2;
     color: #ffffff;
+}
+
+.ownerActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.primaryAction,
+.secondaryAction {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 38px;
+    padding: 0 14px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.primaryAction {
+    background: #047857;
+    color: #ffffff;
+}
+
+.primaryAction:hover {
+    background: #036c4d;
+}
+
+.secondaryAction {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #374151;
+}
+
+.secondaryAction:hover {
+    background: #f9fafb;
 }
 
 .author {

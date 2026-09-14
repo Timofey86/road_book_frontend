@@ -5,6 +5,21 @@
     padding: 32px;
 }
 
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.backLink:hover {
+    color: #047857;
+}
+
 .header {
     margin-bottom: 24px;
 }

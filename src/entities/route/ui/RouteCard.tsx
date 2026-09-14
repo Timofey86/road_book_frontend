@@ -7,6 +7,7 @@ import type {RouteListItem} from '../model/types';
 import {formatDuration} from '../../../shared/lib/formatDuration';
 import styles from './RouteCard.module.css';
 import {Link} from "@tanstack/react-router";
+import {appRoutes} from "../../../shared/lib/routes.ts";
 
 interface RouteCardProps {
     route: RouteListItem;
@@ -15,7 +16,7 @@ interface RouteCardProps {
 export function RouteCard({route}: RouteCardProps) {
     return (
         <Link
-            to="/routes/$routeId"
+            to={appRoutes.routeDetails}
             params={{
                 routeId: String(route.id),
             }}

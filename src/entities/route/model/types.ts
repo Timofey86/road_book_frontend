@@ -127,3 +127,12 @@ export interface PaginationMeta {
 
 export type RoutesPaginatedResponse = PaginatedResponse<RouteListItem>;
 
+export interface UpdateRoutePayload {
+    title?: string;
+    description?: string;
+}
+
+export interface UpdateRouteTagsPayload {
+    tags: string[];
+}
+

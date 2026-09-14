@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { currentUserQueryOptions } from '../../../entities/user';
 import styles from './Header.module.css';
 import {Link} from "@tanstack/react-router";
+import {appRoutes} from "../../../shared/lib/routes.ts";
 
 export function Header() {
     const { data: user } = useQuery(currentUserQueryOptions);
@@ -43,14 +44,14 @@ export function Header() {
                 ) : (
                     <>
                         <Link
-                            to="/login"
+                            to={appRoutes.login}
                             className={styles.signIn}
                         >
                             Sign in
                         </Link>
 
                         <Link
-                            to="/register"
+                            to={appRoutes.register}
                             className={styles.signUp}
                         >
                             Sign up

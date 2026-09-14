@@ -19,6 +19,9 @@ import {useReorderRouteStopsMutation, useDeleteRouteStopMutation} from "../../..
 import {SortableStopItem} from "../../../features/edit-route-stops/ui/SortableStopItem.tsx";
 import {formatDuration} from "../../../shared/lib/formatDuration.ts";
 import {RouteMap} from "../../../features/route-map";
+import {Link} from "@tanstack/react-router";
+import {ArrowLeft} from "lucide-react";
+import {appRoutes} from "../../../shared/lib/routes.ts";
 
 interface EditRouteStopsPageProps {
     routeId: number;
@@ -125,6 +128,17 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
 
     return (
         <div className={styles.page}>
+
+            <Link
+                to={appRoutes.editRoute}
+                params={{
+                    routeId: String(route.id),
+                }}
+                className={styles.backLink}
+            >
+                <ArrowLeft size={16}/>
+                Back to route settings
+            </Link>
             <header className={styles.header}>
                 <div>
                     <span className={styles.eyebrow}>

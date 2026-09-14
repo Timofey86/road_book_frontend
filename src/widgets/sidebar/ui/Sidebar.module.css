@@ -1,13 +1,10 @@
 .sidebar {
     position: sticky;
     top: 0;
-
     display: flex;
     flex-direction: column;
-
     height: 100vh;
     padding: 20px 16px;
-
     background: #ffffff;
     border-right: 1px solid #e5e7eb;
 }
@@ -16,9 +13,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-
     margin-bottom: 28px;
-
     font-size: 22px;
     font-weight: 700;
 }
@@ -37,23 +32,17 @@
 
 .link {
     width: 100%;
-
     display: flex;
     align-items: center;
     gap: 12px;
-
     padding: 10px 12px;
-
     border: 0;
     border-radius: 8px;
-
     background: transparent;
     color: #374151;
-
     font: inherit;
     text-align: left;
     text-decoration: none;
-
     cursor: pointer;
 }
 
@@ -68,24 +57,19 @@
 
 .createButton {
     width: 100%;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-
     margin-top: 14px;
     padding: 10px 12px;
-
     border: 0;
     border-radius: 8px;
-
     background: #047857;
     color: #ffffff;
-
     font: inherit;
     font-weight: 600;
-
+    text-decoration: none;
     cursor: pointer;
 }
 
@@ -99,12 +83,9 @@
 
 .sectionTitle {
     display: block;
-
     margin-bottom: 8px;
     padding: 0 12px;
-
     color: #9ca3af;
-
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -115,10 +96,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
-
     margin-top: 24px;
     padding: 10px;
-
     border-radius: 10px;
     background: #f8faf9;
 }
@@ -127,9 +106,7 @@
 .avatarFallback {
     width: 42px;
     height: 42px;
-
     flex-shrink: 0;
-
     border-radius: 50%;
 }
 
@@ -140,23 +117,19 @@
 .avatarFallback {
     display: grid;
     place-items: center;
-
     background: #047857;
     color: #ffffff;
-
     font-weight: 600;
 }
 
 .userInfo {
     display: flex;
     flex-direction: column;
-
     min-width: 0;
 }
 
 .userInfo strong {
     overflow: hidden;
-
     font-size: 14px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -164,7 +137,6 @@
 
 .userInfo span {
     margin-top: 2px;
-
     color: #6b7280;
     font-size: 11px;
 }

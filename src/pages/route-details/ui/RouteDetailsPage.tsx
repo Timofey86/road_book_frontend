@@ -1,9 +1,12 @@
 import {useQuery} from '@tanstack/react-query';
-import {Clock3, Heart, MapPin, RouteIcon, Star} from 'lucide-react';
+import {ArrowLeft, Clock3, Heart, MapPin, RouteIcon, Star} from 'lucide-react';
 import {routeDetailsQueryOptions} from '../../../entities/route';
 import {RouteMap} from '../../../features/route-map';
 import {formatDuration} from '../../../shared/lib/formatDuration';
 import styles from './RouteDetailsPage.module.css';
+import {Link} from "@tanstack/react-router";
+import {appRoutes} from "../../../shared/lib/routes.ts";
+import {currentUserQueryOptions} from "../../../entities/user";
 
 interface RouteDetailsPageProps {
     routeId: number;
@@ -15,6 +18,10 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
         isPending,
         isError,
     } = useQuery(routeDetailsQueryOptions(routeId));
+
+    const {data: currentUser} = useQuery(
+        currentUserQueryOptions,
+    );
 
     if (isPending) {
         return (
@@ -47,6 +54,13 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
 
     return (
         <div className={styles.page}>
+            <Link
+                to={appRoutes.home}
+                className={styles.backLink}
+            >
+                <ArrowLeft size={16}/>
+                Back to Explore
+            </Link>
             {route.coverUrl ? (
                 <section className={styles.hero}>
                     <img
@@ -144,6 +158,30 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
                         </div>
                     )}
                 </header>
+            )}
+
+            {route.userId === currentUser?.id && (
+                <div className={styles.ownerActions}>
+                    <Link
+                        to={appRoutes.editRoute}
+                        params={{
+                            routeId: String(route.id),
+                        }}
+                        className={styles.primaryAction}
+                    >
+                        Edit route
+                    </Link>
+
+                    <Link
+                        to={appRoutes.editRouteStops}
+                        params={{
+                            routeId: String(route.id),
+                        }}
+                        className={styles.secondaryAction}
+                    >
+                        Edit stops
+                    </Link>
+                </div>
             )}
 
             <div className={styles.mainGrid}>

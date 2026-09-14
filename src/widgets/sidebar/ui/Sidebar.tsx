@@ -14,6 +14,7 @@ import {currentUserQueryOptions} from '../../../entities/user';
 import {useLogoutMutation} from '../../../features/auth';
 import styles from './Sidebar.module.css';
 import {LanguageSwitcher} from "../../../shared/ui/language-switcher";
+import {appRoutes} from "../../../shared/lib/routes.ts";
 
 export function Sidebar() {
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ export function Sidebar() {
 
             <nav className={styles.navigation}>
                 <Link
-                    to="/"
+                    to={appRoutes.home}
                     className={styles.link}
                     activeProps={{
                         className: `${styles.link} ${styles.active}`,
@@ -70,13 +71,13 @@ export function Sidebar() {
                             Favorites
                         </button>
 
-                        <button
-                            type="button"
+                        <Link
+                            to={appRoutes.createRoute}
                             className={styles.createButton}
                         >
                             <Plus size={18}/>
                             Create Route
-                        </button>
+                        </Link>
                     </>
                 )}
             </nav>
@@ -90,7 +91,7 @@ export function Sidebar() {
                         </span>
 
                         <Link
-                            to="/profile"
+                            to={appRoutes.profile}
                             className={styles.link}
                             activeProps={{
                                 className: `${styles.link} ${styles.active}`,

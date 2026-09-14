@@ -4,7 +4,9 @@ export { RouteCard } from './ui/RouteCard';
 export {
     useCreateRouteMutation,
     useBuildRouteMutation,
-    useUploadRouteCoverMutation
+    useUploadRouteCoverMutation,
+    useUpdateRouteMutation,
+    useUpdateRouteTagsMutation,
 } from './model/mutations';
 export { routeDetailsQueryOptions } from './model/queries';
 
