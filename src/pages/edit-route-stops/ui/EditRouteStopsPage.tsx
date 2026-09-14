@@ -19,7 +19,7 @@ import {useReorderRouteStopsMutation, useDeleteRouteStopMutation} from "../../..
 import {SortableStopItem} from "../../../features/edit-route-stops/ui/SortableStopItem.tsx";
 import {formatDuration} from "../../../shared/lib/formatDuration.ts";
 import {RouteMap} from "../../../features/route-map";
-import {Link} from "@tanstack/react-router";
+import {Link, useNavigate} from "@tanstack/react-router";
 import {ArrowLeft} from "lucide-react";
 import {appRoutes} from "../../../shared/lib/routes.ts";
 
@@ -33,6 +33,7 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
         isPending,
         isError,
     } = useQuery(routeDetailsQueryOptions(routeId));
+    const navigate = useNavigate();
 
     const reorderMutation = useReorderRouteStopsMutation(routeId);
     const deleteStopMutation = useDeleteRouteStopMutation(routeId);
@@ -54,7 +55,16 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
     };
 
     const handleBuildRoute = () => {
-        buildRouteMutation.mutate();
+        buildRouteMutation.mutate(undefined, {
+            onSuccess: () => {
+                navigate({
+                    to: appRoutes.routeDetails,
+                    params: {
+                        routeId: String(routeId),
+                    },
+                });
+            },
+        });
     };
 
 
