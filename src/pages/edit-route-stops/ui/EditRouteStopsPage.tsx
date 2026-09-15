@@ -19,9 +19,10 @@ import {useReorderRouteStopsMutation, useDeleteRouteStopMutation} from "../../..
 import {SortableStopItem} from "../../../features/edit-route-stops/ui/SortableStopItem.tsx";
 import {formatDuration} from "../../../shared/lib/formatDuration.ts";
 import {RouteMap} from "../../../features/route-map";
-import {Link, useNavigate} from "@tanstack/react-router";
+import {Link, Navigate, useNavigate} from "@tanstack/react-router";
 import {ArrowLeft} from "lucide-react";
 import {appRoutes} from "../../../shared/lib/routes.ts";
+import {currentUserQueryOptions} from "../../../entities/user";
 
 interface EditRouteStopsPageProps {
     routeId: number;
@@ -33,6 +34,10 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
         isPending,
         isError,
     } = useQuery(routeDetailsQueryOptions(routeId));
+    const {
+        data: currentUser,
+        isPending: isCurrentUserPending,
+    } = useQuery(currentUserQueryOptions);
     const navigate = useNavigate();
 
     const reorderMutation = useReorderRouteStopsMutation(routeId);
@@ -108,7 +113,7 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
         });
     };
 
-    if (isPending) {
+    if (isPending || isCurrentUserPending) {
         return (
             <div className={styles.page}>
                 Loading route...
@@ -121,6 +126,17 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
             <div className={styles.page}>
                 Failed to load route.
             </div>
+        );
+    }
+
+    if (!currentUser || route.userId !== currentUser.id) {
+        return (
+            <Navigate
+                to={appRoutes.routeDetails}
+                params={{
+                    routeId: String(route.id),
+                }}
+            />
         );
     }
 

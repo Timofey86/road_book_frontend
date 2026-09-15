@@ -1,0 +1,253 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 12px;
+}
+
+.photoCard {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.photoCard img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.dragHandle {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 8px;
+    background: rgb(17 24 39 / 70%);
+    color: #ffffff;
+    cursor: grab;
+    touch-action: none;
+}
+
+.dragHandle:active {
+    cursor: grabbing;
+}
+
+.dragging {
+    z-index: 10;
+    opacity: 0.7;
+}
+
+.captionArea {
+    padding: 10px;
+}
+
+.captionButton {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #4b5563;
+    text-align: left;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.captionButton:hover {
+    color: #047857;
+}
+
+.captionArea textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 13px;
+    resize: vertical;
+}
+
+.captionActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.captionCancelButton,
+.captionSaveButton {
+    min-height: 34px;
+    padding: 0 10px;
+    border-radius: 7px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.captionCancelButton {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #374151;
+}
+
+.captionSaveButton {
+    border: 0;
+    background: #047857;
+    color: #ffffff;
+}
+
+.captionCancelButton:disabled,
+.captionSaveButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.imageWrapper {
+    position: relative;
+}
+
+.deletePhotoButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 8px;
+    background: rgb(17 24 39 / 70%);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.deletePhotoButton:hover {
+    background: #dc2626;
+}
+
+.deleteMessage {
+    margin: 0;
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.deleteActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.cancelButton,
+.confirmDeleteButton {
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancelButton {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #374151;
+}
+
+.confirmDeleteButton {
+    border: 0;
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.confirmDeleteButton:hover:not(:disabled) {
+    background: #b91c1c;
+}
+
+.cancelButton:disabled,
+.confirmDeleteButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.uploader {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.preview {
+    width: 100%;
+    max-height: 360px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.uploader textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font: inherit;
+    resize: vertical;
+}
+
+.selectButton,
+.uploadButton {
+    align-self: flex-start;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.selectButton {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #374151;
+}
+
+.uploadButton {
+    border: 0;
+    background: #047857;
+    color: #ffffff;
+}
+
+.uploadButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.uploadFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.uploadFooter span {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.error {
+    margin: 0;
+    color: #b91c1c;
+    font-size: 13px;
+}

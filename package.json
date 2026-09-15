@@ -24,7 +24,8 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-i18next": "^17.0.13",
-    "react-leaflet": "^5.0.0"
+    "react-leaflet": "^5.0.0",
+    "yet-another-react-lightbox": "^3.32.2"
   },
   "devDependencies": {
     "@tanstack/router-plugin": "^1.168.36",

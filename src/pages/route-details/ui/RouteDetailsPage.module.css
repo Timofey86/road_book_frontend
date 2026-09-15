@@ -458,6 +458,61 @@
     color: #9ca3af;
 }
 
+.photosSection {
+    margin-top: 18px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.sectionHeading {
+    margin-bottom: 16px;
+}
+
+.sectionHeading > span {
+    color: #047857;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.sectionHeading h2 {
+    margin: 3px 0 0;
+    color: #111827;
+    font-size: 20px;
+}
+
+.photosGrid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.photoCard {
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #ffffff;
+    cursor: zoom-in;
+}
+
+.photoCard img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.photoCard figcaption {
+    padding: 10px 12px;
+    color: #4b5563;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
 /* Responsive */
 
 @media (max-width: 900px) {

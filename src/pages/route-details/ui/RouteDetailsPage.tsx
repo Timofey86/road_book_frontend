@@ -7,6 +7,11 @@ import styles from './RouteDetailsPage.module.css';
 import {Link} from "@tanstack/react-router";
 import {appRoutes} from "../../../shared/lib/routes.ts";
 import {currentUserQueryOptions} from "../../../entities/user";
+import {useState} from 'react';
+import Lightbox from 'yet-another-react-lightbox';
+import Captions from 'yet-another-react-lightbox/plugins/captions';
+import 'yet-another-react-lightbox/styles.css';
+import 'yet-another-react-lightbox/plugins/captions.css';
 
 interface RouteDetailsPageProps {
     routeId: number;
@@ -18,6 +23,8 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
         isPending,
         isError,
     } = useQuery(routeDetailsQueryOptions(routeId));
+
+    const [photoIndex, setPhotoIndex] = useState(-1);
 
     const {data: currentUser} = useQuery(
         currentUserQueryOptions,
@@ -38,6 +45,10 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
             </div>
         );
     }
+
+    const photos = route.photos.toSorted(
+        (a, b) => a.position - b.position,
+    );
 
     const distance =
         route.totalDistanceMeters !== null
@@ -363,6 +374,51 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
                     </section>
                 </aside>
             </div>
+
+            {route.photos.length > 0 && (
+                <section className={styles.photosSection}>
+                    <div className={styles.sectionHeading}>
+                        <span>GALLERY</span>
+                        <h2>Photos</h2>
+                    </div>
+
+                    <div className={styles.photosGrid}>
+                        {photos.map((photo, index) => (
+                            <figure
+                                key={photo.id}
+                                className={styles.photoCard}
+                                onClick={() => setPhotoIndex(index)}
+                            >
+                                <img
+                                    src={photo.url}
+                                    alt={photo.caption ?? `${route.title} photo`}
+                                />
+
+                                {photo.caption && (
+                                    <figcaption>
+                                        {photo.caption}
+                                    </figcaption>
+                                )}
+                            </figure>
+                        ))}
+                    </div>
+                </section>
+            )}
+            <Lightbox
+                open={photoIndex >= 0}
+                close={() => setPhotoIndex(-1)}
+                index={photoIndex}
+                plugins={[Captions]}
+                captions={{
+                    showToggle: true,
+                    descriptionTextAlign: 'center',
+                }}
+                slides={photos.map((photo) => ({
+                    src: photo.url,
+                    alt: photo.caption ?? `${route.title} photo`,
+                    description: photo.caption ?? undefined,
+                }))}
+            />
         </div>
     );
 }

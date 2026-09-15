@@ -136,3 +136,12 @@ export interface UpdateRouteTagsPayload {
     tags: string[];
 }
 
+export interface UploadRoutePhotoPayload {
+    file: File;
+    caption?: string;
+}
+
+export interface UpdateRoutePhotoPayload {
+    caption?: string | null;
+}
+

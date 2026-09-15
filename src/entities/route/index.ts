@@ -7,7 +7,11 @@ export {
     useUploadRouteCoverMutation,
     useUpdateRouteMutation,
     useUpdateRouteTagsMutation,
-    useDeleteRouteMutation
+    useDeleteRouteMutation,
+    useUploadRoutePhotoMutation,
+    useDeleteRoutePhotoMutation,
+    useReorderRoutePhotosMutation,
+    useUpdateRoutePhotoMutation
 } from './model/mutations';
 export { routeDetailsQueryOptions } from './model/queries';
 
@@ -23,5 +27,9 @@ export type {
     RoutePhoto,
     RouteDetails,
     RouteBuildGeometry,
-    RouteBuildResponse
+    RouteBuildResponse,
+    UpdateRouteTagsPayload,
+    UpdateRoutePayload,
+    UploadRoutePhotoPayload,
+    UpdateRoutePhotoPayload
 } from './model/types';

@@ -6,11 +6,13 @@ import {
 } from "../../../entities/route";
 import {useQuery} from "@tanstack/react-query";
 import {UploadRouteCover} from "../../../features/upload-route-cover";
-import {Link} from "@tanstack/react-router";
+import {Link, Navigate} from "@tanstack/react-router";
 import {type FormEvent, useEffect, useState} from "react";
 import {appRoutes} from "../../../shared/lib/routes.ts";
 import {ArrowLeft} from "lucide-react";
 import {DeleteRoute} from "../../../features/delete-route";
+import {ManageRoutePhotos} from "../../../features/manage-route-photos";
+import {currentUserQueryOptions} from '../../../entities/user';
 
 interface EditRoutePageProps {
     routeId: number;
@@ -23,6 +25,11 @@ export function EditRoutePage({routeId}: EditRoutePageProps) {
     } = useQuery(
         routeDetailsQueryOptions(routeId),
     );
+
+    const {
+        data: currentUser,
+        isPending: isCurrentUserPending,
+    } = useQuery(currentUserQueryOptions);
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -42,7 +49,7 @@ export function EditRoutePage({routeId}: EditRoutePageProps) {
         setTags(route.tags.map((tag) => tag.name));
     }, [route]);
 
-    if (isPending) {
+    if (isPending || isCurrentUserPending) {
         return (
             <div className={styles.page}>
                 Loading route...
@@ -55,6 +62,17 @@ export function EditRoutePage({routeId}: EditRoutePageProps) {
             <div className={styles.page}>
                 Failed to load route.
             </div>
+        );
+    }
+
+    if (!currentUser || route.userId !== currentUser.id) {
+        return (
+            <Navigate
+                to={appRoutes.routeDetails}
+                params={{
+                    routeId: String(route.id),
+                }}
+            />
         );
     }
 
@@ -321,6 +339,23 @@ export function EditRoutePage({routeId}: EditRoutePageProps) {
                 <UploadRouteCover
                     routeId={route.id}
                     coverUrl={route.coverUrl}
+                />
+            </section>
+
+            <section className={styles.section}>
+                <div className={styles.sectionHeader}>
+                    <div>
+                        <h2>Photos</h2>
+
+                        <p>
+                            Add photos from your trip.
+                        </p>
+                    </div>
+                </div>
+
+                <ManageRoutePhotos
+                    routeId={route.id}
+                    photos={route.photos}
                 />
             </section>
 
