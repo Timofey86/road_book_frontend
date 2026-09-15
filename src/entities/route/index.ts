@@ -31,5 +31,7 @@ export type {
     UpdateRouteTagsPayload,
     UpdateRoutePayload,
     UploadRoutePhotoPayload,
-    UpdateRoutePhotoPayload
+    UpdateRoutePhotoPayload,
+    RouteLikeResponse,
+    FavoriteResponse
 } from './model/types';

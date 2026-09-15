@@ -28,37 +28,3 @@
     align-items: stretch;
 
 }
-
-.pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-top: auto;
-    padding-top: 28px;
-    padding-bottom: 48px;
-}
-
-.pagination button {
-    padding: 8px 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background: #ffffff;
-    color: #374151;
-    font: inherit;
-    cursor: pointer;
-}
-
-.pagination button:hover:not(:disabled) {
-    background: #f3f4f6;
-}
-
-.pagination button:disabled {
-    opacity: 0.5;
-    cursor: default;
-}
-
-.pagination span {
-    color: #6b7280;
-    font-size: 14px;
-}

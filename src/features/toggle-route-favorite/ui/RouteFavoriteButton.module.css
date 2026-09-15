@@ -4,7 +4,7 @@
     padding: 0 12px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 8px;
     border: 1px solid #d1d5db;
     border-radius: 8px;
     background: #ffffff;
@@ -18,20 +18,9 @@
             color 0.15s ease;
 }
 
-.action {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.action svg {
+.button svg {
     flex-shrink: 0;
     color: #047857;
-}
-
-.count {
-    color: #6b7280;
-    font-size: 13px;
 }
 
 .button:hover {
@@ -45,7 +34,7 @@
     color: #047857;
 }
 
-.active .action svg {
+.active svg {
     fill: #047857;
 }
 

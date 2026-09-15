@@ -1,20 +1,21 @@
-import {createFileRoute} from "@tanstack/react-router";
-import {ExplorePage} from "../../../pages/explore/ui/ExplorePage.tsx";
+import { createFileRoute } from '@tanstack/react-router'
+import {FavoritesPage} from "../../../../pages/favorites/ui/FavoritesPage.tsx";
 
-interface ExploreSearch {
+interface FavoritesSearch {
     page: number;
 }
 
-export const Route = createFileRoute('/_app/')({
-    validateSearch: (search): ExploreSearch => ({
+export const Route = createFileRoute('/_app/_authenticated/favorites')({
+    validateSearch: (search): FavoritesSearch => ({
         page: Math.max(1, Number(search.page) || 1),
     }),
-    component: ExploreRoute,
+    component: FavoritesRoute,
 });
 
-function ExploreRoute() {
+function FavoritesRoute() {
     const {page} = Route.useSearch();
     const navigate = Route.useNavigate();
+
     const handlePageChange = (newPage: number) => {
         navigate({
             to: '.',
@@ -25,10 +26,9 @@ function ExploreRoute() {
     };
 
     return (
-        <ExplorePage
+        <FavoritesPage
             page={page}
             onPageChange={handlePageChange}
         />
     );
 }
-

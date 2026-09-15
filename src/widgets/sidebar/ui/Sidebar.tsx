@@ -63,13 +63,16 @@ export function Sidebar() {
                             My Routes
                         </button>
 
-                        <button
-                            type="button"
+                        <Link
+                            to={appRoutes.favorites}
                             className={styles.link}
+                            activeProps={{
+                                className: `${styles.link} ${styles.active}`,
+                            }}
                         >
                             <Heart size={20}/>
                             Favorites
-                        </button>
+                        </Link>
 
                         <Link
                             to={appRoutes.createRoute}

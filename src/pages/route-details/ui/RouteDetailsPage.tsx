@@ -4,7 +4,7 @@ import {routeDetailsQueryOptions} from '../../../entities/route';
 import {RouteMap} from '../../../features/route-map';
 import {formatDuration} from '../../../shared/lib/formatDuration';
 import styles from './RouteDetailsPage.module.css';
-import {Link} from "@tanstack/react-router";
+import {Link, useRouter} from "@tanstack/react-router";
 import {appRoutes} from "../../../shared/lib/routes.ts";
 import {currentUserQueryOptions} from "../../../entities/user";
 import {useState} from 'react';
@@ -13,6 +13,7 @@ import Captions from 'yet-another-react-lightbox/plugins/captions';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/captions.css';
 import {RouteLikeButton} from "../../../features/toggle-route-like";
+import {RouteFavoriteButton} from "../../../features/toggle-route-favorite";
 
 interface RouteDetailsPageProps {
     routeId: number;
@@ -26,6 +27,7 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
     } = useQuery(routeDetailsQueryOptions(routeId));
 
     const [photoIndex, setPhotoIndex] = useState(-1);
+    const router = useRouter();
 
     const {data: currentUser} = useQuery(
         currentUserQueryOptions,
@@ -66,13 +68,14 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
 
     return (
         <div className={styles.page}>
-            <Link
-                to={appRoutes.home}
+            <button
+                type="button"
                 className={styles.backLink}
+                onClick={() => router.history.back()}
             >
                 <ArrowLeft size={16}/>
-                Back to Explore
-            </Link>
+                Back
+            </button>
             {route.coverUrl ? (
                 <section className={styles.hero}>
                     <img
@@ -367,15 +370,17 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
                             </div>
                         )}
 
-                        <div className={styles.activityRow}>
-                            <Star size={18}/>
-
-                            <span>
-                                {route.isFavorite
-                                    ? 'In favorites'
-                                    : 'Add to favorites'}
-                            </span>
-                        </div>
+                        {currentUser ? (
+                            <RouteFavoriteButton
+                                routeId={route.id}
+                                isFavorite={route.isFavorite}
+                            />
+                        ) : (
+                            <div className={styles.activityRow}>
+                                <Star size={18}/>
+                                <span>Add to favorites</span>
+                            </div>
+                        )}
                     </section>
                 </aside>
             </div>

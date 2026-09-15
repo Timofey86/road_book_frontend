@@ -151,3 +151,8 @@ export interface RouteLikeResponse {
     likesCount: number;
 }
 
+export interface FavoriteResponse {
+    routeId: number;
+    isFavorite: boolean;
+}
+

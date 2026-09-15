@@ -25,12 +25,11 @@ export function RouteLikeButton({routeId, isLiked, likesCount}: RouteLikeButtonP
             onClick={handleClick}
             disabled={mutation.isPending}
         >
-            <Heart
-                size={18}
-                fill={isLiked ? 'currentColor' : 'none'}
-            />
-
-            <span>
+            <span className={styles.action}>
+                <Heart size={18}/>
+                {isLiked ? 'Liked' : 'Like'}
+            </span>
+            <span className={styles.count}>
                 {likesCount} {likesCount === 1 ? 'like' : 'likes'}
             </span>
         </button>

@@ -1,10 +1,14 @@
 import {RouteCard, routesQueryOptions} from "../../../entities/route";
 import {useQuery} from "@tanstack/react-query";
 import styles from './ExplorePage.module.css';
-import {useState} from "react";
+import {Pagination} from "../../../shared/ui/pagination";
 
-export function ExplorePage() {
-    const [page, setPage] = useState(1);
+interface ExplorePageProps {
+    page: number;
+    onPageChange: (page: number) => void;
+}
+
+export function ExplorePage({page, onPageChange}: ExplorePageProps) {
     const {
         data,
         isPending,
@@ -41,29 +45,11 @@ export function ExplorePage() {
                     ))}
                 </div>
 
-                {meta.totalPages > 1 && (
-                    <div className={styles.pagination}>
-                        <button
-                            type="button"
-                            disabled={meta.page === 1}
-                            onClick={() => setPage((current) => current - 1)}
-                        >
-                            Previous
-                        </button>
-
-                        <span>
-                        Page {meta.page} of {meta.totalPages}
-                    </span>
-
-                        <button
-                            type="button"
-                            disabled={meta.page === meta.totalPages}
-                            onClick={() => setPage((current) => current + 1)}
-                        >
-                            Next
-                        </button>
-                    </div>
-                )}
+                <Pagination
+                    page={meta.page}
+                    totalPages={meta.totalPages}
+                    onPageChange={onPageChange}
+                />
             </div>
         </section>
     );
