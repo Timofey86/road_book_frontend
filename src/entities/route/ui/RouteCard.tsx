@@ -89,7 +89,7 @@ export function RouteCard({route}: RouteCardProps) {
                         )}
 
                         <span>
-                        <Heart size={16}/>
+                        <Heart size={16} className={styles.likesIcon}/>
                             {route.likesCount}
                     </span>
                     </div>

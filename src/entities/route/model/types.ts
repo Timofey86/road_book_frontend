@@ -145,3 +145,9 @@ export interface UpdateRoutePhotoPayload {
     caption?: string | null;
 }
 
+export interface RouteLikeResponse {
+    routeId: number;
+    isLiked: boolean;
+    likesCount: number;
+}
+

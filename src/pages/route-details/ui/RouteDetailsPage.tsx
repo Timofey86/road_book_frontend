@@ -12,6 +12,7 @@ import Lightbox from 'yet-another-react-lightbox';
 import Captions from 'yet-another-react-lightbox/plugins/captions';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/captions.css';
+import {RouteLikeButton} from "../../../features/toggle-route-like";
 
 interface RouteDetailsPageProps {
     routeId: number;
@@ -351,16 +352,20 @@ export function RouteDetailsPage({routeId}: RouteDetailsPageProps) {
                     </section>
 
                     <section className={styles.activityCard}>
-                        <div className={styles.activityRow}>
-                            <Heart size={18}/>
-
-                            <span>
-                                {route.likesCount}{' '}
-                                {route.likesCount === 1
-                                    ? 'like'
-                                    : 'likes'}
-                            </span>
-                        </div>
+                        {currentUser ? (
+                            <RouteLikeButton
+                                routeId={route.id}
+                                isLiked={route.isLiked}
+                                likesCount={route.likesCount}
+                            />
+                        ) : (
+                            <div className={styles.activityRow}>
+                                <Heart size={18} />
+                                <span>
+                                    {route.likesCount} {route.likesCount === 1 ? 'like' : 'likes'}
+                                </span>
+                            </div>
+                        )}
 
                         <div className={styles.activityRow}>
                             <Star size={18}/>
