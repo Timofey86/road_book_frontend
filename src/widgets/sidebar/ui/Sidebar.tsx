@@ -4,10 +4,9 @@ import {
     LogOut,
     MapPinned,
     Plus,
-    Settings,
     User,
 } from 'lucide-react';
-import logo from '../../../shared/assets/logo-icon.svg';
+import logo from '../../../shared/assets/logo.png';
 import {Link, useNavigate} from '@tanstack/react-router';
 import {useQuery} from '@tanstack/react-query';
 import {currentUserQueryOptions} from '../../../entities/user';
@@ -33,12 +32,13 @@ export function Sidebar() {
     return (
         <aside className={styles.sidebar}>
             <div className={styles.logo}>
+                <Link to={appRoutes.home}>
                 <img
                     src={logo}
-                    alt=""
+                    alt="roadbook_logo"
                     className={styles.logoImage}
                 />
-                <span>RoadBook</span>
+                </Link>
             </div>
 
             <nav className={styles.navigation}>
@@ -55,13 +55,16 @@ export function Sidebar() {
 
                 {user && (
                     <>
-                        <button
-                            type="button"
+                        <Link
+                            to={appRoutes.myRoutes}
                             className={styles.link}
+                            activeProps={{
+                                className: `${styles.navItem} ${styles.active}`,
+                            }}
                         >
                             <MapPinned size={20}/>
                             My Routes
-                        </button>
+                        </Link>
 
                         <Link
                             to={appRoutes.favorites}
@@ -103,14 +106,6 @@ export function Sidebar() {
                             <User size={20}/>
                             Profile
                         </Link>
-
-                        <button
-                            type="button"
-                            className={styles.link}
-                        >
-                            <Settings size={20}/>
-                            Settings
-                        </button>
                     </div>
 
                     <div className={styles.userCard}>

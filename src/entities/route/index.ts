@@ -14,6 +14,7 @@ export {
     useUpdateRoutePhotoMutation
 } from './model/mutations';
 export { routeDetailsQueryOptions } from './model/queries';
+export {myRoutesQueryOptions} from './api/myRoutesQueryOptions.ts';
 
 export type {
     RouteAuthor,

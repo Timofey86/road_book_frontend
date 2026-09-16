@@ -4,6 +4,7 @@ export const appRoutes = {
     register: '/register',
     profile: '/profile',
     favorites: '/favorites',
+    myRoutes: '/my-routes',
     createRoute: '/routes/create',
 
     routeDetails: '/routes/$routeId',
