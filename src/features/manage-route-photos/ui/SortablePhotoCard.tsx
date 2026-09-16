@@ -5,7 +5,7 @@ import {
 import {GripVertical, Trash2} from 'lucide-react';
 import type {RoutePhoto} from '../../../entities/route';
 import styles from './ManageRoutePhotos.module.css';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 interface SortablePhotoCardProps {
     photo: RoutePhoto;
@@ -41,10 +41,6 @@ export function SortablePhotoCard({
         transform: CSS.Transform.toString(transform),
         transition,
     };
-
-    useEffect(() => {
-        setCaption(photo.caption ?? '');
-    }, [photo.caption]);
 
     return (
         <div
@@ -136,9 +132,10 @@ export function SortablePhotoCard({
                     <button
                         type="button"
                         className={styles.captionButton}
-                        onClick={() =>
-                            setIsEditing(true)
-                        }
+                        onClick={() => {
+                            setCaption(photo.caption ?? '');
+                            setIsEditing(true);
+                        }}
                     >
                         {photo.caption ?? 'Add caption'}
                     </button>

@@ -8,7 +8,8 @@ import {
     type RoutePhoto,
     useUploadRoutePhotoMutation,
     useDeleteRoutePhotoMutation,
-    useReorderRoutePhotosMutation, useUpdateRoutePhotoMutation
+    useReorderRoutePhotosMutation,
+    useUpdateRoutePhotoMutation
 } from '../../../entities/route';
 import styles from './ManageRoutePhotos.module.css';
 import {Modal} from "../../../shared/ui/modal";
@@ -39,21 +40,36 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
     const [validationError, setValidationError] = useState<string | null>(null);
 
     const [photoToDelete, setPhotoToDelete] = useState<RoutePhoto | null>(null);
+    const [photoOrder, setPhotoOrder] = useState<number[] | null>(null);
+
     const deletePhotoMutation = useDeleteRoutePhotoMutation(routeId);
-
-    const [orderedPhotos, setOrderedPhotos] = useState<RoutePhoto[]>([]);
-
     const reorderMutation = useReorderRoutePhotosMutation(routeId)
     const updatePhotoMutation = useUpdateRoutePhotoMutation(routeId);
+    const uploadMutation = useUploadRoutePhotoMutation(routeId);
 
-    useEffect(() => {
-        setOrderedPhotos(
-            photos.toSorted(
-                (a, b) =>
-                    a.position - b.position,
+    const sortedPhotos = photos.toSorted(
+        (a, b) => a.position - b.position,
+    );
+
+    const orderedPhotos = photoOrder
+        ? [
+            ...photoOrder
+                .map((id) =>
+                    photos.find(
+                        (photo) => photo.id === id,
+                    ),
+                )
+                .filter(
+                    (photo): photo is RoutePhoto =>
+                        photo !== undefined,
+                ),
+
+            ...sortedPhotos.filter(
+                (photo) =>
+                    !photoOrder.includes(photo.id),
             ),
-        );
-    }, [photos]);
+        ]
+        : sortedPhotos;
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -95,15 +111,14 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
             newIndex,
         );
 
-        setOrderedPhotos(nextPhotos);
-
-        reorderMutation.mutate(
-            nextPhotos.map((photo) => photo.id),
+        const nextOrder = nextPhotos.map(
+            (photo) => photo.id,
         );
+
+        setPhotoOrder(nextOrder);
+        reorderMutation.mutate(nextOrder);
     };
 
-
-    const uploadMutation = useUploadRoutePhotoMutation(routeId);
 
     useEffect(() => {
         return () => {

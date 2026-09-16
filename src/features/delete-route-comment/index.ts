@@ -1,0 +1,1 @@
+export { useDeleteRouteCommentMutation} from './model/useDeleteRouteCommentMutation';

@@ -1,0 +1,222 @@
+import type {RouteDetails} from "../../../entities/route";
+import styles from './RouteDetailsPage.module.css';
+import {RouteMap} from "../../../features/route-map";
+import {Clock3, Heart, MapPin, RouteIcon, Star} from "lucide-react";
+import {RouteLikeButton} from "../../../features/toggle-route-like";
+import {RouteFavoriteButton} from "../../../features/toggle-route-favorite";
+import {formatDuration} from "../../../shared/lib/formatDuration.ts";
+import {useQuery} from "@tanstack/react-query";
+import {currentUserQueryOptions} from "../../../entities/user";
+
+interface RouteOverviewProps {
+    route: RouteDetails;
+}
+
+export function RouteOverview({route}: RouteOverviewProps) {
+
+    const distance =
+        route.totalDistanceMeters !== null
+            ? `${(
+                route.totalDistanceMeters / 1000
+            ).toFixed(1)} km`
+            : '—';
+
+    const duration =
+        route.totalDurationSeconds !== null
+            ? formatDuration(route.totalDurationSeconds)
+            : '—';
+
+    const {data: currentUser} = useQuery(
+        currentUserQueryOptions,
+    );
+
+    return (
+        <>
+            <div className={styles.mainGrid}>
+                <div className={styles.mainColumn}>
+                    {route.routeGeometry &&
+                        route.isRouteActual && (
+                            <section className={styles.section}>
+                                <div className={styles.sectionHeader}>
+                                    <div>
+                                        <span className={styles.sectionEyebrow}>
+                                            Route
+                                        </span>
+
+                                        <h2>Route map</h2>
+                                    </div>
+                                </div>
+
+                                <RouteMap
+                                    geometry={
+                                        route.routeGeometry
+                                    }
+                                    stops={route.stops}
+                                />
+                            </section>
+                        )}
+
+                    <section className={styles.section}>
+                        <div className={styles.sectionHeader}>
+                            <div>
+                                <span
+                                    className={
+                                        styles.sectionEyebrow
+                                    }
+                                >
+                                    Itinerary
+                                </span>
+
+                                <h2>Stops</h2>
+                            </div>
+
+                            <span className={styles.stopCount}>
+                                {route.stops.length}{' '}
+                                {route.stops.length === 1
+                                    ? 'stop'
+                                    : 'stops'}
+                            </span>
+                        </div>
+
+                        <div className={styles.stops}>
+                            {route.stops.map((stop) => (
+                                <div
+                                    key={stop.id}
+                                    className={styles.stop}
+                                >
+                                    <div
+                                        className={
+                                            styles.stopPosition
+                                        }
+                                    >
+                                        {stop.position}
+                                    </div>
+
+                                    <div
+                                        className={
+                                            styles.stopContent
+                                        }
+                                    >
+                                        <strong>
+                                            {stop.name}
+                                        </strong>
+
+                                        {stop.address && (
+                                            <span>
+                                                {stop.address}
+                                            </span>
+                                        )}
+
+                                        {!stop.address &&
+                                            (stop.cityName ||
+                                                stop.countryName) && (
+                                                <span>
+                                                    {[
+                                                        stop.cityName,
+                                                        stop.countryName,
+                                                    ]
+                                                        .filter(Boolean)
+                                                        .join(', ')}
+                                                </span>
+                                            )}
+                                    </div>
+
+                                    <MapPin
+                                        size={18}
+                                        className={
+                                            styles.stopIcon
+                                        }
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                </div>
+
+                <aside className={styles.sidebar}>
+                    <section className={styles.infoCard}>
+                        <h2>Route info</h2>
+
+                        <div className={styles.infoList}>
+                            <div className={styles.infoItem}>
+                                <div
+                                    className={
+                                        styles.infoIcon
+                                    }
+                                >
+                                    <RouteIcon size={18}/>
+                                </div>
+
+                                <div>
+                                    <span>Distance</span>
+                                    <strong>{distance}</strong>
+                                </div>
+                            </div>
+
+                            <div className={styles.infoItem}>
+                                <div
+                                    className={
+                                        styles.infoIcon
+                                    }
+                                >
+                                    <Clock3 size={18}/>
+                                </div>
+
+                                <div>
+                                    <span>Duration</span>
+                                    <strong>{duration}</strong>
+                                </div>
+                            </div>
+
+                            <div className={styles.infoItem}>
+                                <div
+                                    className={
+                                        styles.infoIcon
+                                    }
+                                >
+                                    <MapPin size={18}/>
+                                </div>
+
+                                <div>
+                                    <span>Stops</span>
+                                    <strong>
+                                        {route.stops.length}
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className={styles.activityCard}>
+                        {currentUser ? (
+                            <RouteLikeButton
+                                routeId={route.id}
+                                isLiked={route.isLiked}
+                                likesCount={route.likesCount}
+                            />
+                        ) : (
+                            <div className={styles.activityRow}>
+                                <Heart size={18} />
+                                <span>
+                                    {route.likesCount} {route.likesCount === 1 ? 'like' : 'likes'}
+                                </span>
+                            </div>
+                        )}
+
+                        {currentUser ? (
+                            <RouteFavoriteButton
+                                routeId={route.id}
+                                isFavorite={route.isFavorite}
+                            />
+                        ) : (
+                            <div className={styles.activityRow}>
+                                <Star size={18}/>
+                                <span>Add to favorites</span>
+                            </div>
+                        )}
+                    </section>
+                </aside>
+            </div>
+        </>
+    )
+}
