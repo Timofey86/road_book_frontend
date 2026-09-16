@@ -3,23 +3,24 @@ import {currentUserQueryOptions} from "../../../entities/user";
 import {GuestLayout} from "../../../widgets/guest-layout";
 
 export const Route = createFileRoute('/_guest')({
-    beforeLoad: async ({ context }) => {
+    beforeLoad: async ({context}) => {
         const user = await context.queryClient
             .ensureQueryData(currentUserQueryOptions)
 
         if (user) {
             throw redirect({
                 to: '/',
+                search: {page: 1}
             });
         }
     },
-  component: GuestRoute,
+    component: GuestRoute,
 })
 
 function GuestRoute() {
     return (
         <GuestLayout>
-            <Outlet />
+            <Outlet/>
         </GuestLayout>
     );
 }
