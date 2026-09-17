@@ -1,4 +1,4 @@
-import { Bell, Search } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { currentUserQueryOptions } from '../../../entities/user';
 import styles from './Header.module.css';
@@ -9,14 +9,6 @@ export function Header() {
     const { data: user } = useQuery(currentUserQueryOptions);
     return (
         <header className={styles.header}>
-            <div className={styles.search}>
-                <Search size={18} />
-
-                <input
-                    type="search"
-                    placeholder="Search routes, destinations, users..."
-                />
-            </div>
 
             <div className={styles.actions}>
                 {user ? (

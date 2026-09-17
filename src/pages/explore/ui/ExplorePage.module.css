@@ -28,3 +28,73 @@
     align-items: stretch;
 
 }
+
+.toolbar {
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) auto auto;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+
+.sortWrapper {
+    position: relative;
+}
+
+.sort {
+    height: 42px;
+    padding: 0 42px 0 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #ffffff;
+    font: inherit;
+    cursor: pointer;
+    appearance: none;
+}
+
+.sortIcon {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.filtersButton {
+    display: inline-flex;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #ffffff;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.filtersCount {
+    display: grid;
+    min-width: 20px;
+    height: 20px;
+    place-items: center;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: #047857;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.filtersButton:hover {
+    background: #f9fafb;
+}
+
+.empty {
+    padding: 48px 20px;
+    color: #6b7280;
+    text-align: center;
+}

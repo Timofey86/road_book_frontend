@@ -1,9 +1,12 @@
-import {keepPreviousData, queryOptions} from "@tanstack/react-query";
-import {getRoutes} from "./getRoutes";
+import {keepPreviousData, queryOptions} from '@tanstack/react-query';
+import {getRoutes} from './getRoutes';
+import type {RoutesQueryParams} from '../model/types';
 
-export const routesQueryOptions = (page: number) =>
+export const routesQueryOptions = (
+    params: RoutesQueryParams,
+) =>
     queryOptions({
-        queryKey: ['routes', {page}],
-        queryFn: () => getRoutes(page),
+        queryKey: ['routes', params],
+        queryFn: () => getRoutes(params),
         placeholderData: keepPreviousData,
-    })
+    });

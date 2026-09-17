@@ -99,6 +99,14 @@
     padding: 10px;
     border-radius: 10px;
     background: #f8faf9;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.userCard:hover {
+    background: #f3f4f6;
 }
 
 .avatar,

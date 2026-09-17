@@ -34,5 +34,9 @@ export type {
     UploadRoutePhotoPayload,
     UpdateRoutePhotoPayload,
     RouteLikeResponse,
-    FavoriteResponse
+    FavoriteResponse,
+    RouteSortBy,
+    SortOrder,
+    RoutesQueryParams,
+    ExploreSearch
 } from './model/types';

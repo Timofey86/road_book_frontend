@@ -1,0 +1,157 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.section h3 {
+    margin: 0;
+    color: #111827;
+    font-size: 15px;
+}
+
+.distance {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.distance label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.distance label span {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.distance input {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    background: #ffffff;
+    font: inherit;
+    outline: none;
+}
+
+.distance input:focus {
+    border-color: #047857;
+}
+
+.tagSearch {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    color: #6b7280;
+}
+
+.tagSearch:focus-within {
+    border-color: #047857;
+}
+
+.tagSearch input {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    outline: none;
+}
+
+.selectedTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.selectedTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 9px;
+    border: 0;
+    border-radius: 999px;
+    background: #ecfdf5;
+    color: #047857;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.selectedTag:hover {
+    background: #d1fae5;
+}
+
+.tags {
+    display: grid;
+    max-height: 220px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 16px;
+    overflow-y: auto;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 6px 4px;
+    cursor: pointer;
+}
+
+.tag input {
+    flex: 0 0 auto;
+    accent-color: #047857;
+}
+
+.tag span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 4px;
+}
+
+.resetButton,
+.applyButton {
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 9px;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.resetButton {
+    border: 0;
+    background: transparent;
+    color: #4b5563;
+}
+
+.resetButton:hover {
+    background: #f3f4f6;
+}
+
+.applyButton {
+    border: 1px solid #047857;
+    background: #047857;
+    color: #ffffff;
+}

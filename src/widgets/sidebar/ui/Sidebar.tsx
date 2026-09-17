@@ -108,7 +108,10 @@ export function Sidebar() {
                         </Link>
                     </div>
 
-                    <div className={styles.userCard}>
+                    <Link
+                        to={appRoutes.profile}
+                        className={styles.userCard}
+                    >
                         {user.avatarUrl ? (
                             <img
                                 src={user.avatarUrl}
@@ -125,7 +128,7 @@ export function Sidebar() {
                             <strong>{user.name}</strong>
                             <span>View profile</span>
                         </div>
-                    </div>
+                    </Link>
 
                     <div className={styles.languageRow}>
                         <LanguageSwitcher />

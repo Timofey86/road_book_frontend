@@ -156,3 +156,34 @@ export interface FavoriteResponse {
     isFavorite: boolean;
 }
 
+export type RouteSortBy =
+    | 'createdAt'
+    | 'likes'
+    | 'distance';
+
+export type SortOrder =
+    | 'asc'
+    | 'desc';
+
+export interface RoutesQueryParams {
+    page?: number;
+    limit?: number;
+    search?: string;
+    sortBy?: RouteSortBy;
+    sortOrder?: SortOrder;
+    minDistance?: number;
+    maxDistance?: number;
+    tags?: string;
+    userId?: number;
+}
+
+export interface ExploreSearch {
+    page: number;
+    search?: string;
+    sortBy?: RouteSortBy;
+    sortOrder?: SortOrder;
+    minDistance?: number;
+    maxDistance?: number;
+    tags?: string;
+}
+

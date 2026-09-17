@@ -1,0 +1,1 @@
+export {tagsQueryOptions} from './model/queries'

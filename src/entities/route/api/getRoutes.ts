@@ -1,18 +1,21 @@
-import type {RoutesPaginatedResponse} from "../model/types.ts";
-import {apiClient} from "../../../shared/api/apiClient.ts";
+import {apiClient} from '../../../shared/api/apiClient';
+import type {
+    RouteListItem,
+    RoutesQueryParams,
+} from '../model/types';
+import type {PaginatedResponse} from "../../../shared/api/types.ts";
 
 export async function getRoutes(
-    page: number,
-): Promise<RoutesPaginatedResponse> {
-    const { data } = await apiClient.get<RoutesPaginatedResponse>(
-        '/routes',
-        {
-            params: {
-                page,
-                limit: 12,
-            },
+    params: RoutesQueryParams,
+): Promise<PaginatedResponse<RouteListItem>> {
+    const {data} = await apiClient.get<
+        PaginatedResponse<RouteListItem>
+    >('/routes', {
+        params: {
+            ...params,
+            limit: params.limit ?? 12,
         },
-    );
+    });
 
     return data;
 }
