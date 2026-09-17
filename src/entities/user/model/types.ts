@@ -12,3 +12,19 @@ export interface CurrentUser {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface PublicUser {
+    id: number;
+    name: string;
+    bio: string | null;
+    avatarUrl: string | null;
+    routesCount: number;
+    receivedLikesCount: number;
+    createdAt: string;
+}
+
+export interface UpdateUser {
+    name?: string;
+    bio?: string;
+    preferredLanguage?: PreferredLanguage;
+}

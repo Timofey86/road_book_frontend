@@ -9,7 +9,7 @@ export async function getMyRoutes(
         {
             params: {
                 page,
-                limit: 2,
+                limit: 12,
             },
         },
     );

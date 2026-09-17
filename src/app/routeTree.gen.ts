@@ -17,7 +17,8 @@ import { Route as GuestLoginRouteImport } from './routes/_guest/login'
 import { Route as GuestRegisterRouteImport } from './routes/_guest/register'
 import { Route as AppAuthenticatedFavoritesRouteImport } from './routes/_app/_authenticated/favorites'
 import { Route as AppAuthenticatedMyRoutesRouteImport } from './routes/_app/_authenticated/my-routes'
-import { Route as AppAuthenticatedProfileRouteImport } from './routes/_app/_authenticated/profile'
+import { Route as AppAuthenticatedProfileIndexRouteImport } from './routes/_app/_authenticated/profile/index'
+import { Route as AppAuthenticatedProfileEditRouteImport } from './routes/_app/_authenticated/profile/edit'
 import { Route as AppAuthenticatedRoutesCreateRouteImport } from './routes/_app/_authenticated/routes/create'
 import { Route as AppRoutesRouteIdIndexRouteImport } from './routes/_app/routes/$routeId/index'
 import { Route as AppAuthenticatedRoutesRouteIdEditIndexRouteImport } from './routes/_app/_authenticated/routes/$routeId/edit/index'
@@ -62,11 +63,18 @@ const AppAuthenticatedMyRoutesRoute =
     path: '/my-routes',
     getParentRoute: () => AppAuthenticatedRouteRoute,
   } as any)
-const AppAuthenticatedProfileRoute = AppAuthenticatedProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AppAuthenticatedRouteRoute,
-} as any)
+const AppAuthenticatedProfileIndexRoute =
+  AppAuthenticatedProfileIndexRouteImport.update({
+    id: '/profile/',
+    path: '/profile/',
+    getParentRoute: () => AppAuthenticatedRouteRoute,
+  } as any)
+const AppAuthenticatedProfileEditRoute =
+  AppAuthenticatedProfileEditRouteImport.update({
+    id: '/profile/edit',
+    path: '/profile/edit',
+    getParentRoute: () => AppAuthenticatedRouteRoute,
+  } as any)
 const AppAuthenticatedRoutesCreateRoute =
   AppAuthenticatedRoutesCreateRouteImport.update({
     id: '/routes/create',
@@ -97,8 +105,9 @@ export interface FileRoutesByFullPath {
   '/register': typeof GuestRegisterRoute
   '/favorites': typeof AppAuthenticatedFavoritesRoute
   '/my-routes': typeof AppAuthenticatedMyRoutesRoute
-  '/profile': typeof AppAuthenticatedProfileRoute
+  '/profile/edit': typeof AppAuthenticatedProfileEditRoute
   '/routes/create': typeof AppAuthenticatedRoutesCreateRoute
+  '/profile/': typeof AppAuthenticatedProfileIndexRoute
   '/routes/$routeId/': typeof AppRoutesRouteIdIndexRoute
   '/routes/$routeId/edit/stops': typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
   '/routes/$routeId/edit/': typeof AppAuthenticatedRoutesRouteIdEditIndexRoute
@@ -109,8 +118,9 @@ export interface FileRoutesByTo {
   '/register': typeof GuestRegisterRoute
   '/favorites': typeof AppAuthenticatedFavoritesRoute
   '/my-routes': typeof AppAuthenticatedMyRoutesRoute
-  '/profile': typeof AppAuthenticatedProfileRoute
+  '/profile/edit': typeof AppAuthenticatedProfileEditRoute
   '/routes/create': typeof AppAuthenticatedRoutesCreateRoute
+  '/profile': typeof AppAuthenticatedProfileIndexRoute
   '/routes/$routeId': typeof AppRoutesRouteIdIndexRoute
   '/routes/$routeId/edit/stops': typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
   '/routes/$routeId/edit': typeof AppAuthenticatedRoutesRouteIdEditIndexRoute
@@ -125,8 +135,9 @@ export interface FileRoutesById {
   '/_app/': typeof AppIndexRoute
   '/_app/_authenticated/favorites': typeof AppAuthenticatedFavoritesRoute
   '/_app/_authenticated/my-routes': typeof AppAuthenticatedMyRoutesRoute
-  '/_app/_authenticated/profile': typeof AppAuthenticatedProfileRoute
+  '/_app/_authenticated/profile/edit': typeof AppAuthenticatedProfileEditRoute
   '/_app/_authenticated/routes/create': typeof AppAuthenticatedRoutesCreateRoute
+  '/_app/_authenticated/profile/': typeof AppAuthenticatedProfileIndexRoute
   '/_app/routes/$routeId/': typeof AppRoutesRouteIdIndexRoute
   '/_app/_authenticated/routes/$routeId/edit/stops': typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
   '/_app/_authenticated/routes/$routeId/edit/': typeof AppAuthenticatedRoutesRouteIdEditIndexRoute
@@ -139,8 +150,9 @@ export interface FileRouteTypes {
     | '/register'
     | '/favorites'
     | '/my-routes'
-    | '/profile'
+    | '/profile/edit'
     | '/routes/create'
+    | '/profile/'
     | '/routes/$routeId/'
     | '/routes/$routeId/edit/stops'
     | '/routes/$routeId/edit/'
@@ -151,8 +163,9 @@ export interface FileRouteTypes {
     | '/register'
     | '/favorites'
     | '/my-routes'
-    | '/profile'
+    | '/profile/edit'
     | '/routes/create'
+    | '/profile'
     | '/routes/$routeId'
     | '/routes/$routeId/edit/stops'
     | '/routes/$routeId/edit'
@@ -166,8 +179,9 @@ export interface FileRouteTypes {
     | '/_app/'
     | '/_app/_authenticated/favorites'
     | '/_app/_authenticated/my-routes'
-    | '/_app/_authenticated/profile'
+    | '/_app/_authenticated/profile/edit'
     | '/_app/_authenticated/routes/create'
+    | '/_app/_authenticated/profile/'
     | '/_app/routes/$routeId/'
     | '/_app/_authenticated/routes/$routeId/edit/stops'
     | '/_app/_authenticated/routes/$routeId/edit/'
@@ -236,11 +250,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAuthenticatedMyRoutesRouteImport
       parentRoute: typeof AppAuthenticatedRouteRoute
     }
-    '/_app/_authenticated/profile': {
-      id: '/_app/_authenticated/profile'
+    '/_app/_authenticated/profile/': {
+      id: '/_app/_authenticated/profile/'
       path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AppAuthenticatedProfileRouteImport
+      fullPath: '/profile/'
+      preLoaderRoute: typeof AppAuthenticatedProfileIndexRouteImport
+      parentRoute: typeof AppAuthenticatedRouteRoute
+    }
+    '/_app/_authenticated/profile/edit': {
+      id: '/_app/_authenticated/profile/edit'
+      path: '/profile/edit'
+      fullPath: '/profile/edit'
+      preLoaderRoute: typeof AppAuthenticatedProfileEditRouteImport
       parentRoute: typeof AppAuthenticatedRouteRoute
     }
     '/_app/_authenticated/routes/create': {
@@ -277,8 +298,9 @@ declare module '@tanstack/react-router' {
 interface AppAuthenticatedRouteRouteChildren {
   AppAuthenticatedFavoritesRoute: typeof AppAuthenticatedFavoritesRoute
   AppAuthenticatedMyRoutesRoute: typeof AppAuthenticatedMyRoutesRoute
-  AppAuthenticatedProfileRoute: typeof AppAuthenticatedProfileRoute
+  AppAuthenticatedProfileEditRoute: typeof AppAuthenticatedProfileEditRoute
   AppAuthenticatedRoutesCreateRoute: typeof AppAuthenticatedRoutesCreateRoute
+  AppAuthenticatedProfileIndexRoute: typeof AppAuthenticatedProfileIndexRoute
   AppAuthenticatedRoutesRouteIdEditStopsRoute: typeof AppAuthenticatedRoutesRouteIdEditStopsRoute
   AppAuthenticatedRoutesRouteIdEditIndexRoute: typeof AppAuthenticatedRoutesRouteIdEditIndexRoute
 }
@@ -286,8 +308,9 @@ interface AppAuthenticatedRouteRouteChildren {
 const AppAuthenticatedRouteRouteChildren: AppAuthenticatedRouteRouteChildren = {
   AppAuthenticatedFavoritesRoute: AppAuthenticatedFavoritesRoute,
   AppAuthenticatedMyRoutesRoute: AppAuthenticatedMyRoutesRoute,
-  AppAuthenticatedProfileRoute: AppAuthenticatedProfileRoute,
+  AppAuthenticatedProfileEditRoute: AppAuthenticatedProfileEditRoute,
   AppAuthenticatedRoutesCreateRoute: AppAuthenticatedRoutesCreateRoute,
+  AppAuthenticatedProfileIndexRoute: AppAuthenticatedProfileIndexRoute,
   AppAuthenticatedRoutesRouteIdEditStopsRoute:
     AppAuthenticatedRoutesRouteIdEditStopsRoute,
   AppAuthenticatedRoutesRouteIdEditIndexRoute:

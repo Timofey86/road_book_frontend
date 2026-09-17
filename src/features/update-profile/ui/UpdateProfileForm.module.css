@@ -1,0 +1,110 @@
+form {
+    padding: 24px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.field label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #111827;
+    font: inherit;
+    font-size: 14px;
+    outline: none;
+    transition:
+            border-color 0.15s ease,
+            box-shadow 0.15s ease;
+}
+
+.field input {
+    height: 42px;
+}
+
+.field textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.field input:focus,
+.field textarea:focus {
+    border-color: #047857;
+    box-shadow: 0 0 0 3px rgb(4 120 87 / 10%);
+}
+
+.labelRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.labelRow span {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 4px;
+}
+
+.actions button {
+    min-height: 40px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 8px;
+    background: #047857;
+    color: #ffffff;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.actions button:hover:not(:disabled) {
+    background: #065f46;
+}
+
+.actions button:disabled {
+    cursor: default;
+    opacity: 0.5;
+}
+
+.error,
+.success {
+    margin: -4px 0 16px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.error {
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.success {
+    border: 1px solid #a7f3d0;
+    background: #ecfdf5;
+    color: #047857;
+}

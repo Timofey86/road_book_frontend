@@ -13,6 +13,4 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
 
         throw error;
     }
-
-
 }

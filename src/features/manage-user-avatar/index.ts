@@ -1,0 +1,1 @@
+export {ManageUserAvatar} from './ui/ManageUserAvatar'

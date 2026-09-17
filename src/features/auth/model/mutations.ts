@@ -1,8 +1,9 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {login} from "../api/login.ts";
-import {currentUserQueryOptions} from "../../../entities/user";
+import {currentUserQueryOptions, getCurrentUser} from "../../../entities/user";
 import {logout} from "../api/logout.ts";
 import {register} from "../api/register.ts";
+import type {RegisterPayload} from "./types.ts";
 
 export function useLoginMutation() {
     const queryClient = useQueryClient();
@@ -25,9 +26,10 @@ export function useLogoutMutation() {
     return useMutation({
         mutationFn: logout,
         onSuccess: () => {
-            queryClient.removeQueries({
-                queryKey: currentUserQueryOptions.queryKey,
-            });
+            queryClient.setQueryData(
+                currentUserQueryOptions.queryKey,
+                null,
+            );
         },
     });
 }
@@ -36,7 +38,22 @@ export function useRegisterMutation() {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: register,
+        mutationFn: async (data: RegisterPayload) => {
+            await register(data);
+
+            await login({
+                email: data.email,
+                password: data.password,
+            });
+
+            const user = await getCurrentUser();
+
+            if (!user) {
+                throw new Error('Failed to authenticate after registration');
+            }
+
+            return user;
+        },
 
         onSuccess: (user) => {
             queryClient.setQueryData(

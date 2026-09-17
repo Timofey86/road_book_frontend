@@ -1,0 +1,175 @@
+.page {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.pageHeader {
+    margin-bottom: 22px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.pageHeader h1 {
+    margin: 0;
+    color: #111827;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.pageHeader p {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.editButton {
+    min-height: 40px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #374151;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition:
+            border-color 0.15s ease,
+            background-color 0.15s ease,
+            color 0.15s ease;
+}
+
+.editButton:hover {
+    border-color: #047857;
+    background: #f0fdf4;
+    color: #047857;
+}
+
+.profileCard {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.identity {
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Avatar */
+
+.avatarButton,
+.avatarFallback {
+    width: 88px;
+    height: 88px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.avatarButton {
+    padding: 0;
+    overflow: hidden;
+    display: block;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+    transition: opacity 0.15s ease;
+}
+
+.avatarButton:hover {
+    opacity: 0.9;
+}
+
+.avatarImage {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.avatarFallback {
+    display: grid;
+    place-items: center;
+    background: #047857;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+/* User information */
+
+.userInfo {
+    min-width: 0;
+}
+
+.userInfo h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 22px;
+}
+
+.email {
+    display: block;
+    margin-top: 3px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.bio {
+    max-width: 700px;
+    margin: 12px 0 0;
+    color: #374151;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Stats */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid #e5e7eb;
+}
+
+.stat {
+    min-height: 84px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stat + .stat {
+    border-left: 1px solid #e5e7eb;
+}
+
+.stat > svg {
+    flex-shrink: 0;
+    color: #047857;
+}
+
+.stat div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stat strong {
+    color: #111827;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.stat span {
+    color: #6b7280;
+    font-size: 12px;
+}

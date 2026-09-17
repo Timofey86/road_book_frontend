@@ -1,0 +1,122 @@
+.card {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.header {
+    padding: 20px 22px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.header h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 18px;
+}
+
+.header p {
+    margin: 4px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.content {
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #047857;
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.uploadButton,
+.removeButton {
+    min-height: 38px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.uploadButton {
+    border: 1px solid #047857;
+    background: #047857;
+    color: #ffffff;
+}
+
+.uploadButton:hover:not(:disabled) {
+    background: #065f46;
+}
+
+.removeButton {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #374151;
+}
+
+.removeButton:hover:not(:disabled) {
+    border-color: #dc2626;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.uploadButton:disabled,
+.removeButton:disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+.hint {
+    margin: 0;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.error {
+    margin: 0;
+    color: #dc2626;
+    font-size: 13px;
+}
+
+.fileInput {
+    display: none;
+}
