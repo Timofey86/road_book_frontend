@@ -11,4 +11,6 @@ export const appRoutes = {
     routeDetails: '/routes/$routeId',
     editRoute: '/routes/$routeId/edit',
     editRouteStops: '/routes/$routeId/edit/stops',
+
+    publicProfile: '/users/$userId',
 } as const;

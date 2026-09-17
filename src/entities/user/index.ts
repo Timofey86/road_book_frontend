@@ -1,5 +1,5 @@
 export { getCurrentUser } from './api/getCurrentUser';
-export { currentUserQueryOptions } from './model/queries';
+export { currentUserQueryOptions, publicUserQueryOptions, } from './model/queries';
 export {
     useUpdatePreferredLanguageMutation,
     useUploadAvatarMutation,

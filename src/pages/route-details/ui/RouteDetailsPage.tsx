@@ -78,7 +78,13 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
                     )}
 
                     <div className={styles.heroContent}>
-                        <div className={styles.author}>
+                        <Link
+                            to={appRoutes.publicProfile}
+                            params={{
+                                userId: String(route.author.id),
+                            }}
+                            className={styles.author}
+                        >
                             {route.author.avatarUrl ? (
                                 <img
                                     src={route.author.avatarUrl}
@@ -93,7 +99,7 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
                             )}
 
                             <span>{route.author.name}</span>
-                        </div>
+                        </Link>
 
                         <h1>{route.title}</h1>
 
