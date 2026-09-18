@@ -8,12 +8,14 @@ import {formatDuration} from '../../../shared/lib/formatDuration';
 import styles from './RouteCard.module.css';
 import {Link} from "@tanstack/react-router";
 import {appRoutes} from "../../../shared/lib/routes.ts";
+import {useTranslation} from 'react-i18next';
 
 interface RouteCardProps {
     route: RouteListItem;
 }
 
 export function RouteCard({route}: RouteCardProps) {
+    const {t} = useTranslation();
     return (
         <Link
             to={appRoutes.routeDetails}
@@ -78,7 +80,9 @@ export function RouteCard({route}: RouteCardProps) {
                     <div className={styles.meta}>
                     <span>
                         <MapPin size={16}/>
-                        {route.stopsCount} stops
+                        {t('routeCard.stops', {
+                            count: route.stopsCount,
+                        })}
                     </span>
 
                         {route.totalDurationSeconds !== null && (

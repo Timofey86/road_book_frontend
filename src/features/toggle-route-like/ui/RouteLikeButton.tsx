@@ -1,6 +1,7 @@
 import {useToggleRouteLikeMutation} from "../model/useToggleRouteLikeMutation.ts";
 import {Heart} from "lucide-react";
 import styles from './RouteLikeButton.module.css';
+import {useTranslation} from 'react-i18next';
 
 interface RouteLikeButtonProps {
     routeId: number;
@@ -10,6 +11,7 @@ interface RouteLikeButtonProps {
 
 export function RouteLikeButton({routeId, isLiked, likesCount}: RouteLikeButtonProps) {
     const mutation = useToggleRouteLikeMutation();
+    const {t} = useTranslation();
 
     const handleClick = () => {
         mutation.mutate({
@@ -27,10 +29,14 @@ export function RouteLikeButton({routeId, isLiked, likesCount}: RouteLikeButtonP
         >
             <span className={styles.action}>
                 <Heart size={18}/>
-                {isLiked ? 'Liked' : 'Like'}
+                {isLiked
+                    ? t('routeActions.like.liked')
+                    : t('routeActions.like.like')}
             </span>
             <span className={styles.count}>
-                {likesCount} {likesCount === 1 ? 'like' : 'likes'}
+                {t('routeActions.like.likes', {
+                    count: likesCount,
+                })}
             </span>
         </button>
     );

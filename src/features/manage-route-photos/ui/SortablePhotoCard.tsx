@@ -6,6 +6,7 @@ import {GripVertical, Trash2} from 'lucide-react';
 import type {RoutePhoto} from '../../../entities/route';
 import styles from './ManageRoutePhotos.module.css';
 import {useState} from "react";
+import {useTranslation} from 'react-i18next';
 
 interface SortablePhotoCardProps {
     photo: RoutePhoto;
@@ -23,6 +24,7 @@ export function SortablePhotoCard({
     onUpdateCaption,
     isUpdatingCaption,
 }: SortablePhotoCardProps) {
+    const {t} = useTranslation();
     const {
         attributes,
         listeners,
@@ -55,14 +57,14 @@ export function SortablePhotoCard({
                     src={photo.url}
                     alt={
                         photo.caption ??
-                        'Route photo'
+                        t('editRoute.photos.photoAlt')
                     }
                 />
 
                 <button
                     type="button"
                     className={styles.dragHandle}
-                    aria-label="Reorder photo"
+                    aria-label={t('editRoute.photos.reorder')}
                     {...attributes}
                     {...listeners}
                 >
@@ -73,7 +75,7 @@ export function SortablePhotoCard({
                     type="button"
                     className={styles.deletePhotoButton}
                     onClick={onDelete}
-                    aria-label="Delete photo"
+                    aria-label={t('editRoute.photos.delete')}
                 >
                     <Trash2 size={16}/>
                 </button>
@@ -82,14 +84,14 @@ export function SortablePhotoCard({
             <div className={styles.captionArea}>
                 {isEditing ? (
                     <>
-            <textarea
-                value={caption}
-                maxLength={500}
-                rows={3}
-                onChange={(event) =>
-                    setCaption(event.target.value)
-                }
-            />
+                        <textarea
+                            value={caption}
+                            maxLength={500}
+                            rows={3}
+                            onChange={(event) =>
+                                setCaption(event.target.value)
+                            }
+                        />
 
                         <div className={styles.captionActions}>
                             <button
@@ -97,13 +99,11 @@ export function SortablePhotoCard({
                                 className={styles.captionCancelButton}
                                 disabled={isUpdatingCaption}
                                 onClick={() => {
-                                    setCaption(
-                                        photo.caption ?? '',
-                                    );
+                                    setCaption(photo.caption ?? '');
                                     setIsEditing(false);
                                 }}
                             >
-                                Cancel
+                                {t('common.cancel')}
                             </button>
 
                             <button
@@ -111,20 +111,14 @@ export function SortablePhotoCard({
                                 className={styles.captionSaveButton}
                                 disabled={isUpdatingCaption}
                                 onClick={() => {
-                                    const value =
-                                        caption.trim();
-
-                                    onUpdateCaption(
-                                        photo.id,
-                                        value || null,
-                                    );
-
+                                    const value = caption.trim();
+                                    onUpdateCaption(photo.id, value || null);
                                     setIsEditing(false);
                                 }}
                             >
                                 {isUpdatingCaption
-                                    ? 'Saving...'
-                                    : 'Save'}
+                                    ? t('editRoute.photos.savingCaption')
+                                    : t('editRoute.photos.saveCaption')}
                             </button>
                         </div>
                     </>
@@ -137,7 +131,7 @@ export function SortablePhotoCard({
                             setIsEditing(true);
                         }}
                     >
-                        {photo.caption ?? 'Add caption'}
+                        {photo.caption ?? t('editRoute.photos.addCaption')}
                     </button>
                 )}
             </div>

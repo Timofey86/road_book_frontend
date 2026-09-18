@@ -4,9 +4,11 @@ import { currentUserQueryOptions } from '../../../entities/user';
 import styles from './Header.module.css';
 import {Link} from "@tanstack/react-router";
 import {appRoutes} from "../../../shared/lib/routes.ts";
+import { useTranslation } from 'react-i18next';
 
 export function Header() {
     const { data: user } = useQuery(currentUserQueryOptions);
+    const {t} = useTranslation();
     return (
         <header className={styles.header}>
 
@@ -16,7 +18,7 @@ export function Header() {
                         <button
                             type="button"
                             className={styles.iconButton}
-                            aria-label="Notifications"
+                            aria-label={t('header.notifications')}
                         >
                             <Bell size={20} />
                         </button>
@@ -39,14 +41,14 @@ export function Header() {
                             to={appRoutes.login}
                             className={styles.signIn}
                         >
-                            Sign in
+                            {t('navigation.signIn')}
                         </Link>
 
                         <Link
                             to={appRoutes.register}
                             className={styles.signUp}
                         >
-                            Sign up
+                            {t('navigation.signUp')}
                         </Link>
                     </>
                 )}

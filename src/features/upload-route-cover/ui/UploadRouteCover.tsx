@@ -2,6 +2,7 @@ import {type ChangeEvent, useEffect, useRef, useState} from "react";
 import {useUploadRouteCoverMutation} from "../../../entities/route";
 import styles from './UploadRouteCover.module.css';
 import {ImagePlus} from "lucide-react";
+import {useTranslation} from 'react-i18next';
 
 interface UploadRouteCoverProps {
     routeId: number;
@@ -17,6 +18,7 @@ const ALLOWED_TYPES = [
 ];
 
 export function UploadRouteCover({routeId, coverUrl}: UploadRouteCoverProps) {
+    const {t} = useTranslation();
     const inputRef = useRef<HTMLInputElement>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -44,12 +46,12 @@ export function UploadRouteCover({routeId, coverUrl}: UploadRouteCoverProps) {
         setError(null);
 
         if (!ALLOWED_TYPES.includes(file.type)) {
-            setError('Only JPEG, PNG and WebP images are allowed.');
+            setError('editRoute.cover.errors.invalidType');
             return;
         }
 
         if (file.size > MAX_FILE_SIZE) {
-            setError('Image must not exceed 5 MB.');
+            setError('editRoute.cover.errors.tooLarge');
             return;
         }
 
@@ -83,14 +85,14 @@ export function UploadRouteCover({routeId, coverUrl}: UploadRouteCoverProps) {
                 {imageUrl ? (
                     <img
                         src={imageUrl}
-                        alt="Route cover"
+                        alt={t('editRoute.cover.imageAlt')}
                     />
                 ) : (
                     <span className={styles.placeholder}>
                         <ImagePlus size={30} />
 
                         <span>
-                            Add route cover
+                            {t('editRoute.cover.add')}
                         </span>
                     </span>
                 )}
@@ -114,26 +116,26 @@ export function UploadRouteCover({routeId, coverUrl}: UploadRouteCoverProps) {
                     disabled={uploadMutation.isPending}
                 >
                     {uploadMutation.isPending
-                        ? 'Uploading...'
+                        ? t('editRoute.cover.uploading')
                         : coverUrl
-                            ? 'Replace cover'
-                            : 'Upload cover'}
+                            ? t('editRoute.cover.replace')
+                            : t('editRoute.cover.upload')}
                 </button>
 
                 <span className={styles.hint}>
-                    JPEG, PNG or WebP, max 5 MB
+                    {t('editRoute.cover.hint')}
                 </span>
             </div>
 
             {error && (
                 <p className={styles.error}>
-                    {error}
+                    {t(error)}
                 </p>
             )}
 
             {uploadMutation.isError && (
                 <p className={styles.error}>
-                    Failed to upload cover.
+                    {t('editRoute.cover.errors.uploadFailed')}
                 </p>
             )}
         </div>

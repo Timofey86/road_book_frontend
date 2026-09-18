@@ -6,6 +6,7 @@ import 'yet-another-react-lightbox/plugins/captions.css';
 import type {RoutePhoto} from '../../../entities/route';
 import styles from './RouteDetailsPage.module.css';
 import {Image} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 interface RoutePhotosProps {
     photos: RoutePhoto[];
@@ -17,6 +18,7 @@ export function RoutePhotos({
     routeTitle,
 }: RoutePhotosProps) {
     const [photoIndex, setPhotoIndex] = useState(-1);
+    const {t} = useTranslation();
 
     const sortedPhotos = photos.toSorted(
         (a, b) => a.position - b.position,
@@ -29,10 +31,10 @@ export function RoutePhotos({
                     <Image size={24}/>
                 </div>
 
-                <h2>No photos yet</h2>
+                <h2>{t('routeDetails.photos.emptyTitle')}</h2>
 
                 <p>
-                    This route doesn't have any photos yet.
+                    {t('routeDetails.photos.emptyDescription')}
                 </p>
             </div>
         );
@@ -42,8 +44,8 @@ export function RoutePhotos({
         <>
             <section className={styles.photosSection}>
                 <div className={styles.sectionHeading}>
-                    <span>GALLERY</span>
-                    <h2>Photos</h2>
+                    <span>{t('routeDetails.photos.gallery')}</span>
+                    <h2>{t('routeDetails.photos.title')}</h2>
                 </div>
 
                 <div className={styles.photosGrid}>
@@ -55,7 +57,10 @@ export function RoutePhotos({
                         >
                             <img
                                 src={photo.url}
-                                alt={photo.caption ?? `${routeTitle} photo`}
+                                alt={photo.caption ??
+                                    t('routeDetails.photos.imageAlt', {
+                                        title: routeTitle,
+                                    })}
                             />
 
                             {photo.caption && (
@@ -79,7 +84,10 @@ export function RoutePhotos({
                 }}
                 slides={sortedPhotos.map((photo) => ({
                     src: photo.url,
-                    alt: photo.caption ?? `${routeTitle} photo`,
+                    alt: photo.caption ??
+                        t('routeDetails.photos.imageAlt', {
+                            title: routeTitle,
+                        }),
                     description: photo.caption ?? undefined,
                 }))}
             />

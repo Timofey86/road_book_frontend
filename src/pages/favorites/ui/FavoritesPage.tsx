@@ -4,6 +4,7 @@ import {favoritesQueryOptions} from '../../../entities/favorite';
 import {RouteCard} from '../../../entities/route';
 import styles from './FavoritesPage.module.css';
 import {Pagination} from "../../../shared/ui/pagination";
+import {useTranslation} from 'react-i18next';
 
 interface FavoritesPageProps {
     page: number;
@@ -11,7 +12,7 @@ interface FavoritesPageProps {
 }
 
 export function FavoritesPage({page, onPageChange}: FavoritesPageProps) {
-
+    const {t} = useTranslation();
     const {data, isPending, isError} = useQuery(
         favoritesQueryOptions(page),
     );
@@ -19,7 +20,7 @@ export function FavoritesPage({page, onPageChange}: FavoritesPageProps) {
     if (isPending) {
         return (
             <div className={styles.page}>
-                <p>Loading favorites...</p>
+                <p>{t('favorites.loading')}</p>
             </div>
         );
     }
@@ -27,7 +28,7 @@ export function FavoritesPage({page, onPageChange}: FavoritesPageProps) {
     if (isError) {
         return (
             <div className={styles.page}>
-                <p>Failed to load favorites.</p>
+                <p>{t('favorites.loadError')}</p>
             </div>
         );
     }
@@ -35,9 +36,9 @@ export function FavoritesPage({page, onPageChange}: FavoritesPageProps) {
     return (
         <div className={styles.page}>
             <header className={styles.header}>
-                <h1>Favorites</h1>
+                <h1>{t('favorites.title')}</h1>
                 <p>
-                    Routes you've saved for later.
+                    {t('favorites.emptyTitle')}
                 </p>
             </header>
 
@@ -45,10 +46,10 @@ export function FavoritesPage({page, onPageChange}: FavoritesPageProps) {
                 <div className={styles.empty}>
                     <Heart size={36}/>
 
-                    <h2>No favorite routes yet</h2>
+                    <h2>{t('favorites.emptyTitle')}</h2>
 
                     <p>
-                        Save routes you like and they'll appear here.
+                        {t('favorites.emptyDescription')}
                     </p>
                 </div>
             ) : (

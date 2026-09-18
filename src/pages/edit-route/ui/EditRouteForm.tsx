@@ -4,6 +4,7 @@ import {
 } from 'react';
 import {Link} from '@tanstack/react-router';
 import {ArrowLeft} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 import {
     type RouteDetails,
@@ -21,6 +22,7 @@ interface EditRouteFormProps {
 }
 
 export function EditRouteForm({route}: EditRouteFormProps) {
+    const {t} = useTranslation();
     const [title, setTitle] = useState(route.title);
     const [description, setDescription] = useState(route.description ?? '');
     const [tags, setTags] = useState<string[]>(
@@ -95,29 +97,27 @@ export function EditRouteForm({route}: EditRouteFormProps) {
                 className={styles.backLink}
             >
                 <ArrowLeft size={16}/>
-                Back to route
+                {t('editRoute.back')}
             </Link>
 
             <header className={styles.header}>
                 <span className={styles.eyebrow}>
-                    Edit route
+                    {t('editRoute.eyebrow')}
                 </span>
 
                 <h1>{route.title}</h1>
 
                 <p>
-                    Manage the route information
-                    and appearance.
+                    {t('editRoute.subtitle')}
                 </p>
             </header>
 
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
                     <div>
-                        <h2>General information</h2>
+                        <h2>{t('editRoute.general.title')}</h2>
                         <p>
-                            Update the title and
-                            description of your route.
+                            {t('editRoute.general.description')}
                         </p>
                     </div>
                 </div>
@@ -127,7 +127,7 @@ export function EditRouteForm({route}: EditRouteFormProps) {
                     onSubmit={handleSubmit}
                 >
                     <label className={styles.field}>
-                        <span>Title</span>
+                        <span>{t('editRoute.general.titleLabel')}</span>
 
                         <input
                             type="text"
@@ -142,7 +142,7 @@ export function EditRouteForm({route}: EditRouteFormProps) {
                     </label>
 
                     <label className={styles.field}>
-                        <span>Description</span>
+                        <span>{t('editRoute.general.descriptionLabel')}</span>
 
                         <textarea
                             value={description}
@@ -159,26 +159,20 @@ export function EditRouteForm({route}: EditRouteFormProps) {
                     >
                         <button
                             type="submit"
-                            className={
-                                styles.saveButton
-                            }
+                            className={styles.saveButton}
                             disabled={
                                 updateRouteMutation.isPending ||
                                 !title.trim()
                             }
                         >
                             {updateRouteMutation.isPending
-                                ? 'Saving...'
-                                : 'Save changes'}
+                                ? t('editRoute.general.saving')
+                                : t('editRoute.general.save')}
                         </button>
 
                         {updateRouteMutation.isSuccess && (
-                            <span
-                                className={
-                                    styles.success
-                                }
-                            >
-                                Changes saved
+                            <span className={styles.success}>
+                                {t('editRoute.general.saved')}
                             </span>
                         )}
                     </div>
@@ -188,11 +182,10 @@ export function EditRouteForm({route}: EditRouteFormProps) {
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
                     <div>
-                        <h2>Tags</h2>
+                        <h2>{t('editRoute.tags.title')}</h2>
 
                         <p>
-                            Add up to 10 tags to help describe
-                            your route.
+                            {t('editRoute.tags.description')}
                         </p>
                     </div>
                 </div>
@@ -208,10 +201,8 @@ export function EditRouteForm({route}: EditRouteFormProps) {
 
                                 <button
                                     type="button"
-                                    onClick={() =>
-                                        handleRemoveTag(tag)
-                                    }
-                                    aria-label={`Remove ${tag}`}
+                                    onClick={() => handleRemoveTag(tag)}
+                                    aria-label={t('editRoute.tags.remove', {tag})}
                                 >
                                     ×
                                 </button>
@@ -224,7 +215,7 @@ export function EditRouteForm({route}: EditRouteFormProps) {
                             type="text"
                             value={tagInput}
                             maxLength={50}
-                            placeholder="Add a tag"
+                            placeholder={t('editRoute.tags.placeholder')}
                             onChange={(event) =>
                                 setTagInput(
                                     event.target.value,
@@ -247,34 +238,33 @@ export function EditRouteForm({route}: EditRouteFormProps) {
                                 tags.length >= 10
                             }
                         >
-                            Add
+                            {t('editRoute.tags.add')}
                         </button>
                     </div>
 
                     <div className={styles.tagsFooter}>
-            <span>
-                {tags.length}/10 tags
-            </span>
+                        <span>
+                            {t('editRoute.tags.count', {
+                                count: tags.length,
+                            })}
+                        </span>
 
                         <button
                             type="button"
                             className={styles.saveTagsButton}
                             onClick={handleSaveTags}
-                            disabled={
-                                updateTagsMutation.isPending ||
-                                !tagsChanged
-                            }
+                            disabled={updateTagsMutation.isPending || !tagsChanged}
                         >
                             {updateTagsMutation.isPending
-                                ? 'Saving...'
-                                : 'Save tags'}
+                                ? t('editRoute.tags.saving')
+                                : t('editRoute.tags.save')}
                         </button>
                     </div>
 
                     {updateTagsMutation.isSuccess && (
                         <span className={styles.success}>
-                Tags saved
-            </span>
+                            {t('editRoute.tags.saved')}
+                        </span>
                     )}
                 </div>
             </section>
@@ -282,11 +272,10 @@ export function EditRouteForm({route}: EditRouteFormProps) {
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
                     <div>
-                        <h2>Cover</h2>
+                        <h2>{t('editRoute.cover.title')}</h2>
 
                         <p>
-                            Choose an image that represents
-                            your route.
+                            {t('editRoute.cover.description')}
                         </p>
                     </div>
                 </div>
@@ -300,10 +289,10 @@ export function EditRouteForm({route}: EditRouteFormProps) {
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
                     <div>
-                        <h2>Photos</h2>
+                        <h2>{t('editRoute.photos.title')}</h2>
 
                         <p>
-                            Add photos from your trip.
+                            {t('editRoute.photos.description')}
                         </p>
                     </div>
                 </div>
@@ -316,10 +305,10 @@ export function EditRouteForm({route}: EditRouteFormProps) {
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
                     <div>
-                        <h2>Route stops</h2>
+                        <h2>{t('editRoute.stops.title')}</h2>
 
                         <p>
-                            Add, remove and reorder stops.
+                            {t('editRoute.stops.description')}
                         </p>
                     </div>
 
@@ -330,16 +319,17 @@ export function EditRouteForm({route}: EditRouteFormProps) {
                         }}
                         className={styles.editStopsButton}
                     >
-                        Edit stops
+                        {t('editRoute.stops.edit')}
                     </Link>
                 </div>
 
                 <div className={styles.routeInfo}>
                     <strong>
-                        {route.stops.length}
+                        {t('editRoute.stops.count', {
+                            count: route.stops.length,
+                        })}
                     </strong>
 
-                    <span>stops</span>
                 </div>
             </section>
 

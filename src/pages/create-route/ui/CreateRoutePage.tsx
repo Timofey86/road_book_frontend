@@ -1,14 +1,15 @@
 import styles from './CreateRoutePage.module.css';
 import {CreateRouteForm} from "../../../features/create-route";
+import {useTranslation} from 'react-i18next';
 
 export function CreateRoutePage() {
+    const {t} = useTranslation();
     return (
         <div className={styles.page}>
             <div className={styles.header}>
-                <h1>Create a new route</h1>
+                <h1>{t('createRoute.title')}</h1>
                 <p>
-                    Add the basic information first. You can configure stops
-                    and build the route on the next step.
+                    {t('createRoute.subtitle')}
                 </p>
             </div>
 

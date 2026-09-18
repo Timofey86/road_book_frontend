@@ -5,6 +5,7 @@ import {Modal} from '../../../shared/ui/modal';
 import {useDebounce} from '../../../shared/lib/useDebounce';
 import {tagsQueryOptions} from '../../../entities/tag';
 import styles from './ExploreFilters.module.css';
+import {useTranslation} from 'react-i18next';
 
 interface ExploreFiltersValue {
     minDistance?: number;
@@ -54,6 +55,7 @@ export function ExploreFilters({
                     .filter(Boolean)
                 : [],
         );
+    const {t} = useTranslation();
 
     const debouncedTagSearch = useDebounce(tagSearch, 500);
 
@@ -117,15 +119,15 @@ export function ExploreFilters({
         <Modal
             open={open}
             onClose={onClose}
-            title="Filters"
+            title={t('explore.filters.title')}
         >
             <div className={styles.content}>
                 <div className={styles.section}>
-                    <h3>Distance</h3>
+                    <h3>{t('explore.filters.distance')}</h3>
 
                     <div className={styles.distance}>
                         <label>
-                            <span>Min km</span>
+                            <span>{t('explore.filters.minKm')}</span>
                             <input
                                 type="number"
                                 min="0"
@@ -138,7 +140,7 @@ export function ExploreFilters({
                         </label>
 
                         <label>
-                            <span>Max km</span>
+                            <span>{t('explore.filters.maxKm')}</span>
                             <input
                                 type="number"
                                 min="0"
@@ -146,14 +148,14 @@ export function ExploreFilters({
                                 onChange={(event) =>
                                     setMaxKm(event.target.value)
                                 }
-                                placeholder="Any"
+                                placeholder={t('explore.filters.any')}
                             />
                         </label>
                     </div>
                 </div>
 
                 <div className={styles.section}>
-                    <h3>Tags</h3>
+                    <h3>{t('explore.filters.tags')}</h3>
 
                     <div className={styles.tagSearch}>
                         <Search size={17}/>
@@ -164,7 +166,7 @@ export function ExploreFilters({
                             onChange={(event) =>
                                 setTagSearch(event.target.value)
                             }
-                            placeholder="Search tags..."
+                            placeholder={t('explore.filters.searchTags')}
                         />
                     </div>
 
@@ -210,7 +212,7 @@ export function ExploreFilters({
                         className={styles.resetButton}
                         onClick={handleReset}
                     >
-                        Reset
+                        {t('explore.filters.reset')}
                     </button>
 
                     <button
@@ -218,7 +220,7 @@ export function ExploreFilters({
                         className={styles.applyButton}
                         onClick={handleApply}
                     >
-                        Apply filters
+                        {t('explore.filters.apply')}
                     </button>
                 </div>
             </div>

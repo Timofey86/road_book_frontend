@@ -9,8 +9,10 @@ import {appRoutes} from "../../../shared/lib/routes.ts";
 import {ArrowLeft} from "lucide-react";
 import {ManageUserAvatar} from "../../../features/manage-user-avatar";
 import {DeleteAccount} from "../../../features/delete-account";
+import {useTranslation} from 'react-i18next';
 
 export function EditProfilePage() {
+    const {t} = useTranslation();
     const {
         data: user,
         isPending,
@@ -20,7 +22,7 @@ export function EditProfilePage() {
     if (isPending) {
         return (
             <div className={styles.page}>
-                Loading profile...
+                {t('profile.loading')}
             </div>
         );
     }
@@ -28,7 +30,7 @@ export function EditProfilePage() {
     if (isError || !user) {
         return (
             <div className={styles.page}>
-                Failed to load profile.
+                {t('profile.loadError')}
             </div>
         );
     }
@@ -40,23 +42,22 @@ export function EditProfilePage() {
                 className={styles.backLink}
             >
                 <ArrowLeft size={16}/>
-                Back to profile
+                {t('profile.backToProfile')}
             </Link>
 
             <header className={styles.header}>
-                <h1>Profile</h1>
+                <h1>{t('profile.title')}</h1>
                 <p>
-                    Manage your personal information.
+                    {t('profile.editPage.subtitle')}
                 </p>
             </header>
 
             <div className={styles.sections}>
                 <section className={styles.card}>
                     <div className={styles.sectionHeader}>
-                        <h2>Profile information</h2>
+                        <h2>{t('profile.editPage.information.title')}</h2>
                         <p>
-                            Update your name and tell other
-                            travelers about yourself.
+                            {t('profile.editPage.information.description')}
                         </p>
                     </div>
 

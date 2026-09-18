@@ -3,9 +3,14 @@
     "title": "Plan your next road trip.",
     "description": "Discover inspiring routes, create your own trips and share them with other travelers."
   },
-
+  "header": {
+    "notifications": "Notifications"
+  },
   "sidebar": {
     "language": "Language"
+  },
+  "common": {
+    "cancel": "Cancel"
   },
 
   "auth": {
@@ -64,5 +69,397 @@
       "showPassword": "Show password",
       "hidePassword": "Hide password"
     }
+  },
+
+  "navigation": {
+    "explore": "Explore",
+    "myRoutes": "My Routes",
+    "favorites": "Favorites",
+    "createRoute": "Create Route",
+    "profile": "Profile",
+    "account": "Account",
+    "viewProfile": "View profile",
+    "logout": "Log out",
+    "signIn": "Sign in",
+    "signUp": "Sign up"
+  },
+
+  "explore": {
+    "title": "Explore",
+    "subtitle": "Discover routes shared by the community.",
+    "searchPlaceholder": "Search routes...",
+    "loading": "Loading routes...",
+    "empty": "No routes found.",
+
+    "sort": {
+      "latest": "Latest",
+      "oldest": "Oldest",
+      "mostLiked": "Most liked",
+      "distanceShortest": "Distance: shortest",
+      "distanceLongest": "Distance: longest"
+    },
+
+    "filters": {
+      "button": "Filters",
+      "title": "Filters",
+      "distance": "Distance",
+      "minKm": "Min km",
+      "maxKm": "Max km",
+      "any": "Any",
+      "tags": "Tags",
+      "searchTags": "Search tags...",
+      "reset": "Reset",
+      "apply": "Apply filters"
+    }
+  },
+
+  "routeCard": {
+    "stops_one": "{{count}} stop",
+    "stops_other": "{{count}} stops"
+  },
+
+  "routeDetails": {
+    "loading": "Loading route...",
+    "loadError": "Failed to load route.",
+    "back": "Back",
+
+    "actions": {
+      "editRoute": "Edit route",
+      "editStops": "Edit stops"
+    },
+
+    "tabs": {
+      "overview": "Overview",
+      "photos": "Photos ({{count}})",
+      "comments": "Comments ({{count}})"
+    },
+
+    "overview": {
+      "route": "Route",
+      "routeMap": "Route map",
+      "itinerary": "Itinerary",
+      "stops": "Stops",
+      "stopCount_one": "{{count}} stop",
+      "stopCount_other": "{{count}} stops",
+      "routeInfo": "Route info",
+      "distance": "Distance",
+      "duration": "Duration",
+      "addToFavorites": "Add to favorites",
+      "like_one": "{{count}} like",
+      "like_other": "{{count}} likes"
+    },
+
+    "photos": {
+      "gallery": "Gallery",
+      "title": "Photos",
+      "emptyTitle": "No photos yet",
+      "emptyDescription": "This route doesn't have any photos yet.",
+      "imageAlt": "{{title}} photo"
+    },
+
+    "comments": {
+      "loading": "Loading comments...",
+      "loadError": "Failed to load comments.",
+      "emptyTitle": "No comments yet",
+      "emptyDescription": "Be the first to share your thoughts about this route.",
+      "community": "Community",
+      "title": "Comments",
+
+      "actions": {
+        "menu": "Comment actions",
+        "edit": "Edit",
+        "delete": "Delete",
+        "deleting": "Deleting...",
+        "cancel": "Cancel",
+        "save": "Save changes",
+        "saving": "Saving..."
+      },
+
+      "deleteModal": {
+        "title": "Delete comment?",
+        "description": "Are you sure you want to delete this comment? This action cannot be undone."
+      }
+    }
+  },
+  "routeActions": {
+    "like": {
+      "like": "Like",
+      "liked": "Liked",
+      "likes_one": "{{count}} like",
+      "likes_other": "{{count}} likes"
+    },
+
+    "favorite": {
+      "add": "Add to favorites",
+      "inFavorites": "In favorites",
+      "remove": "Remove from favorites"
+    }
+  },
+  "comments": {
+    "form": {
+      "title": "Join the conversation",
+      "subtitle": "Share your thoughts about this route.",
+      "placeholder": "Write a comment...",
+      "submit": "Post comment",
+      "posting": "Posting...",
+      "error": "Failed to post comment."
+    }
+  },
+  "createRoute": {
+    "title": "Create a new route",
+    "subtitle": "Add the basic information first. You can configure stops and build the route on the next step.",
+
+    "form": {
+      "title": "Route title",
+      "titlePlaceholder": "Italy Summer Road Trip",
+
+      "description": "Description",
+      "descriptionPlaceholder": "Tell people something about this trip...",
+
+      "tags": "Tags",
+      "tagPlaceholder": "Mountains",
+      "addTag": "Add tag",
+      "removeTag": "Remove {{tag}}",
+
+      "cancel": "Cancel",
+      "continue": "Continue",
+      "creating": "Creating..."
+    },
+
+    "validation": {
+      "titleRequired": "Route title is required.",
+      "titleMaxLength": "Route title must contain at most 150 characters.",
+      "maxTags": "You can add up to 10 tags."
+    },
+
+    "errors": {
+      "createFailed": "Failed to create route."
+    }
+  },
+  "route": {
+    "validation": {
+      "titleRequired": "Route title is required.",
+      "titleMaxLength": "Route title must contain at most 150 characters.",
+      "tagsMaxCount": "You can add up to 10 tags.",
+      "tagMaxLength": "Each tag must contain at most 50 characters."
+    }
+  },
+  "editRoute": {
+    "loading": "Loading route...",
+    "loadError": "Failed to load route.",
+
+    "back": "Back to route",
+    "eyebrow": "Edit route",
+    "subtitle": "Manage the route information and appearance.",
+
+    "general": {
+      "title": "General information",
+      "description": "Update the title and description of your route.",
+      "titleLabel": "Title",
+      "descriptionLabel": "Description",
+      "save": "Save changes",
+      "saving": "Saving...",
+      "saved": "Changes saved"
+    },
+
+    "tags": {
+      "title": "Tags",
+      "description": "Add up to 10 tags to help describe your route.",
+      "placeholder": "Add a tag",
+      "add": "Add",
+      "remove": "Remove {{tag}}",
+      "count": "{{count}}/10 tags",
+      "save": "Save tags",
+      "saving": "Saving...",
+      "saved": "Tags saved"
+    },
+
+    "cover": {
+      "title": "Cover",
+      "description": "Choose an image that represents your route.",
+      "imageAlt": "Route cover",
+      "add": "Add route cover",
+      "upload": "Upload cover",
+      "replace": "Replace cover",
+      "uploading": "Uploading...",
+      "hint": "JPEG, PNG or WebP, max 5 MB",
+      "errors": {
+        "invalidType": "Only JPEG, PNG and WebP images are allowed.",
+        "tooLarge": "Image must not exceed 5 MB.",
+        "uploadFailed": "Failed to upload cover."
+      }
+    },
+
+    "photos": {
+      "title": "Photos",
+      "description": "Add photos from your trip.",
+
+      "select": "Select photo",
+      "selectedPhotoAlt": "Selected route photo",
+      "captionPlaceholder": "Optional caption",
+      "upload": "Upload photo",
+      "uploading": "Uploading...",
+
+      "photoAlt": "Route photo",
+      "reorder": "Reorder photo",
+      "delete": "Delete photo",
+      "addCaption": "Add caption",
+      "saveCaption": "Save",
+      "savingCaption": "Saving...",
+
+      "errors": {
+        "invalidType": "Only JPEG, PNG and WebP images are allowed.",
+        "tooLarge": "Image must be smaller than 5 MB.",
+        "uploadFailed": "Failed to upload photo.",
+        "deleteFailed": "Failed to delete photo."
+      },
+
+      "deleteModal": {
+        "title": "Delete photo?",
+        "description": "This photo will be permanently deleted. This action cannot be undone.",
+        "deleting": "Deleting..."
+      }
+    },
+
+    "stops": {
+      "title": "Route stops",
+      "description": "Add, remove and reorder stops.",
+      "edit": "Edit stops",
+      "count_one": "{{count}} stop",
+      "count_other": "{{count}} stops"
+    },
+    "delete": {
+      "title": "Danger zone",
+      "description": "Permanently delete this route and all related data.",
+      "button": "Delete route",
+      "modalTitle": "Delete route?",
+      "confirmation": "This will permanently delete <strong>“{{routeTitle}}”</strong>. This action cannot be undone.",
+      "deleting": "Deleting...",
+      "error": "Failed to delete the route."
+    }
+  },
+  "editRouteStops": {
+    "loading": "Loading route...",
+    "loadError": "Failed to load route.",
+    "back": "Back to route settings",
+    "eyebrow": "Edit route",
+
+    "stops": {
+      "title": "Stops",
+      "description": "Add at least two stops to build your route.",
+      "count_one": "{{count}} stop",
+      "count_other": "{{count}} stops",
+      "emptyTitle": "No stops yet",
+      "emptyDescription": "Search for a city or address to add your first stop.",
+
+      "add": "Add a stop",
+      "searchPlaceholder": "Search for a city or address...",
+      "searching": "Searching...",
+      "searchError": "Failed to search places.",
+      "noResults": "No places found.",
+      "addError": "Failed to add stop.",
+
+      "move": "Move {{name}}",
+      "delete": "Delete {{name}}"
+    },
+
+    "build": {
+      "build": "Build route",
+      "rebuild": "Rebuild route",
+      "building": "Building route...",
+      "upToDate": "Route is up to date",
+      "hint": "Add at least two stops to build the route.",
+      "error": "Failed to build route."
+    },
+
+    "stats": {
+      "distance": "Distance",
+      "duration": "Duration",
+      "status": "Status",
+      "ready": "Ready",
+      "needsRebuild": "Needs rebuild"
+    }
+  },
+  "profile": {
+    "loading": "Loading profile...",
+    "loadError": "Failed to load profile.",
+
+    "title": "Profile",
+    "ownSubtitle": "Your public RoadBook profile.",
+    "publicSubtitle": "RoadBook traveler profile.",
+    "edit": "Edit profile",
+    "back": "Back",
+    "backToProfile": "Back to profile",
+    "viewPhoto": "View profile photo",
+    "photoAlt": "{{name}} profile photo",
+
+    "stats": {
+      "routes": "Routes",
+      "likesReceived": "Likes received",
+      "memberSince": "Member since"
+    },
+
+    "editPage": {
+      "subtitle": "Manage your personal information.",
+      "information": {
+        "title": "Profile information",
+        "description": "Update your name and tell other travelers about yourself.",
+        "name": "Name",
+        "bio": "Bio",
+        "save": "Save changes",
+        "saving": "Saving...",
+        "error": "Failed to update profile."
+      },
+
+      "avatar": {
+        "title": "Profile photo",
+        "description": "Upload a photo so other travelers can recognize you.",
+        "upload": "Upload photo",
+        "change": "Change photo",
+        "uploading": "Uploading...",
+        "remove": "Remove",
+        "hint": "JPEG, PNG or WebP. Maximum 5 MB.",
+        "errors": {
+          "invalidType": "Please select a JPEG, PNG or WebP image.",
+          "tooLarge": "Image must be smaller than 5 MB.",
+          "uploadFailed": "Failed to upload avatar.",
+          "removeFailed": "Failed to remove avatar."
+        }
+      },
+
+      "delete": {
+        "dangerZone": "Danger Zone",
+        "dangerDescription": "Irreversible account actions.",
+        "title": "Delete account",
+        "description": "Permanently delete your account and all associated data. This action cannot be undone.",
+        "modalTitle": "Delete account?",
+        "modalDescription": "Your profile, routes, photos, likes, comments and other account data will be permanently deleted. This action cannot be undone.",
+        "button": "Delete account",
+        "deleting": "Deleting...",
+        "error": "Failed to delete account. Please try again."
+      }
+    }
+  },
+  "favorites": {
+    "title": "Favorites",
+    "subtitle": "Routes you've saved.",
+    "loading": "Loading favorites...",
+    "loadError": "Failed to load favorites.",
+    "emptyTitle": "No favorite routes yet",
+    "emptyDescription": "Routes you add to favorites will appear here."
+  },
+  "myRoutes": {
+    "title": "My Routes",
+    "subtitle": "Routes you've created.",
+    "loading": "Loading routes...",
+    "loadError": "Failed to load routes.",
+    "emptyTitle": "No routes yet",
+    "emptyDescription": "Create your first route to see it here."
+  },
+
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {{page}} of {{totalPages}}"
   }
 }

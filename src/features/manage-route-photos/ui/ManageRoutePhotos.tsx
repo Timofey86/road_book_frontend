@@ -15,6 +15,7 @@ import styles from './ManageRoutePhotos.module.css';
 import {Modal} from "../../../shared/ui/modal";
 import {closestCenter, DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors} from "@dnd-kit/core";
 import {arrayMove, rectSortingStrategy, SortableContext} from "@dnd-kit/sortable";
+import {useTranslation} from 'react-i18next';
 
 import {SortablePhotoCard} from "./SortablePhotoCard.tsx";
 
@@ -32,6 +33,7 @@ const ALLOWED_TYPES = [
 ];
 
 export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
+    const {t} = useTranslation();
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [file, setFile] = useState<File | null>(null);
@@ -146,7 +148,7 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
             )
         ) {
             setValidationError(
-                'Only JPEG, PNG and WebP images are allowed.',
+                'editRoute.photos.errors.invalidType',
             );
             return;
         }
@@ -156,7 +158,7 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
             MAX_FILE_SIZE
         ) {
             setValidationError(
-                'Image must be smaller than 5 MB.',
+                'editRoute.photos.errors.tooLarge',
             );
             return;
         }
@@ -249,7 +251,7 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
                 {previewUrl && (
                     <img
                         src={previewUrl}
-                        alt="Selected route photo"
+                        alt={t('editRoute.photos.selectedPhotoAlt')}
                         className={styles.preview}
                     />
                 )}
@@ -265,11 +267,9 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
                 <button
                     type="button"
                     className={styles.selectButton}
-                    onClick={() =>
-                        inputRef.current?.click()
-                    }
+                    onClick={() => inputRef.current?.click()}
                 >
-                    Select photo
+                    {t('editRoute.photos.select')}
                 </button>
 
                 {file && (
@@ -278,7 +278,7 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
                             value={caption}
                             maxLength={500}
                             rows={3}
-                            placeholder="Optional caption"
+                            placeholder={t('editRoute.photos.captionPlaceholder')}
                             onChange={(event) =>
                                 setCaption(
                                     event.target.value,
@@ -302,8 +302,8 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
                                 onClick={handleUpload}
                             >
                                 {uploadMutation.isPending
-                                    ? 'Uploading...'
-                                    : 'Upload photo'}
+                                    ? t('editRoute.photos.uploading')
+                                    : t('editRoute.photos.upload')}
                             </button>
                         </div>
                     </>
@@ -311,13 +311,13 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
 
                 {validationError && (
                     <p className={styles.error}>
-                        {validationError}
+                        {t(validationError)}
                     </p>
                 )}
 
                 {uploadMutation.isError && (
                     <p className={styles.error}>
-                        Failed to upload photo.
+                        {t('editRoute.photos.errors.uploadFailed')}
                     </p>
                 )}
             </div>
@@ -328,16 +328,15 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
                         setPhotoToDelete(null);
                     }
                 }}
-                title="Delete photo?"
+                title={t('editRoute.photos.deleteModal.title')}
             >
                 <p className={styles.deleteMessage}>
-                    This photo will be permanently deleted.
-                    This action cannot be undone.
+                    {t('editRoute.photos.deleteModal.description')}
                 </p>
 
                 {deletePhotoMutation.isError && (
                     <p className={styles.error}>
-                        Failed to delete photo.
+                        {t('editRoute.photos.errors.deleteFailed')}
                     </p>
                 )}
 
@@ -345,22 +344,16 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
                     <button
                         type="button"
                         className={styles.cancelButton}
-                        disabled={
-                            deletePhotoMutation.isPending
-                        }
-                        onClick={() =>
-                            setPhotoToDelete(null)
-                        }
+                        disabled={deletePhotoMutation.isPending}
+                        onClick={() => setPhotoToDelete(null)}
                     >
-                        Cancel
+                        {t('common.cancel')}
                     </button>
 
                     <button
                         type="button"
                         className={styles.confirmDeleteButton}
-                        disabled={
-                            deletePhotoMutation.isPending
-                        }
+                        disabled={deletePhotoMutation.isPending}
                         onClick={() => {
                             if (!photoToDelete) {
                                 return;
@@ -377,8 +370,8 @@ export function ManageRoutePhotos({routeId, photos}: ManageRoutePhotosProps) {
                         }}
                     >
                         {deletePhotoMutation.isPending
-                            ? 'Deleting...'
-                            : 'Delete photo'}
+                            ? t('editRoute.photos.deleteModal.deleting')
+                            : t('editRoute.photos.delete')}
                     </button>
                 </div>
             </Modal>

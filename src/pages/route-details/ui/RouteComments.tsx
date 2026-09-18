@@ -6,6 +6,7 @@ import {CreateRouteCommentForm} from "../../../features/create-route-comment";
 import {RouteComment} from "./RouteComment.tsx";
 import {useState} from "react";
 import {Pagination} from "../../../shared/ui/pagination";
+import {useTranslation} from 'react-i18next';
 
 interface RouteCommentsProps {
     routeId: number;
@@ -14,6 +15,7 @@ interface RouteCommentsProps {
 
 export function RouteComments({routeId, currentUserId}: RouteCommentsProps) {
     const [page, setPage] = useState(1);
+    const {t} = useTranslation();
     const {
         data,
         isPending,
@@ -24,11 +26,11 @@ export function RouteComments({routeId, currentUserId}: RouteCommentsProps) {
 
 
     if (isPending) {
-        return <div>Loading comments...</div>;
+        return <div>{t('routeDetails.comments.loading')}</div>;
     }
 
     if (isError) {
-        return <div>Failed to load comments.</div>;
+        return <div>{t('routeDetails.comments.loadError')}</div>;
     }
 
 
@@ -46,18 +48,17 @@ export function RouteComments({routeId, currentUserId}: RouteCommentsProps) {
                         <MessageCircle size={24}/>
                     </div>
 
-                    <h2>No comments yet</h2>
+                    <h2>{t('routeDetails.comments.emptyTitle')}</h2>
 
                     <p>
-                        Be the first to share your thoughts
-                        about this route.
+                        {t('routeDetails.comments.emptyDescription')}
                     </p>
                 </div>
             ) : (
                 <section className={styles.commentsSection}>
                     <div className={styles.sectionHeading}>
-                        <span>COMMUNITY</span>
-                        <h2>Comments</h2>
+                        <span>{t('routeDetails.comments.community')}</span>
+                        <h2>{t('routeDetails.comments.title')}</h2>
                     </div>
 
                     <div className={styles.commentsList}>

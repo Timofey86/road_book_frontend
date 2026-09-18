@@ -5,8 +5,10 @@ import {Modal} from '../../../shared/ui/modal';
 import {appRoutes} from '../../../shared/lib/routes.ts';
 import {useDeleteAccountMutation} from '../model/useDeleteAccountMutation.ts';
 import styles from './DeleteAccount.module.css';
+import {useTranslation} from 'react-i18next';
 
 export function DeleteAccount() {
+    const {t} = useTranslation();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const navigate = useNavigate();
@@ -28,19 +30,18 @@ export function DeleteAccount() {
         <>
             <section className={styles.card}>
                 <div className={styles.header}>
-                    <h2>Danger Zone</h2>
+                    <h2>{t('profile.editPage.delete.dangerZone')}</h2>
                     <p>
-                        Irreversible account actions.
+                        {t('profile.editPage.delete.dangerDescription')}
                     </p>
                 </div>
 
                 <div className={styles.content}>
                     <div>
-                        <h3>Delete account</h3>
+                        <h3>{t('profile.editPage.delete.title')}</h3>
 
                         <p>
-                            Permanently delete your account and all
-                            associated data. This action cannot be undone.
+                            {t('profile.editPage.delete.description')}
                         </p>
                     </div>
 
@@ -50,7 +51,7 @@ export function DeleteAccount() {
                         onClick={() => setIsModalOpen(true)}
                     >
                         <Trash2 size={16}/>
-                        Delete account
+                        {t('profile.editPage.delete.button')}
                     </button>
                 </div>
             </section>
@@ -60,17 +61,15 @@ export function DeleteAccount() {
                 onClose={() => setIsModalOpen(false)}
             >
                 <div className={styles.modalContent}>
-                    <h2>Delete account?</h2>
+                    <h2>{t('profile.editPage.delete.modalTitle')}</h2>
 
                     <p>
-                        Your profile, routes, photos, likes, comments
-                        and other account data will be permanently deleted.
-                        This action cannot be undone.
+                        {t('profile.editPage.delete.modalDescription')}
                     </p>
 
                     {deleteAccountMutation.isError && (
                         <p className={styles.error}>
-                            Failed to delete account. Please try again.
+                            {t('profile.editPage.delete.error')}
                         </p>
                     )}
 
@@ -81,7 +80,7 @@ export function DeleteAccount() {
                             onClick={() => setIsModalOpen(false)}
                             disabled={deleteAccountMutation.isPending}
                         >
-                            Cancel
+                            {t('common.cancel')}
                         </button>
 
                         <button
@@ -91,8 +90,8 @@ export function DeleteAccount() {
                             disabled={deleteAccountMutation.isPending}
                         >
                             {deleteAccountMutation.isPending
-                                ? 'Deleting...'
-                                : 'Delete account'}
+                                ? t('profile.editPage.delete.deleting')
+                                : t('profile.editPage.delete.button')}
                         </button>
                     </div>
                 </div>

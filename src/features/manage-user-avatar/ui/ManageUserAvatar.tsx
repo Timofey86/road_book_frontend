@@ -9,6 +9,7 @@ import {
     useUploadAvatarMutation,
 } from '../../../entities/user';
 import styles from './ManageUserAvatar.module.css';
+import {useTranslation} from 'react-i18next';
 
 interface ManageUserAvatarProps {
     name: string;
@@ -24,6 +25,7 @@ const ALLOWED_TYPES = [
 ];
 
 export function ManageUserAvatar({name, avatarUrl}: ManageUserAvatarProps) {
+    const {t} = useTranslation();
     const inputRef = useRef<HTMLInputElement>(null);
     const [error, setError] = useState<string | null>(null);
 
@@ -46,22 +48,18 @@ export function ManageUserAvatar({name, avatarUrl}: ManageUserAvatarProps) {
         setError(null);
 
         if (!ALLOWED_TYPES.includes(file.type)) {
-            setError(
-                'Please select a JPEG, PNG or WebP image.',
-            );
+            setError('profile.editPage.avatar.errors.invalidType');
             return;
         }
 
         if (file.size > MAX_FILE_SIZE) {
-            setError(
-                'Image must be smaller than 5 MB.',
-            );
+            setError('profile.editPage.avatar.errors.tooLarge');
             return;
         }
 
         uploadMutation.mutate(file, {
             onError: () => {
-                setError('Failed to upload avatar.');
+                setError('profile.editPage.avatar.errors.uploadFailed',);
             },
         });
     };
@@ -71,7 +69,7 @@ export function ManageUserAvatar({name, avatarUrl}: ManageUserAvatarProps) {
 
         deleteMutation.mutate(undefined, {
             onError: () => {
-                setError('Failed to remove avatar.');
+                setError('profile.editPage.avatar.errors.removeFailed');
             },
         });
     };
@@ -79,11 +77,10 @@ export function ManageUserAvatar({name, avatarUrl}: ManageUserAvatarProps) {
     return (
         <section className={styles.card}>
             <header className={styles.header}>
-                <h2>Profile photo</h2>
+                <h2>{t('profile.editPage.avatar.title')}</h2>
 
                 <p>
-                    Upload a photo so other travelers can
-                    recognize you.
+                    {t('profile.editPage.avatar.description')}
                 </p>
             </header>
 
@@ -112,10 +109,10 @@ export function ManageUserAvatar({name, avatarUrl}: ManageUserAvatarProps) {
                             <Camera size={16}/>
 
                             {uploadMutation.isPending
-                                ? 'Uploading...'
+                                ? t('profile.editPage.avatar.uploading')
                                 : avatarUrl
-                                    ? 'Change photo'
-                                    : 'Upload photo'}
+                                    ? t('profile.editPage.avatar.change')
+                                    : t('profile.editPage.avatar.upload')}
                         </button>
 
                         {avatarUrl && (
@@ -126,18 +123,18 @@ export function ManageUserAvatar({name, avatarUrl}: ManageUserAvatarProps) {
                                 onClick={handleDelete}
                             >
                                 <Trash2 size={16}/>
-                                Remove
+                                {t('profile.editPage.avatar.remove')}
                             </button>
                         )}
                     </div>
 
                     <p className={styles.hint}>
-                        JPEG, PNG or WebP. Maximum 5 MB.
+                        {t('profile.editPage.avatar.hint')}
                     </p>
 
                     {error && (
                         <p className={styles.error}>
-                            {error}
+                            {t(error)}
                         </p>
                     )}
                 </div>

@@ -5,11 +5,13 @@ import {Navigate} from "@tanstack/react-router";
 import {appRoutes} from "../../../shared/lib/routes.ts";
 import {currentUserQueryOptions} from '../../../entities/user';
 import {EditRouteForm} from "./EditRouteForm.tsx";
+import {useTranslation} from 'react-i18next';
 
 interface EditRoutePageProps {
     routeId: number;
 }
 export function EditRoutePage({routeId}: EditRoutePageProps) {
+    const {t} = useTranslation();
     const {
         data: route,
         isPending,
@@ -27,7 +29,7 @@ export function EditRoutePage({routeId}: EditRoutePageProps) {
     if (isPending || isCurrentUserPending) {
         return (
             <div className={styles.page}>
-                Loading route...
+                {t('editRoute.loading')}
             </div>
         );
     }
@@ -35,7 +37,7 @@ export function EditRoutePage({routeId}: EditRoutePageProps) {
     if (isError || !route) {
         return (
             <div className={styles.page}>
-                Failed to load route.
+                {t('editRoute.loadError')}
             </div>
         );
     }

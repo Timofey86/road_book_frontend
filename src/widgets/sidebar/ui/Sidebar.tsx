@@ -14,9 +14,11 @@ import {useLogoutMutation} from '../../../features/auth';
 import styles from './Sidebar.module.css';
 import {LanguageSwitcher} from "../../../shared/ui/language-switcher";
 import {appRoutes} from "../../../shared/lib/routes.ts";
+import {useTranslation} from 'react-i18next';
 
 export function Sidebar() {
     const navigate = useNavigate();
+    const {t} = useTranslation();
     const {data: user} = useQuery(currentUserQueryOptions);
     const logoutMutation = useLogoutMutation();
 
@@ -50,7 +52,7 @@ export function Sidebar() {
                     }}
                 >
                     <Compass size={20}/>
-                    Explore
+                    {t('navigation.explore')}
                 </Link>
 
                 {user && (
@@ -63,7 +65,7 @@ export function Sidebar() {
                             }}
                         >
                             <MapPinned size={20}/>
-                            My Routes
+                            {t('navigation.myRoutes')}
                         </Link>
 
                         <Link
@@ -74,7 +76,7 @@ export function Sidebar() {
                             }}
                         >
                             <Heart size={20}/>
-                            Favorites
+                            {t('navigation.favorites')}
                         </Link>
 
                         <Link
@@ -82,7 +84,7 @@ export function Sidebar() {
                             className={styles.createButton}
                         >
                             <Plus size={18}/>
-                            Create Route
+                            {t('navigation.createRoute')}
                         </Link>
                     </>
                 )}
@@ -93,7 +95,7 @@ export function Sidebar() {
                 <>
                     <div className={styles.accountSection}>
                         <span className={styles.sectionTitle}>
-                            Account
+                            {t('navigation.account')}
                         </span>
 
                         <Link
@@ -104,7 +106,7 @@ export function Sidebar() {
                             }}
                         >
                             <User size={20}/>
-                            Profile
+                            {t('navigation.profile')}
                         </Link>
                     </div>
 
@@ -126,7 +128,7 @@ export function Sidebar() {
 
                         <div className={styles.userInfo}>
                             <strong>{user.name}</strong>
-                            <span>View profile</span>
+                            <span>{t('navigation.viewProfile')}</span>
                         </div>
                     </Link>
 
@@ -141,7 +143,7 @@ export function Sidebar() {
                         disabled={logoutMutation.isPending}
                     >
                         <LogOut size={18}/>
-                        Log out
+                        {t('navigation.logout')}
                     </button>
                 </>
             )}

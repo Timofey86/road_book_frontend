@@ -1,20 +1,23 @@
 import {useQuery} from '@tanstack/react-query';
 import {Link} from '@tanstack/react-router';
 import {
+    ArrowLeft,
     CalendarDays,
     Heart,
     Map,
     Pencil,
 } from 'lucide-react';
-
 import {currentUserQueryOptions} from '../../../entities/user';
 import {appRoutes} from '../../../shared/lib/routes.ts';
 import styles from './ProfilePage.module.css';
 import {useState} from "react";
 import Lightbox from "yet-another-react-lightbox";
 import 'yet-another-react-lightbox/styles.css';
+import {useTranslation} from 'react-i18next';
+import {router} from "../../../app/router.ts";
 
 export function ProfilePage() {
+    const {t, i18n} = useTranslation();
     const [avatarOpen, setAvatarOpen] = useState(false);
     const {
         data: user,
@@ -25,7 +28,7 @@ export function ProfilePage() {
     if (isPending) {
         return (
             <div className={styles.page}>
-                Loading profile...
+                {t('profile.loading')}
             </div>
         );
     }
@@ -33,23 +36,35 @@ export function ProfilePage() {
     if (isError || !user) {
         return (
             <div className={styles.page}>
-                Failed to load profile.
+                {t('profile.loadError')}
             </div>
         );
     }
 
-    const joinedAt = new Intl.DateTimeFormat('en', {
-        month: 'long',
-        year: 'numeric',
-    }).format(new Date(user.createdAt));
+    const joinedAt = new Intl.DateTimeFormat(
+        i18n.resolvedLanguage,
+        {
+            month: 'long',
+            year: 'numeric',
+        },
+    ).format(new Date(user.createdAt));
 
     return (
         <div className={styles.page}>
+            <button
+                type="button"
+                className={styles.backButton}
+                onClick={() => router.history.back()}
+            >
+                <ArrowLeft size={16}/>
+                {t('profile.back')}
+            </button>
+
             <header className={styles.pageHeader}>
                 <div>
-                    <h1>Profile</h1>
+                    <h1>{t('profile.title')}</h1>
                     <p>
-                        Your public RoadBook profile.
+                        {t('profile.ownSubtitle')}
                     </p>
                 </div>
 
@@ -58,7 +73,7 @@ export function ProfilePage() {
                     className={styles.editButton}
                 >
                     <Pencil size={16}/>
-                    Edit profile
+                    {t('profile.edit')}
                 </Link>
             </header>
 
@@ -70,7 +85,7 @@ export function ProfilePage() {
                                 type="button"
                                 className={styles.avatarButton}
                                 onClick={() => setAvatarOpen(true)}
-                                aria-label="View profile photo"
+                                aria-label={t('profile.viewPhoto')}
                             >
                                 <img
                                     src={user.avatarUrl}
@@ -108,7 +123,7 @@ export function ProfilePage() {
                             <strong>
                                 {user.routesCount}
                             </strong>
-                            <span>Routes</span>
+                            <span>{t('profile.stats.routes')}</span>
                         </div>
                     </div>
 
@@ -119,7 +134,7 @@ export function ProfilePage() {
                             <strong>
                                 {user.receivedLikesCount}
                             </strong>
-                            <span>Likes received</span>
+                            <span>{t('profile.stats.likesReceived')}</span>
                         </div>
                     </div>
 
@@ -128,7 +143,7 @@ export function ProfilePage() {
 
                         <div>
                             <strong>{joinedAt}</strong>
-                            <span>Member since</span>
+                            <span>{t('profile.stats.memberSince')}</span>
                         </div>
                     </div>
                 </div>
@@ -141,7 +156,9 @@ export function ProfilePage() {
                     slides={[
                         {
                             src: user.avatarUrl,
-                            alt: `${user.name} profile photo`,
+                            alt: t('profile.photoAlt', {
+                                name: user.name,
+                            }),
                         },
                     ]}
                 />

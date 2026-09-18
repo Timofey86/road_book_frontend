@@ -7,12 +7,14 @@ import {RouteFavoriteButton} from "../../../features/toggle-route-favorite";
 import {formatDuration} from "../../../shared/lib/formatDuration.ts";
 import {useQuery} from "@tanstack/react-query";
 import {currentUserQueryOptions} from "../../../entities/user";
+import {useTranslation} from 'react-i18next';
 
 interface RouteOverviewProps {
     route: RouteDetails;
 }
 
 export function RouteOverview({route}: RouteOverviewProps) {
+    const {t} = useTranslation();
 
     const distance =
         route.totalDistanceMeters !== null
@@ -40,10 +42,10 @@ export function RouteOverview({route}: RouteOverviewProps) {
                                 <div className={styles.sectionHeader}>
                                     <div>
                                         <span className={styles.sectionEyebrow}>
-                                            Route
+                                            {t('routeDetails.overview.route')}
                                         </span>
 
-                                        <h2>Route map</h2>
+                                        <h2>{t('routeDetails.overview.routeMap')}</h2>
                                     </div>
                                 </div>
 
@@ -60,21 +62,18 @@ export function RouteOverview({route}: RouteOverviewProps) {
                         <div className={styles.sectionHeader}>
                             <div>
                                 <span
-                                    className={
-                                        styles.sectionEyebrow
-                                    }
+                                    className={styles.sectionEyebrow}
                                 >
-                                    Itinerary
+                                    {t('routeDetails.overview.itinerary')}
                                 </span>
 
-                                <h2>Stops</h2>
+                                <h2>{t('routeDetails.overview.stops')}</h2>
                             </div>
 
                             <span className={styles.stopCount}>
-                                {route.stops.length}{' '}
-                                {route.stops.length === 1
-                                    ? 'stop'
-                                    : 'stops'}
+                                {t('routeDetails.overview.stopCount', {
+                                    count: route.stops.length,
+                                })}
                             </span>
                         </div>
 
@@ -84,19 +83,11 @@ export function RouteOverview({route}: RouteOverviewProps) {
                                     key={stop.id}
                                     className={styles.stop}
                                 >
-                                    <div
-                                        className={
-                                            styles.stopPosition
-                                        }
-                                    >
+                                    <div className={styles.stopPosition}>
                                         {stop.position}
                                     </div>
 
-                                    <div
-                                        className={
-                                            styles.stopContent
-                                        }
-                                    >
+                                    <div className={styles.stopContent}>
                                         <strong>
                                             {stop.name}
                                         </strong>
@@ -123,9 +114,7 @@ export function RouteOverview({route}: RouteOverviewProps) {
 
                                     <MapPin
                                         size={18}
-                                        className={
-                                            styles.stopIcon
-                                        }
+                                        className={styles.stopIcon}
                                     />
                                 </div>
                             ))}
@@ -135,50 +124,38 @@ export function RouteOverview({route}: RouteOverviewProps) {
 
                 <aside className={styles.sidebar}>
                     <section className={styles.infoCard}>
-                        <h2>Route info</h2>
+                        <h2>{t('routeDetails.overview.routeInfo')}</h2>
 
                         <div className={styles.infoList}>
                             <div className={styles.infoItem}>
-                                <div
-                                    className={
-                                        styles.infoIcon
-                                    }
-                                >
+                                <div className={styles.infoIcon}>
                                     <RouteIcon size={18}/>
                                 </div>
 
                                 <div>
-                                    <span>Distance</span>
+                                    <span>{t('routeDetails.overview.distance')}</span>
                                     <strong>{distance}</strong>
                                 </div>
                             </div>
 
                             <div className={styles.infoItem}>
-                                <div
-                                    className={
-                                        styles.infoIcon
-                                    }
-                                >
+                                <div className={styles.infoIcon}>
                                     <Clock3 size={18}/>
                                 </div>
 
                                 <div>
-                                    <span>Duration</span>
+                                    <span>{t('routeDetails.overview.duration')}</span>
                                     <strong>{duration}</strong>
                                 </div>
                             </div>
 
                             <div className={styles.infoItem}>
-                                <div
-                                    className={
-                                        styles.infoIcon
-                                    }
-                                >
+                                <div className={styles.infoIcon}>
                                     <MapPin size={18}/>
                                 </div>
 
                                 <div>
-                                    <span>Stops</span>
+                                    <span>{t('routeDetails.overview.stops')}</span>
                                     <strong>
                                         {route.stops.length}
                                     </strong>
@@ -198,7 +175,9 @@ export function RouteOverview({route}: RouteOverviewProps) {
                             <div className={styles.activityRow}>
                                 <Heart size={18} />
                                 <span>
-                                    {route.likesCount} {route.likesCount === 1 ? 'like' : 'likes'}
+                                    {t('routeDetails.overview.like', {
+                                        count: route.likesCount,
+                                    })}
                                 </span>
                             </div>
                         )}
@@ -211,7 +190,7 @@ export function RouteOverview({route}: RouteOverviewProps) {
                         ) : (
                             <div className={styles.activityRow}>
                                 <Star size={18}/>
-                                <span>Add to favorites</span>
+                                <span>{t('routeDetails.overview.addToFavorites')}</span>
                             </div>
                         )}
                     </section>

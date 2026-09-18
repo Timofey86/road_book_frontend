@@ -23,12 +23,14 @@ import {Link, Navigate, useNavigate} from "@tanstack/react-router";
 import {ArrowLeft} from "lucide-react";
 import {appRoutes} from "../../../shared/lib/routes.ts";
 import {currentUserQueryOptions} from "../../../entities/user";
+import {useTranslation} from 'react-i18next';
 
 interface EditRouteStopsPageProps {
     routeId: number;
 }
 
 export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
+    const {t} = useTranslation();
     const {
         data: route,
         isPending,
@@ -116,7 +118,7 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
     if (isPending || isCurrentUserPending) {
         return (
             <div className={styles.page}>
-                Loading route...
+                {t('editRouteStops.loading')}
             </div>
         );
     }
@@ -124,7 +126,7 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
     if (isError || !route) {
         return (
             <div className={styles.page}>
-                Failed to load route.
+                {t('editRouteStops.loadError')}
             </div>
         );
     }
@@ -145,12 +147,12 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
         route.totalDurationSeconds !== null;
 
     const buildButtonLabel = buildRouteMutation.isPending
-        ? 'Building route...'
+        ? t('editRouteStops.build.building')
         : route.isRouteActual
-            ? 'Route is up to date'
+            ? t('editRouteStops.build.upToDate')
             : hasBuiltRoute
-                ? 'Rebuild route'
-                : 'Build route';
+                ? t('editRouteStops.build.rebuild')
+                : t('editRouteStops.build.build');
 
     return (
         <div className={styles.page}>
@@ -163,12 +165,12 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
                 className={styles.backLink}
             >
                 <ArrowLeft size={16}/>
-                Back to route settings
+                {t('editRouteStops.back')}
             </Link>
             <header className={styles.header}>
                 <div>
                     <span className={styles.eyebrow}>
-                        Edit route
+                        {t('editRouteStops.eyebrow')}
                     </span>
 
                     <h1>{route.title}</h1>
@@ -182,15 +184,16 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
                     <div>
-                        <h2>Stops</h2>
+                        <h2>{t('editRouteStops.stops.title')}</h2>
                         <p>
-                            Add at least two stops to build
-                            your route.
+                            {t('editRouteStops.stops.description')}
                         </p>
                     </div>
 
                     <span className={styles.stopsCount}>
-                        {route.stops.length} stops
+                        {t('editRouteStops.stops.count', {
+                            count: route.stops.length,
+                        })}
                     </span>
                 </div>
 
@@ -198,10 +201,9 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
 
                 {route.stops.length === 0 ? (
                     <div className={styles.empty}>
-                        <strong>No stops yet</strong>
+                        <strong>{t('editRouteStops.stops.emptyTitle')}</strong>
                         <span>
-                            Search for a city or address to add
-                            your first stop.
+                            {t('editRouteStops.stops.emptyDescription')}
                         </span>
                     </div>
                 ) : (
@@ -243,13 +245,13 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
 
                     {route.stops.length < 2 && (
                         <span className={styles.buildHint}>
-                            Add at least two stops to build the route.
+                            {t('editRouteStops.build.hint')}
                         </span>
                     )}
 
                     {buildRouteMutation.isError && (
                         <span className={styles.buildError}>
-                            Failed to build route.
+                            {t('editRouteStops.build.error')}
                         </span>
                     )}
                 </div>
@@ -261,14 +263,14 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
                                 <strong>
                                     {(route.totalDistanceMeters / 1000).toFixed(1)} km
                                 </strong>
-                                <span>Distance</span>
+                                <span>{t('editRouteStops.stats.distance')}</span>
                             </div>
 
                             <div>
                                 <strong>
                                     {formatDuration(route.totalDurationSeconds)}
                                 </strong>
-                                <span>Duration</span>
+                                <span>{t('editRouteStops.stats.duration')}</span>
                             </div>
 
                             <div
@@ -279,9 +281,11 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
                                 }`}
                             >
                                 <strong>
-                                    {route.isRouteActual ? 'Ready' : 'Needs rebuild'}
+                                    {route.isRouteActual
+                                        ? t('editRouteStops.stats.ready')
+                                        : t('editRouteStops.stats.needsRebuild')}
                                 </strong>
-                                <span>Status</span>
+                                <span>{t('editRouteStops.stats.status')}</span>
                             </div>
                         </div>
 

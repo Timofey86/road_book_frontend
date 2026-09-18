@@ -3,16 +3,17 @@ import {useQuery} from '@tanstack/react-query';
 import {ArrowLeft, CalendarDays, Heart, Map} from 'lucide-react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
-
 import {publicUserQueryOptions} from '../../../entities/user';
 import styles from './PublicProfilePage.module.css';
 import {router} from "../../../app/router.ts";
+import {useTranslation} from 'react-i18next';
 
 interface PublicProfilePageProps {
     userId: number;
 }
 
 export function PublicProfilePage({userId}: PublicProfilePageProps) {
+    const {t, i18n} = useTranslation();
     const [avatarOpen, setAvatarOpen] = useState(false);
 
     const {
@@ -24,7 +25,7 @@ export function PublicProfilePage({userId}: PublicProfilePageProps) {
     if (isPending) {
         return (
             <div className={styles.page}>
-                Loading profile...
+                {t('profile.loading')}
             </div>
         );
     }
@@ -32,15 +33,18 @@ export function PublicProfilePage({userId}: PublicProfilePageProps) {
     if (isError) {
         return (
             <div className={styles.page}>
-                Failed to load profile.
+                {t('profile.loadError')}
             </div>
         );
     }
 
-    const joinedAt = new Intl.DateTimeFormat('en', {
-        month: 'long',
-        year: 'numeric',
-    }).format(new Date(user.createdAt));
+    const joinedAt = new Intl.DateTimeFormat(
+        i18n.resolvedLanguage,
+        {
+            month: 'long',
+            year: 'numeric',
+        },
+    ).format(new Date(user.createdAt));
 
     return (
         <div className={styles.page}>
@@ -50,13 +54,13 @@ export function PublicProfilePage({userId}: PublicProfilePageProps) {
                 onClick={() => router.history.back()}
             >
                 <ArrowLeft size={16}/>
-                Back
+                {t('profile.back')}
             </button>
             <header className={styles.pageHeader}>
-                <h1>Profile</h1>
+                <h1>{t('profile.title')}</h1>
 
                 <p>
-                    RoadBook traveler profile.
+                    {t('profile.ownSubtitle')}
                 </p>
             </header>
 
@@ -67,7 +71,7 @@ export function PublicProfilePage({userId}: PublicProfilePageProps) {
                             type="button"
                             className={styles.avatarButton}
                             onClick={() => setAvatarOpen(true)}
-                            aria-label="View profile photo"
+                            aria-label={t('profile.viewPhoto')}
                         >
                             <img
                                 src={user.avatarUrl}
@@ -98,7 +102,7 @@ export function PublicProfilePage({userId}: PublicProfilePageProps) {
 
                         <span className={styles.inlineStat}>
                             <strong>{user.routesCount}</strong>
-                                Routes
+                            {t('profile.stats.routes')}
                         </span>
                     </div>
 
@@ -107,7 +111,7 @@ export function PublicProfilePage({userId}: PublicProfilePageProps) {
 
                         <span className={styles.inlineStat}>
                             <strong>{user.receivedLikesCount}</strong>
-                                Likes received
+                            {t('profile.stats.likesReceived')}
                         </span>
                     </div>
 
@@ -116,7 +120,7 @@ export function PublicProfilePage({userId}: PublicProfilePageProps) {
 
                         <div className={styles.memberSince}>
                             <strong>{joinedAt}</strong>
-                            <span>Member since</span>
+                            <span>{t('profile.stats.memberSince')}</span>
                         </div>
                     </div>
                 </div>
@@ -129,7 +133,9 @@ export function PublicProfilePage({userId}: PublicProfilePageProps) {
                     slides={[
                         {
                             src: user.avatarUrl,
-                            alt: `${user.name} profile photo`,
+                            alt: t('profile.photoAlt', {
+                                name: user.name,
+                            }),
                         },
                     ]}
                 />

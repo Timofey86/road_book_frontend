@@ -101,7 +101,7 @@ export function LoginPage() {
             </button>
 
             {loginMutation.isError && (
-                <p>Login failed</p>
+                <p>{t('auth.errors.loginFailed')}</p>
             )}
         </form>
             <p className={styles.footer}>

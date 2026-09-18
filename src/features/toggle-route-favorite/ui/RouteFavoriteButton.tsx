@@ -1,6 +1,7 @@
 import {Star} from 'lucide-react';
 import {useToggleRouteFavoriteMutation} from '../model/useToggleRouteFavoriteMutation';
 import styles from './RouteFavoriteButton.module.css';
+import {useTranslation} from 'react-i18next';
 
 interface RouteFavoriteButtonProps {
     routeId: number;
@@ -8,10 +9,12 @@ interface RouteFavoriteButtonProps {
 }
 
 export function RouteFavoriteButton({routeId, isFavorite}: RouteFavoriteButtonProps) {
+    const {t} = useTranslation();
     const mutation = useToggleRouteFavoriteMutation(
         routeId,
         isFavorite,
     );
+
 
     return (
         <button
@@ -26,8 +29,8 @@ export function RouteFavoriteButton({routeId, isFavorite}: RouteFavoriteButtonPr
 
             <span>
                 {isFavorite
-                    ? 'In favorites'
-                    : 'Add to favorites'}
+                    ? t('routeActions.favorite.inFavorites')
+                    : t('routeActions.favorite.add')}
             </span>
         </button>
     );

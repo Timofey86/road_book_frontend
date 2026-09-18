@@ -12,6 +12,7 @@ import {RouteOverview} from "./RouteOverview.tsx";
 import {RoutePhotos} from "./RoutePhotos.tsx";
 import {RouteComments} from "./RouteComments.tsx";
 import type {RouteDetailsTab} from "../model/types.ts";
+import {useTranslation} from 'react-i18next';
 
 interface RouteDetailsPageProps {
     routeId: number;
@@ -27,6 +28,7 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
     } = useQuery(routeDetailsQueryOptions(routeId));
 
     const router = useRouter();
+    const {t} = useTranslation();
 
     const {data: currentUser} = useQuery(
         currentUserQueryOptions,
@@ -35,7 +37,7 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
     if (isPending) {
         return (
             <div className={styles.page}>
-                Loading route...
+                {t('routeDetails.loading')}
             </div>
         );
     }
@@ -43,7 +45,7 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
     if (isError || !route) {
         return (
             <div className={styles.page}>
-                Failed to load route.
+                {t('routeDetails.loadError')}
             </div>
         );
     }
@@ -56,7 +58,7 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
                 onClick={() => router.history.back()}
             >
                 <ArrowLeft size={16}/>
-                Back
+                {t('routeDetails.back')}
             </button>
             {route.coverUrl ? (
                 <section className={styles.hero}>
@@ -172,7 +174,7 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
                         }}
                         className={styles.primaryAction}
                     >
-                        Edit route
+                        {t('routeDetails.actions.editRoute')}
                     </Link>
 
                     <Link
@@ -182,7 +184,7 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
                         }}
                         className={styles.secondaryAction}
                     >
-                        Edit stops
+                        {t('routeDetails.actions.editStops')}
                     </Link>
                 </div>
             )}

@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {Search} from 'lucide-react';
 import {useDebounce} from '../../../shared/lib/useDebounce';
 import styles from './ExploreSearch.module.css';
+import {useTranslation} from 'react-i18next';
 
 interface ExploreSearchProps {
     value: string;
@@ -12,6 +13,7 @@ export function ExploreSearch({value, onChange}: ExploreSearchProps) {
     const [searchValue, setSearchValue] = useState(value);
 
     const debouncedSearch = useDebounce(searchValue, 500);
+    const {t} = useTranslation();
 
     useEffect(() => {
         if (debouncedSearch !== value) {
@@ -36,7 +38,7 @@ export function ExploreSearch({value, onChange}: ExploreSearchProps) {
                 onChange={(event) =>
                     setSearchValue(event.target.value)
                 }
-                placeholder="Search routes..."
+                placeholder={t('explore.searchPlaceholder')}
             />
         </div>
     );

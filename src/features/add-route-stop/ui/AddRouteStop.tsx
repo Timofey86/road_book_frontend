@@ -5,12 +5,14 @@ import {type CreateRouteStopPayload, useCreateRouteStopMutation} from "../../../
 import {useQuery} from "@tanstack/react-query";
 import {type PlaceSearchResult, placesSearchQueryOptions} from "../../../entities/place";
 import {MapPin, Search} from "lucide-react";
+import {useTranslation} from 'react-i18next';
 
 interface AddRouteStopProps {
     routeId: number;
 }
 
 export function AddRouteStop({routeId}: AddRouteStopProps) {
+    const {t} = useTranslation();
     const [query, setQuery] = useState('');
     const debouncedQuery = useDebounce(
         query.trim(),
@@ -58,7 +60,7 @@ export function AddRouteStop({routeId}: AddRouteStopProps) {
                 htmlFor="place-search"
                 className={styles.label}
             >
-                Add a stop
+                {t('editRouteStops.stops.add')}
             </label>
 
             <div className={styles.searchWrapper}>
@@ -71,7 +73,7 @@ export function AddRouteStop({routeId}: AddRouteStopProps) {
                     id="place-search"
                     type="text"
                     value={query}
-                    placeholder="Search for a city or address..."
+                    placeholder={t('editRouteStops.stops.searchPlaceholder')}
                     autoComplete="off"
                     onChange={(event) =>
                         setQuery(event.target.value)
@@ -80,7 +82,7 @@ export function AddRouteStop({routeId}: AddRouteStopProps) {
 
                 {isFetching && (
                     <span className={styles.loading}>
-                        Searching...
+                        {t('editRouteStops.stops.searching')}
                     </span>
                 )}
             </div>
@@ -89,7 +91,7 @@ export function AddRouteStop({routeId}: AddRouteStopProps) {
                 <div className={styles.results}>
                     {isError && (
                         <div className={styles.message}>
-                            Failed to search places.
+                            {t('editRouteStops.stops.searchError')}
                         </div>
                     )}
 
@@ -97,7 +99,7 @@ export function AddRouteStop({routeId}: AddRouteStopProps) {
                         !isError &&
                         places.length === 0 && (
                             <div className={styles.message}>
-                                No places found.
+                                {t('editRouteStops.stops.noResults')}
                             </div>
                         )}
 
@@ -106,20 +108,12 @@ export function AddRouteStop({routeId}: AddRouteStopProps) {
                             key={`${place.latitude}-${place.longitude}-${index}`}
                             type="button"
                             className={styles.result}
-                            onClick={() =>
-                                handleSelectPlace(place)
-                            }
-                            disabled={
-                                createStopMutation.isPending
-                            }
+                            onClick={() => handleSelectPlace(place)}
+                            disabled={createStopMutation.isPending}
                         >
                             <MapPin size={18} />
-
-                            <span
-                                className={styles.resultContent}
-                            >
+                            <span className={styles.resultContent}>
                                 <strong>{place.name}</strong>
-
                                 {place.address && (
                                     <span>
                                         {place.address}
@@ -133,7 +127,7 @@ export function AddRouteStop({routeId}: AddRouteStopProps) {
 
             {createStopMutation.isError && (
                 <div className={styles.error}>
-                    Failed to add stop.
+                    {t('editRouteStops.stops.addError')}
                 </div>
             )}
         </div>

@@ -6,17 +6,17 @@ import {
 } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { X } from 'lucide-react';
-
 import {
     useCreateRouteMutation,
     type CreateRoutePayload,
 } from '../../../entities/route';
-
 import {
     type CreateRouteFormErrors,
     type CreateRouteFormValues,
     validateCreateRoute,
 } from '../model/validation';
+import {useTranslation} from 'react-i18next';
+import {appRoutes} from "../../../shared/lib/routes.ts";
 
 const initialValues: CreateRouteFormValues = {
     title: '',
@@ -25,6 +25,7 @@ const initialValues: CreateRouteFormValues = {
 };
 
 export function CreateRouteForm() {
+    const {t} = useTranslation();
     const navigate = useNavigate();
 
     const createRouteMutation = useCreateRouteMutation();
@@ -61,7 +62,7 @@ export function CreateRouteForm() {
         createRouteMutation.mutate(payload, {
             onSuccess: (route) => {
                 navigate({
-                    to: '/routes/$routeId/edit/stops',
+                    to: appRoutes.editRouteStops,
                     params: {
                         routeId: String(route.id),
                     },
@@ -80,7 +81,7 @@ export function CreateRouteForm() {
         if (values.tags.length >= 10) {
             setErrors((current) => ({
                 ...current,
-                tags: 'You can add up to 10 tags',
+                tags: 'route.validation.tagsMaxCount',
             }));
 
             return;
@@ -134,7 +135,7 @@ export function CreateRouteForm() {
         >
             <div className={styles.field}>
                 <label htmlFor="title">
-                    Route title
+                    {t('createRoute.form.title')}
                 </label>
 
                 <input
@@ -142,7 +143,7 @@ export function CreateRouteForm() {
                     type="text"
                     value={values.title}
                     maxLength={150}
-                    placeholder="Italy Summer Road Trip"
+                    placeholder={t('createRoute.form.titlePlaceholder')}
                     onChange={(event) => {
                         setValues((current) => ({
                             ...current,
@@ -161,7 +162,7 @@ export function CreateRouteForm() {
                 <div className={styles.fieldFooter}>
                     {errors.title ? (
                         <span className={styles.error}>
-                            {errors.title}
+                            {t(errors.title)}
                         </span>
                     ) : (
                         <span />
@@ -175,13 +176,13 @@ export function CreateRouteForm() {
 
             <div className={styles.field}>
                 <label htmlFor="description">
-                    Description
+                    {t('createRoute.form.description')}
                 </label>
 
                 <textarea
                     id="description"
                     value={values.description}
-                    placeholder="Tell people something about this trip..."
+                    placeholder={t('createRoute.form.descriptionPlaceholder')}
                     rows={5}
                     onChange={(event) => {
                         setValues((current) => ({
@@ -194,7 +195,7 @@ export function CreateRouteForm() {
 
             <div className={styles.field}>
                 <label htmlFor="tags">
-                    Tags
+                    {t('createRoute.form.tags')}
                 </label>
 
                 <div className={styles.tagControls}>
@@ -203,7 +204,7 @@ export function CreateRouteForm() {
                         type="text"
                         value={tagInput}
                         maxLength={50}
-                        placeholder="Mountains"
+                        placeholder={t('createRoute.form.tagPlaceholder')}
                         onChange={(event) => {
                             setTagInput(event.target.value);
                         }}
@@ -215,7 +216,7 @@ export function CreateRouteForm() {
                         className={styles.addTagButton}
                         onClick={handleAddTag}
                     >
-                        Add tag
+                        {t('createRoute.form.addTag')}
                     </button>
                 </div>
 
@@ -230,10 +231,8 @@ export function CreateRouteForm() {
 
                                 <button
                                     type="button"
-                                    onClick={() =>
-                                        handleRemoveTag(tag)
-                                    }
-                                    aria-label={`Remove ${tag}`}
+                                    onClick={() => handleRemoveTag(tag)}
+                                    aria-label={t('createRoute.form.removeTag', {tag})}
                                 >
                                     <X size={14} />
                                 </button>
@@ -245,7 +244,7 @@ export function CreateRouteForm() {
                 <div className={styles.fieldFooter}>
                     {errors.tags ? (
                         <span className={styles.error}>
-                            {errors.tags}
+                            {t(errors.tags)}
                         </span>
                     ) : (
                         <span />
@@ -259,7 +258,7 @@ export function CreateRouteForm() {
 
             {createRouteMutation.isError && (
                 <div className={styles.requestError}>
-                    Failed to create route
+                    {t('createRoute.errors.createFailed')}
                 </div>
             )}
 
@@ -269,7 +268,7 @@ export function CreateRouteForm() {
                     className={styles.cancelButton}
                     onClick={() => navigate({ to: '/' })}
                 >
-                    Cancel
+                    {t('createRoute.form.cancel')}
                 </button>
 
                 <button
@@ -278,8 +277,8 @@ export function CreateRouteForm() {
                     disabled={createRouteMutation.isPending}
                 >
                     {createRouteMutation.isPending
-                        ? 'Creating...'
-                        : 'Continue'
+                        ? t('createRoute.form.creating')
+                        : t('createRoute.form.continue')
                     }
                 </button>
             </div>

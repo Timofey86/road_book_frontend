@@ -3,6 +3,7 @@ import {useSortable} from "@dnd-kit/sortable";
 import { GripVertical, Trash2 } from 'lucide-react';
 import { CSS } from '@dnd-kit/utilities';
 import styles from './SortableStopItem.module.css';
+import {useTranslation} from 'react-i18next';
 
 interface SortableStopItemProps {
     stop: RouteStop;
@@ -15,6 +16,7 @@ export function SortableStopItem({
     onDelete,
     isDeleting = false,
 }: SortableStopItemProps) {
+    const {t} = useTranslation();
     const {
         attributes,
         listeners,
@@ -44,7 +46,9 @@ export function SortableStopItem({
                 className={styles.dragHandle}
                 {...attributes}
                 {...listeners}
-                aria-label={`Move ${stop.name}`}
+                aria-label={t('editRouteStops.stops.move', {
+                    name: stop.name,
+                })}
             >
                 <GripVertical size={18} />
             </button>
@@ -64,7 +68,9 @@ export function SortableStopItem({
                 className={styles.deleteButton}
                 onClick={() => onDelete(stop.id)}
                 disabled={isDeleting}
-                aria-label={`Delete ${stop.name}`}
+                aria-label={t('editRouteStops.stops.delete', {
+                    name: stop.name,
+                })}
             >
                 <Trash2 size={17} />
             </button>

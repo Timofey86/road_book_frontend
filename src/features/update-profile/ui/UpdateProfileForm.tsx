@@ -2,12 +2,14 @@ import {useState} from 'react';
 import type {CurrentUser} from '../../../entities/user';
 import styles from './UpdateProfileForm.module.css';
 import {useUpdateProfileMutation} from "../model/useUpdateProfileMutation";
+import {useTranslation} from 'react-i18next';
 
 interface UpdateProfileFormProps {
     user: CurrentUser;
 }
 
 export function UpdateProfileForm({user}: UpdateProfileFormProps) {
+    const {t} = useTranslation();
     const [name, setName] = useState(user.name);
     const [bio, setBio] = useState(user.bio ?? '');
 
@@ -42,7 +44,7 @@ export function UpdateProfileForm({user}: UpdateProfileFormProps) {
         >
             <div className={styles.field}>
                 <label htmlFor="profile-name">
-                    Name
+                    {t('profile.editPage.information.name')}
                 </label>
 
                 <input
@@ -59,7 +61,7 @@ export function UpdateProfileForm({user}: UpdateProfileFormProps) {
             <div className={styles.field}>
                 <div className={styles.labelRow}>
                     <label htmlFor="profile-bio">
-                        Bio
+                        {t('profile.editPage.information.bio')}
                     </label>
 
                     <span>
@@ -80,15 +82,9 @@ export function UpdateProfileForm({user}: UpdateProfileFormProps) {
 
             {mutation.isError && (
                 <p className={styles.error}>
-                    Failed to update profile.
+                    {t('profile.editPage.information.error')}
                 </p>
             )}
-
-            {/*{mutation.isSuccess && (*/}
-            {/*    <p className={styles.success}>*/}
-            {/*        Profile updated.*/}
-            {/*    </p>*/}
-            {/*)}*/}
 
             <div className={styles.actions}>
                 <button
@@ -100,8 +96,8 @@ export function UpdateProfileForm({user}: UpdateProfileFormProps) {
                     }
                 >
                     {mutation.isPending
-                        ? 'Saving...'
-                        : 'Save changes'}
+                        ? t('profile.editPage.information.saving')
+                        : t('profile.editPage.information.save')}
                 </button>
             </div>
         </form>

@@ -2,7 +2,6 @@
     width: 100%;
     max-width: 1120px;
     margin: 0 auto;
-    padding: 32px;
 }
 
 .backLink {
@@ -120,12 +119,15 @@
 }
 
 .author {
+    width: fit-content;
     display: flex;
     align-items: center;
+    color: inherit;
     gap: 9px;
     margin-bottom: 12px;
     font-size: 14px;
     font-weight: 600;
+    text-decoration: none;
 }
 
 .author img,
@@ -139,6 +141,14 @@
 
 .author img {
     object-fit: cover;
+}
+
+.author span {
+    transition: opacity 0.15s ease;
+}
+
+.author:hover span {
+    opacity: 0.8;
 }
 
 .avatarFallback {

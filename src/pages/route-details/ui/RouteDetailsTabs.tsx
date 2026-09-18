@@ -1,5 +1,6 @@
 import styles from './RouteDetailsPage.module.css';
 import type {RouteDetailsTab} from '../model/types';
+import {useTranslation} from 'react-i18next';
 
 interface RouteDetailsTabsProps {
     activeTab: RouteDetailsTab;
@@ -13,6 +14,7 @@ export function RouteDetailsTabs({
     commentsCount,
     onTabChange,
 }: RouteDetailsTabsProps) {
+    const {t} = useTranslation();
     return (
         <div className={styles.tabs}>
             <button
@@ -24,7 +26,7 @@ export function RouteDetailsTabs({
                 }
                 onClick={() => onTabChange('overview')}
             >
-                Overview
+                {t('routeDetails.tabs.overview')}
             </button>
 
             <button
@@ -36,7 +38,9 @@ export function RouteDetailsTabs({
                 }
                 onClick={() => onTabChange('photos')}
             >
-                Photos ({photosCount})
+                {t('routeDetails.tabs.photos', {
+                    count: photosCount,
+                })}
             </button>
 
             <button
@@ -48,7 +52,9 @@ export function RouteDetailsTabs({
                 }
                 onClick={() => onTabChange('comments')}
             >
-                Comments ({commentsCount})
+                {t('routeDetails.tabs.comments', {
+                    count: commentsCount,
+                })}
             </button>
         </div>
     )

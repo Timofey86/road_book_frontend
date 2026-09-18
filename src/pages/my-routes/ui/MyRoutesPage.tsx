@@ -6,6 +6,7 @@ import {
 } from '../../../entities/route';
 import {Pagination} from '../../../shared/ui/pagination';
 import styles from './MyRoutesPage.module.css';
+import {useTranslation} from 'react-i18next';
 
 interface MyRoutesPageProps {
     page: number;
@@ -13,6 +14,7 @@ interface MyRoutesPageProps {
 }
 
 export function MyRoutesPage({page, onPageChange}: MyRoutesPageProps) {
+    const {t} = useTranslation();
     const {
         data,
         isPending,
@@ -24,7 +26,7 @@ export function MyRoutesPage({page, onPageChange}: MyRoutesPageProps) {
     if (isPending) {
         return (
             <div className={styles.page}>
-                <p>Loading routes...</p>
+                <p>{t('myRoutes.loading')}</p>
             </div>
         );
     }
@@ -32,7 +34,7 @@ export function MyRoutesPage({page, onPageChange}: MyRoutesPageProps) {
     if (isError) {
         return (
             <div className={styles.page}>
-                <p>Failed to load routes.</p>
+                <p>{t('myRoutes.loadError')}</p>
             </div>
         );
     }
@@ -41,8 +43,8 @@ export function MyRoutesPage({page, onPageChange}: MyRoutesPageProps) {
         <div className={styles.page}>
             <header className={styles.header}>
                 <div>
-                    <h1>My Routes</h1>
-                    <p>Routes you've created.</p>
+                    <h1>{t('myRoutes.title')}</h1>
+                    <p>{t('myRoutes.subtitle')}</p>
                 </div>
             </header>
 
@@ -50,10 +52,10 @@ export function MyRoutesPage({page, onPageChange}: MyRoutesPageProps) {
                 <div className={styles.empty}>
                     <Map size={36}/>
 
-                    <h2>No routes yet</h2>
+                    <h2>{t('myRoutes.emptyTitle')}</h2>
 
                     <p>
-                        Create your first route and start planning your journey.
+                        {t('myRoutes.emptyDescription')}
                     </p>
 
                 </div>

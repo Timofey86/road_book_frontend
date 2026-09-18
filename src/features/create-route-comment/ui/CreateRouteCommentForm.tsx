@@ -1,12 +1,14 @@
 import {useState, type FormEvent} from 'react';
 import {useCreateRouteCommentMutation} from '../model/useCreateRouteCommentMutation';
 import styles from './CreateRouteCommentForm.module.css';
+import {useTranslation} from 'react-i18next';
 
 interface CreateRouteCommentFormProps {
     routeId: number;
 }
 
 export function CreateRouteCommentForm({routeId}: CreateRouteCommentFormProps) {
+    const {t} = useTranslation();
     const [body, setBody] = useState('');
 
     const mutation =  useCreateRouteCommentMutation(routeId);
@@ -31,8 +33,8 @@ export function CreateRouteCommentForm({routeId}: CreateRouteCommentFormProps) {
             onSubmit={handleSubmit}
         >
             <div className={styles.heading}>
-                <strong>Join the conversation</strong>
-                <span>Share your thoughts about this route.</span>
+                <strong>{t('comments.form.title')}</strong>
+                <span>{t('comments.form.subtitle')}</span>
             </div>
 
             <textarea
@@ -40,7 +42,7 @@ export function CreateRouteCommentForm({routeId}: CreateRouteCommentFormProps) {
                 onChange={(event) =>
                     setBody(event.target.value)
                 }
-                placeholder="Write a comment..."
+                placeholder={t('comments.form.placeholder')}
                 maxLength={2000}
                 rows={3}
                 disabled={mutation.isPending}
@@ -56,14 +58,14 @@ export function CreateRouteCommentForm({routeId}: CreateRouteCommentFormProps) {
                     disabled={mutation.isPending || !body.trim()}
                 >
                     {mutation.isPending
-                        ? 'Posting...'
-                        : 'Post comment'}
+                        ? t('comments.form.posting')
+                        : t('comments.form.submit')}
                 </button>
             </div>
 
             {mutation.isError && (
                 <p className={styles.error}>
-                    Failed to post comment.
+                    {t('comments.form.error')}
                 </p>
             )}
         </form>

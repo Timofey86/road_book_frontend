@@ -4,6 +4,7 @@ import {useDeleteRouteMutation} from '../../../entities/route';
 import {appRoutes} from '../../../shared/lib/routes';
 import {Modal} from '../../../shared/ui/modal';
 import styles from './DeleteRoute.module.css';
+import {Trans, useTranslation} from 'react-i18next';
 
 interface DeleteRouteProps {
     routeId: number;
@@ -11,6 +12,7 @@ interface DeleteRouteProps {
 }
 
 export function DeleteRoute({routeId,routeTitle}: DeleteRouteProps) {
+    const {t} = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
 
     const navigate = useNavigate();
@@ -40,11 +42,10 @@ export function DeleteRoute({routeId,routeTitle}: DeleteRouteProps) {
             <section className={styles.dangerSection}>
                 <div className={styles.dangerContent}>
                     <div>
-                        <h2>Danger zone</h2>
+                        <h2>{t('editRoute.delete.title')}</h2>
 
                         <p>
-                            Permanently delete this route
-                            and all related data.
+                            {t('editRoute.delete.description')}
                         </p>
                     </div>
 
@@ -53,7 +54,7 @@ export function DeleteRoute({routeId,routeTitle}: DeleteRouteProps) {
                         className={styles.deleteButton}
                         onClick={() => setIsOpen(true)}
                     >
-                        Delete route
+                        {t('editRoute.delete.button')}
                     </button>
                 </div>
             </section>
@@ -61,17 +62,21 @@ export function DeleteRoute({routeId,routeTitle}: DeleteRouteProps) {
             <Modal
                 open={isOpen}
                 onClose={handleClose}
-                title="Delete route?"
+                title={t('editRoute.delete.modalTitle')}
             >
                 <p className={styles.message}>
-                    This will permanently delete{' '}
-                    <strong>“{routeTitle}”</strong>.
-                    This action cannot be undone.
+                    <Trans
+                        i18nKey="editRoute.delete.confirmation"
+                        values={{routeTitle}}
+                        components={{
+                            strong: <strong/>,
+                        }}
+                    />
                 </p>
 
                 {deleteRouteMutation.isError && (
                     <p className={styles.error}>
-                        Failed to delete the route.
+                        {t('editRoute.delete.error')}
                     </p>
                 )}
 
@@ -80,26 +85,20 @@ export function DeleteRoute({routeId,routeTitle}: DeleteRouteProps) {
                         type="button"
                         className={styles.cancelButton}
                         onClick={handleClose}
-                        disabled={
-                            deleteRouteMutation.isPending
-                        }
+                        disabled={deleteRouteMutation.isPending}
                     >
-                        Cancel
+                        {t('common.cancel')}
                     </button>
 
                     <button
                         type="button"
-                        className={
-                            styles.confirmDeleteButton
-                        }
+                        className={styles.confirmDeleteButton}
                         onClick={handleDelete}
-                        disabled={
-                            deleteRouteMutation.isPending
-                        }
+                        disabled={deleteRouteMutation.isPending}
                     >
                         {deleteRouteMutation.isPending
-                            ? 'Deleting...'
-                            : 'Delete route'}
+                            ? t('editRoute.delete.deleting')
+                            : t('editRoute.delete.button')}
                     </button>
                 </div>
             </Modal>

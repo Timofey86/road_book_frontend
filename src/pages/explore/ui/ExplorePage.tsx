@@ -7,6 +7,7 @@ import {ExploreSearch} from "./ExploreSearch.tsx";
 import {ChevronDown} from 'lucide-react';
 import {useState} from "react";
 import {ExploreFilters} from "./ExploreFilters.tsx";
+import {useTranslation} from 'react-i18next';
 
 interface ExplorePageProps {
     page: number;
@@ -60,6 +61,7 @@ export function ExplorePage({
         tags,
     }));
     const [filtersOpen, setFiltersOpen] = useState(false);
+    const {t} = useTranslation();
 
     const handleSortChange = (
         value: string,
@@ -124,7 +126,7 @@ export function ExplorePage({
             : 0);
 
     if (isPending) {
-        return <div>Loading routes...</div>;
+        return <div>{t('explore.loading')}</div>;
     }
 
     if (isError) {
@@ -136,9 +138,9 @@ export function ExplorePage({
     return (
         <section className={styles.explore}>
             <div className={styles.heading}>
-                <div>
-                    <h1>Explore</h1>
-                    <p>Discover routes shared by the community.</p>
+                < div>
+                    <h1>{t('explore.title')}</h1>
+                    <p>{t('explore.subtitle')}</p>
                 </div>
             </div>
             <div className={styles.toolbar}>
@@ -156,19 +158,19 @@ export function ExplorePage({
                         }
                     >
                         <option value="latest">
-                            Latest
+                            {t('explore.sort.latest')}
                         </option>
                         <option value="oldest">
-                            Oldest
+                            {t('explore.sort.oldest')}
                         </option>
                         <option value="likes">
-                            Most liked
+                            {t('explore.sort.mostLiked')}
                         </option>
                         <option value="distance-asc">
-                            Distance: shortest
+                            {t('explore.sort.distanceShortest')}
                         </option>
                         <option value="distance-desc">
-                            Distance: longest
+                            {t('explore.sort.distanceLongest')}
                         </option>
                     </select>
                     <ChevronDown
@@ -183,12 +185,12 @@ export function ExplorePage({
                     onClick={() => setFiltersOpen(true)}
                 >
                     <SlidersHorizontal size={18}/>
-                    Filters
+                    {t('explore.filters.button')}
 
                     {activeFiltersCount > 0 && (
                         <span className={styles.filtersCount}>
-            {activeFiltersCount}
-        </span>
+                            {activeFiltersCount}
+                        </span>
                     )}
                 </button>
             </div>
@@ -205,7 +207,7 @@ export function ExplorePage({
                     </div>
                 ) : (
                     <div className={styles.empty}>
-                        No routes found.
+                        {t('explore.empty')}
                     </div>
                 )}
 

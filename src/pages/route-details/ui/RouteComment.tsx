@@ -5,6 +5,7 @@ import {useDeleteRouteCommentMutation} from '../../../features/delete-route-comm
 import styles from './RouteDetailsPage.module.css';
 import {useEditRouteCommentMutation} from "../../../features/edit-route-comment";
 import { Modal } from "../../../shared/ui/modal";
+import {useTranslation} from 'react-i18next';
 
 interface RouteCommentProps {
     comment: Comment;
@@ -23,6 +24,7 @@ export function RouteComment({
     const [isEditing, setIsEditing] = useState(false);
     const [body, setBody] = useState(comment.body);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const {t} = useTranslation();
 
     const editMutation = useEditRouteCommentMutation(routeId);
     const deleteMutation = useDeleteRouteCommentMutation(routeId);
@@ -82,11 +84,7 @@ export function RouteComment({
                             alt={comment.author.name}
                         />
                     ) : (
-                        <div
-                            className={
-                                styles.commentAvatarFallback
-                            }
-                        >
+                        <div className={styles.commentAvatarFallback}>
                             {comment.author.name
                                 .charAt(0)
                                 .toUpperCase()}
@@ -103,7 +101,7 @@ export function RouteComment({
                         <button
                             type="button"
                             className={styles.commentMenuButton}
-                            aria-label="Comment actions"
+                            aria-label={t('routeDetails.comments.actions.menu')}
                             onClick={() =>
                                 setIsMenuOpen(
                                     (current) => !current,
@@ -122,7 +120,7 @@ export function RouteComment({
                                     className={styles.editCommentButton}
                                     onClick={handleEdit}
                                 >
-                                    Edit
+                                    {t('routeDetails.comments.actions.edit')}
                                 </button>
 
                                 <button
@@ -135,8 +133,8 @@ export function RouteComment({
                                     }}
                                 >
                                     {deleteMutation.isPending
-                                        ? 'Deleting...'
-                                        : 'Delete'}
+                                        ? t('routeDetails.comments.actions.deleting')
+                                        : t('routeDetails.comments.actions.delete')}
                                 </button>
                             </div>
                         )}
@@ -166,7 +164,7 @@ export function RouteComment({
                                 disabled={editMutation.isPending}
                                 onClick={handleCancelEdit}
                             >
-                                Cancel
+                                {t('routeDetails.comments.actions.cancel')}
                             </button>
 
                             <button
@@ -181,8 +179,8 @@ export function RouteComment({
                                 onClick={handleSaveEdit}
                             >
                                 {editMutation.isPending
-                                    ? 'Saving...'
-                                    : 'Save changes'}
+                                    ? t('routeDetails.comments.actions.saving')
+                                    : t('routeDetails.comments.actions.save')}
                             </button>
                         </div>
                     </div>
@@ -200,12 +198,15 @@ export function RouteComment({
                 setIsDeleteModalOpen(false);
             }
         }}
-        title="Delete comment?"
+        title={t(
+            'routeDetails.comments.deleteModal.title',
+        )}
     >
         <div className={styles.deleteModal}>
             <p>
-                Are you sure you want to delete this comment?
-                This action cannot be undone.
+                {t(
+                    'routeDetails.comments.deleteModal.description',
+                )}
             </p>
 
             <div className={styles.deleteModalActions}>
@@ -217,7 +218,7 @@ export function RouteComment({
                         setIsDeleteModalOpen(false)
                     }
                 >
-                    Cancel
+                    {t('routeDetails.comments.actions.cancel')}
                 </button>
 
                 <button
@@ -227,8 +228,8 @@ export function RouteComment({
                     onClick={handleDelete}
                 >
                     {deleteMutation.isPending
-                        ? 'Deleting...'
-                        : 'Delete'}
+                        ? t('routeDetails.comments.actions.deleting')
+                        : t('routeDetails.comments.actions.delete')}
                 </button>
             </div>
         </div>
