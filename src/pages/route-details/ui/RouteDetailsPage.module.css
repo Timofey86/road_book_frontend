@@ -29,12 +29,13 @@
     overflow: hidden;
     width: 100%;
     aspect-ratio: 16 / 6;
-    border-radius: 18px;
+    border-radius: 14px;
     background: #111827;
 }
 
 .heroImage {
-    display: block;
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -193,8 +194,15 @@
 
 /* No-cover fallback */
 
+.plainHeaderRow {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
 .header {
-    padding: 6px 0 20px;
+    padding: 6px 0 8px;
 }
 
 .header h1 {
@@ -212,16 +220,23 @@
 }
 
 .authorPlain {
+    width: fit-content;
     display: flex;
     align-items: center;
     gap: 8px;
     color: #374151;
     font-size: 14px;
     font-weight: 500;
+    text-decoration: none;
+}
+
+.authorPlain:hover span {
+    color: #047857;
 }
 
 .authorPlain img,
 .avatarFallbackPlain {
+    flex-shrink: 0;
     width: 34px;
     height: 34px;
     border-radius: 50%;
@@ -253,6 +268,13 @@
     color: #047857;
     font-size: 13px;
     font-weight: 500;
+}
+
+.ownerActionsPlain {
+    flex-shrink: 0;
+    display: flex;
+    gap: 10px;
+    padding-bottom: 8px;
 }
 
 /* Tabs */
@@ -963,6 +985,17 @@
     .hero {
         aspect-ratio: 16 / 7;
     }
+
+    .plainHeaderRow {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .ownerActionsPlain {
+        width: 100%;
+        padding-bottom: 0;
+    }
 }
 
 @media (max-width: 640px) {
@@ -971,8 +1004,8 @@
     }
 
     .hero {
-        aspect-ratio: auto;
-        min-height: 320px;
+        aspect-ratio: 4 / 3;
+        min-height: 0;
     }
 
     .heroContent {
@@ -996,5 +1029,23 @@
     .distanceBadge {
         top: 12px;
         right: 12px;
+    }
+
+    .ownerActions,
+    .ownerActionsPlain {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .primaryAction,
+    .secondaryAction {
+        width: 100%;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 30px;
     }
 }

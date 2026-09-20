@@ -49,6 +49,8 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
             </div>
         );
     }
+    const hasCover = Boolean(route.coverUrl);
+    const isOwner = route.userId === currentUser?.id;
 
     return (
         <div className={styles.page}>
@@ -60,32 +62,107 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
                 <ArrowLeft size={16}/>
                 {t('routeDetails.back')}
             </button>
-            {route.coverUrl ? (
-                <section className={styles.hero}>
-                    <img
-                        src={route.coverUrl}
-                        alt={route.title}
-                        className={styles.heroImage}
-                    />
 
-                    <div className={styles.heroOverlay}/>
+            {hasCover ? (
+                <>
+                    <section className={styles.hero}>
+                        <img
+                            src={route.coverUrl!}
+                            alt={route.title}
+                            className={styles.heroImage}
+                        />
 
-                    {route.totalDistanceMeters !== null && (
-                        <span className={styles.distanceBadge}>
-                            {Math.round(
-                                route.totalDistanceMeters / 1000,
-                            )}{' '}
-                            km
-                        </span>
+                        <div className={styles.heroOverlay}/>
+
+                        {route.totalDistanceMeters !== null && (
+                            <span className={styles.distanceBadge}>
+                                {Math.round(
+                                    route.totalDistanceMeters / 1000,
+                                )}{' '}
+                                km
+                            </span>
+                        )}
+
+                        <div className={styles.heroContent}>
+                            <Link
+                                to={appRoutes.publicProfile}
+                                params={{
+                                    userId: String(route.author.id),
+                                }}
+                                className={styles.author}
+                            >
+                                {route.author.avatarUrl ? (
+                                    <img
+                                        src={route.author.avatarUrl}
+                                        alt={route.author.name}
+                                    />
+                                ) : (
+                                    <div className={styles.avatarFallback}>
+                                        {route.author.name
+                                            .charAt(0)
+                                            .toUpperCase()}
+                                    </div>
+                                )}
+
+                                <span>{route.author.name}</span>
+                            </Link>
+
+                            <h1>{route.title}</h1>
+
+                            {route.description && (
+                                <p className={styles.description}>
+                                    {route.description}
+                                </p>
+                            )}
+
+                            {route.tags.length > 0 && (
+                                <div className={styles.tags}>
+                                    {route.tags.map((tag) => (
+                                        <span
+                                            key={tag.id}
+                                            className={styles.tag}
+                                        >
+                                            {tag.name}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </section>
+
+                    {isOwner && (
+                        <div className={styles.ownerActions}>
+                            <Link
+                                to={appRoutes.editRoute}
+                                params={{
+                                    routeId: String(route.id),
+                                }}
+                                className={styles.primaryAction}
+                            >
+                                {t('routeDetails.actions.editRoute')}
+                            </Link>
+
+                            <Link
+                                to={appRoutes.editRouteStops}
+                                params={{
+                                    routeId: String(route.id),
+                                }}
+                                className={styles.secondaryAction}
+                            >
+                                {t('routeDetails.actions.editStops')}
+                            </Link>
+                        </div>
                     )}
-
-                    <div className={styles.heroContent}>
+                </>
+            ) : (
+                <div className={styles.plainHeaderRow}>
+                    <header className={styles.header}>
                         <Link
                             to={appRoutes.publicProfile}
                             params={{
                                 userId: String(route.author.id),
                             }}
-                            className={styles.author}
+                            className={styles.authorPlain}
                         >
                             {route.author.avatarUrl ? (
                                 <img
@@ -93,7 +170,7 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
                                     alt={route.author.name}
                                 />
                             ) : (
-                                <div className={styles.avatarFallback}>
+                                <div className={styles.avatarFallbackPlain}>
                                     {route.author.name
                                         .charAt(0)
                                         .toUpperCase()}
@@ -106,86 +183,46 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
                         <h1>{route.title}</h1>
 
                         {route.description && (
-                            <p className={styles.description}>
-                                {route.description}
-                            </p>
+                            <p>{route.description}</p>
                         )}
 
                         {route.tags.length > 0 && (
-                            <div className={styles.tags}>
+                            <div className={styles.plainTags}>
                                 {route.tags.map((tag) => (
                                     <span
                                         key={tag.id}
-                                        className={styles.tag}
+                                        className={styles.plainTag}
                                     >
                                         {tag.name}
                                     </span>
                                 ))}
                             </div>
                         )}
-                    </div>
-                </section>
-            ) : (
-                <header className={styles.header}>
-                    <div className={styles.authorPlain}>
-                        {route.author.avatarUrl ? (
-                            <img
-                                src={route.author.avatarUrl}
-                                alt={route.author.name}
-                            />
-                        ) : (
-                            <div className={styles.avatarFallbackPlain}>
-                                {route.author.name
-                                    .charAt(0)
-                                    .toUpperCase()}
-                            </div>
-                        )}
+                    </header>
 
-                        <span>{route.author.name}</span>
-                    </div>
+                    {isOwner && (
+                        <div className={styles.ownerActionsPlain}>
+                            <Link
+                                to={appRoutes.editRoute}
+                                params={{
+                                    routeId: String(route.id),
+                                }}
+                                className={styles.primaryAction}
+                            >
+                                {t('routeDetails.actions.editRoute')}
+                            </Link>
 
-                    <h1>{route.title}</h1>
-
-                    {route.description && (
-                        <p>{route.description}</p>
-                    )}
-
-                    {route.tags.length > 0 && (
-                        <div className={styles.plainTags}>
-                            {route.tags.map((tag) => (
-                                <span
-                                    key={tag.id}
-                                    className={styles.plainTag}
-                                >
-                                    {tag.name}
-                                </span>
-                            ))}
+                            <Link
+                                to={appRoutes.editRouteStops}
+                                params={{
+                                    routeId: String(route.id),
+                                }}
+                                className={styles.secondaryAction}
+                            >
+                                {t('routeDetails.actions.editStops')}
+                            </Link>
                         </div>
                     )}
-                </header>
-            )}
-
-            {route.userId === currentUser?.id && (
-                <div className={styles.ownerActions}>
-                    <Link
-                        to={appRoutes.editRoute}
-                        params={{
-                            routeId: String(route.id),
-                        }}
-                        className={styles.primaryAction}
-                    >
-                        {t('routeDetails.actions.editRoute')}
-                    </Link>
-
-                    <Link
-                        to={appRoutes.editRouteStops}
-                        params={{
-                            routeId: String(route.id),
-                        }}
-                        className={styles.secondaryAction}
-                    >
-                        {t('routeDetails.actions.editStops')}
-                    </Link>
                 </div>
             )}
 
@@ -213,7 +250,6 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
                     currentUserId={currentUser?.id ?? null}
                 />
             )}
-
         </div>
     );
 }
