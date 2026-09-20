@@ -38,7 +38,7 @@ export function FavoritesPage({page, onPageChange}: FavoritesPageProps) {
             <header className={styles.header}>
                 <h1>{t('favorites.title')}</h1>
                 <p>
-                    {t('favorites.emptyTitle')}
+                    {t('favorites.subtitle')}
                 </p>
             </header>
 

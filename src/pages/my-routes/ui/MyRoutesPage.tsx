@@ -51,13 +51,10 @@ export function MyRoutesPage({page, onPageChange}: MyRoutesPageProps) {
             {data.items.length === 0 ? (
                 <div className={styles.empty}>
                     <Map size={36}/>
-
                     <h2>{t('myRoutes.emptyTitle')}</h2>
-
                     <p>
                         {t('myRoutes.emptyDescription')}
                     </p>
-
                 </div>
             ) : (
                 <>

@@ -271,3 +271,34 @@
     color: #6b7280;
     font-size: 14px;
 }
+
+@media (max-width: 640px) {
+    .page {
+        padding: 24px 16px;
+    }
+
+    .section {
+        padding: 20px 16px;
+    }
+
+    .tagInputRow {
+        flex-direction: column;
+    }
+
+    .tagInputRow input,
+    .addTagButton {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .stopsSection .sectionHeader {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .stopsSection .editStopsButton {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}

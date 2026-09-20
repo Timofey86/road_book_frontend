@@ -20,7 +20,7 @@
     display: grid;
     grid-template-columns: repeat(
         auto-fill,
-        minmax(320px, 1fr)
+        minmax(min(100%, 320px), 1fr)
     );
     gap: 20px;
     align-items: stretch;
@@ -51,4 +51,23 @@
 
 .empty p {
     margin: 6px 0 0;
+}
+
+@media (max-width: 600px) {
+    .grid {
+        gap: 16px;
+    }
+
+    .header {
+        margin-bottom: 18px;
+    }
+
+    .empty {
+        min-height: 260px;
+        padding: 24px 16px;
+    }
+
+    .empty p {
+        max-width: 320px;
+    }
 }

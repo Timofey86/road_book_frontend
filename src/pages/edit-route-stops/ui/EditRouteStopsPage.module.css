@@ -89,6 +89,14 @@
     color: #374151;
 }
 
+.empty span {
+    max-width: 240px;
+    margin: 8px auto 0;
+    color: #6b7280;
+    line-height: 1.4;
+    text-align: center;
+}
+
 .stops {
     display: flex;
     flex-direction: column;

@@ -98,3 +98,20 @@
     color: #b91c1c;
     font-size: 14px;
 }
+
+@media (max-width: 640px) {
+    .dangerSection {
+        padding: 20px 16px;
+    }
+
+    .dangerContent {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .deleteButton {
+        width: 100%;
+        min-height: 42px;
+    }
+}
