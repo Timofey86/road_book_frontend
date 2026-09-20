@@ -120,3 +120,31 @@
 .fileInput {
     display: none;
 }
+
+@media (max-width: 480px) {
+    .header {
+        padding: 18px 16px;
+    }
+
+    .content {
+        padding: 18px 16px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .controls {
+        width: 100%;
+    }
+
+    .actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .uploadButton,
+    .removeButton {
+        width: 100%;
+    }
+}

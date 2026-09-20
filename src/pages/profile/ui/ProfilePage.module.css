@@ -191,3 +191,54 @@
     color: #6b7280;
     font-size: 12px;
 }
+
+@media (max-width: 768px) {
+    .page {
+        padding: 24px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat + .stat {
+        border-left: 0;
+        border-top: 1px solid #e5e7eb;
+    }
+}
+
+@media (max-width: 480px) {
+    .page {
+        padding: 16px;
+    }
+
+    .pageHeader {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+
+    .editButton {
+        width: 100%;
+    }
+
+    .identity {
+        padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat {
+        min-height: 72px;
+        padding: 14px 20px;
+    }
+
+    .email {
+        overflow-wrap: anywhere;
+    }
+}

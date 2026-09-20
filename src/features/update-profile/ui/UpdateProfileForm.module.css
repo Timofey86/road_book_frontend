@@ -1,4 +1,4 @@
-form {
+.form {
     padding: 24px;
 }
 
@@ -107,4 +107,18 @@ form {
     border: 1px solid #a7f3d0;
     background: #ecfdf5;
     color: #047857;
+}
+
+@media (max-width: 480px) {
+    .form {
+        padding: 16px;
+    }
+
+    .field {
+        margin-bottom: 18px;
+    }
+
+    .actions button {
+        width: 100%;
+    }
 }

@@ -122,3 +122,29 @@
     color: #dc2626 !important;
     font-size: 13px !important;
 }
+
+@media (max-width: 480px) {
+    .header {
+        padding: 18px 16px;
+    }
+
+    .content {
+        padding: 18px 16px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .deleteButton {
+        width: 100%;
+    }
+
+    .modalActions {
+        flex-direction: column;
+    }
+
+    .cancelButton,
+    .confirmButton {
+        width: 100%;
+    }
+}
