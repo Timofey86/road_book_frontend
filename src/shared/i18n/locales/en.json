@@ -81,7 +81,9 @@
     "viewProfile": "View profile",
     "logout": "Log out",
     "signIn": "Sign in",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "openMenu": "Open navigation",
+    "closeMenu": "Close navigation"
   },
 
   "explore": {
@@ -115,7 +117,8 @@
 
   "routeCard": {
     "stops_one": "{{count}} stop",
-    "stops_other": "{{count}} stops"
+    "stops_other": "{{count}} stops",
+    "noImage": "No image"
   },
 
   "routeDetails": {

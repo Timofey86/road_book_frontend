@@ -34,7 +34,7 @@ export function RouteCard({route}: RouteCardProps) {
                         />
                     ) : (
                         <div className={styles.coverPlaceholder}>
-                            No image
+                            {t('routeCard.noImage')}
                         </div>
                     )}
 

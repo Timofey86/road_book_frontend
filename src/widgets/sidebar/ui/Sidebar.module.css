@@ -1,5 +1,6 @@
 .sidebar {
     position: sticky;
+    z-index: 100;
     top: 0;
     display: flex;
     flex-direction: column;
@@ -9,11 +10,28 @@
     border-right: 1px solid #e5e7eb;
 }
 
+.sidebarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
 .logo {
     display: flex;
     align-items: center;
-    margin-bottom: 28px;
     text-decoration: none;
+}
+
+.closeButton {
+    display: none;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background: transparent;
+    color: #374151;
+    cursor: pointer;
 }
 
 .logoImage {
@@ -175,4 +193,25 @@
 .logout:disabled {
     opacity: 0.5;
     cursor: default;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: min(280px, 85vw);
+        height: 100dvh;
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+    }
+
+    .sidebarOpen {
+        transform: translateX(0);
+    }
+
+    .closeButton {
+        display: grid;
+    }
 }

@@ -155,3 +155,21 @@
     background: #047857;
     color: #ffffff;
 }
+
+@media (max-width: 480px) {
+    .distance {
+        grid-template-columns: 1fr;
+    }
+
+    .tags {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        gap: 12px;
+    }
+
+    .applyButton {
+        flex: 1;
+    }
+}

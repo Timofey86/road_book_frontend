@@ -81,7 +81,9 @@
     "viewProfile": "Открыть профиль",
     "logout": "Выйти",
     "signIn": "Войти",
-    "signUp": "Регистрация"
+    "signUp": "Регистрация",
+    "openMenu": "Открыть меню",
+    "closeMenu": "Закрыть меню"
   },
 
   "explore": {
@@ -117,7 +119,8 @@
     "stops_one": "{{count}} остановка",
     "stops_few": "{{count}} остановки",
     "stops_many": "{{count}} остановок",
-    "stops_other": "{{count}} остановки"
+    "stops_other": "{{count}} остановки",
+    "noImage": "Нет изображения"
   },
 
   "routeDetails": {

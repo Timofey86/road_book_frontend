@@ -5,6 +5,7 @@ import {
     MapPinned,
     Plus,
     User,
+    X,
 } from 'lucide-react';
 import logo from '../../../shared/assets/logo.png';
 import {Link, useNavigate} from '@tanstack/react-router';
@@ -16,7 +17,12 @@ import {LanguageSwitcher} from "../../../shared/ui/language-switcher";
 import {appRoutes} from "../../../shared/lib/routes.ts";
 import {useTranslation} from 'react-i18next';
 
-export function Sidebar() {
+interface SidebarProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export function Sidebar({isOpen, onClose}: SidebarProps) {
     const navigate = useNavigate();
     const {t} = useTranslation();
     const {data: user} = useQuery(currentUserQueryOptions);
@@ -32,15 +38,30 @@ export function Sidebar() {
     };
 
     return (
-        <aside className={styles.sidebar}>
-            <div className={styles.logo}>
-                <Link to={appRoutes.home}>
-                <img
-                    src={logo}
-                    alt="roadbook_logo"
-                    className={styles.logoImage}
-                />
+        <aside className={`${styles.sidebar} ${
+            isOpen ? styles.sidebarOpen : ''
+        }`}>
+            <div className={styles.sidebarHeader}>
+                <Link
+                    to={appRoutes.home}
+                    className={styles.logo}
+                    onClick={onClose}
+                >
+                    <img
+                        src={logo}
+                        alt="roadbook_logo"
+                        className={styles.logoImage}
+                    />
                 </Link>
+
+                <button
+                    type="button"
+                    className={styles.closeButton}
+                    onClick={onClose}
+                    aria-label={t('navigation.closeMenu')}
+                >
+                    <X size={22}/>
+                </button>
             </div>
 
             <nav className={styles.navigation}>
@@ -50,6 +71,7 @@ export function Sidebar() {
                     activeProps={{
                         className: `${styles.link} ${styles.active}`,
                     }}
+                    onClick={onClose}
                 >
                     <Compass size={20}/>
                     {t('navigation.explore')}
@@ -61,8 +83,9 @@ export function Sidebar() {
                             to={appRoutes.myRoutes}
                             className={styles.link}
                             activeProps={{
-                                className: `${styles.navItem} ${styles.active}`,
+                                className: `${styles.link} ${styles.active}`,
                             }}
+                            onClick={onClose}
                         >
                             <MapPinned size={20}/>
                             {t('navigation.myRoutes')}
@@ -74,6 +97,7 @@ export function Sidebar() {
                             activeProps={{
                                 className: `${styles.link} ${styles.active}`,
                             }}
+                            onClick={onClose}
                         >
                             <Heart size={20}/>
                             {t('navigation.favorites')}
@@ -82,6 +106,7 @@ export function Sidebar() {
                         <Link
                             to={appRoutes.createRoute}
                             className={styles.createButton}
+                            onClick={onClose}
                         >
                             <Plus size={18}/>
                             {t('navigation.createRoute')}
@@ -89,7 +114,6 @@ export function Sidebar() {
                     </>
                 )}
             </nav>
-
 
             {user && (
                 <>
@@ -104,6 +128,7 @@ export function Sidebar() {
                             activeProps={{
                                 className: `${styles.link} ${styles.active}`,
                             }}
+                            onClick={onClose}
                         >
                             <User size={20}/>
                             {t('navigation.profile')}
@@ -113,6 +138,7 @@ export function Sidebar() {
                     <Link
                         to={appRoutes.profile}
                         className={styles.userCard}
+                        onClick={onClose}
                     >
                         {user.avatarUrl ? (
                             <img
@@ -133,7 +159,7 @@ export function Sidebar() {
                     </Link>
 
                     <div className={styles.languageRow}>
-                        <LanguageSwitcher />
+                        <LanguageSwitcher/>
                     </div>
 
                     <button
@@ -148,5 +174,5 @@ export function Sidebar() {
                 </>
             )}
         </aside>
-    )
+    );
 }

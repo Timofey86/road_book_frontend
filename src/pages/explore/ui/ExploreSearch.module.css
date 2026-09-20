@@ -26,3 +26,48 @@
 .search input:focus {
     border-color: #047857;
 }
+
+@media (max-width: 600px) {
+    .content {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .authorOverlay {
+        left: 10px;
+        bottom: 8px;
+    }
+
+    .authorOverlay span {
+        font-size: 16px;
+    }
+
+    .avatar,
+    .avatarFallback {
+        width: 34px;
+        height: 34px;
+    }
+
+    .distanceBadge {
+        top: 8px;
+        left: 8px;
+        font-size: 12px;
+    }
+
+    .tag {
+        padding: 3px 6px;
+        font-size: 11px;
+    }
+
+    .meta {
+        font-size: 12px;
+    }
+
+    .meta span {
+        gap: 4px;
+    }
+}

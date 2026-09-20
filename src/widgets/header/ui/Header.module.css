@@ -14,11 +14,19 @@
     gap: 14px;
 }
 
-.iconButton {
-    display: grid;
+.menuButton {
+    display: none;
+}
+
+.iconButton,
+.menuButton {
     place-items: center;
     border: 0;
     background: transparent;
+}
+
+.iconButton {
+    display: grid;
 }
 
 .avatar,
@@ -51,4 +59,19 @@
 
 .signIn:hover, .signUp:hover {
     background: #ecf7f2;
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: 60px;
+        justify-content: space-between;
+        padding: 0 16px;
+    }
+
+    .menuButton {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+    }
 }

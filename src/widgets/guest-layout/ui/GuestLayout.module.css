@@ -38,6 +38,16 @@
     height: auto;
 }
 
+.mobileLogoLink {
+    display: none;
+}
+
+.mobileLogo {
+    display: block;
+    width: 150px;
+    height: auto;
+}
+
 .intro {
     max-width: 380px;
 }
@@ -78,6 +88,14 @@
     }
 
     .formSection {
+        flex-direction: column;
+        align-items: stretch;
         padding: 32px 24px;
+    }
+
+    .mobileLogoLink {
+        display: block;
+        align-self: flex-start;
+        margin-bottom: 28px;
     }
 }

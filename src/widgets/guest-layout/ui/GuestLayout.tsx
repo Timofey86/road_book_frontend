@@ -25,6 +25,16 @@ export function GuestLayout({ children }: PropsWithChildren) {
                     </div>
                 </section>
                 <section className={styles.formSection}>
+                    <Link
+                        to={appRoutes.home}
+                        className={styles.mobileLogoLink}
+                    >
+                        <img
+                            src={logo}
+                            alt="RoadBook"
+                            className={styles.mobileLogo}
+                        />
+                    </Link>
                     {children}
                 </section>
             </div>
