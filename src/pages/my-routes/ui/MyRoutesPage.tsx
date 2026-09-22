@@ -7,6 +7,7 @@ import {
 import {Pagination} from '../../../shared/ui/pagination';
 import styles from './MyRoutesPage.module.css';
 import {useTranslation} from 'react-i18next';
+import {PageLoader} from "../../../shared/ui/PageLoader";
 
 interface MyRoutesPageProps {
     page: number;
@@ -24,11 +25,8 @@ export function MyRoutesPage({page, onPageChange}: MyRoutesPageProps) {
     );
 
     if (isPending) {
-        return (
-            <div className={styles.page}>
-                <p>{t('myRoutes.loading')}</p>
-            </div>
-        );
+        return  <PageLoader />
+
     }
 
     if (isError) {

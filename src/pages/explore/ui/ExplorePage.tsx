@@ -8,6 +8,7 @@ import {ChevronDown} from 'lucide-react';
 import {useState} from "react";
 import {ExploreFilters} from "./ExploreFilters.tsx";
 import {useTranslation} from 'react-i18next';
+import {PageLoader} from "../../../shared/ui/PageLoader";
 
 interface ExplorePageProps {
     page: number;
@@ -126,7 +127,7 @@ export function ExplorePage({
             : 0);
 
     if (isPending) {
-        return <div>{t('explore.loading')}</div>;
+        return <PageLoader />
     }
 
     if (isError) {

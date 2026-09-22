@@ -10,6 +10,7 @@ import {ArrowLeft} from "lucide-react";
 import {ManageUserAvatar} from "../../../features/manage-user-avatar";
 import {DeleteAccount} from "../../../features/delete-account";
 import {useTranslation} from 'react-i18next';
+import {PageLoader} from "../../../shared/ui/PageLoader";
 
 export function EditProfilePage() {
     const {t} = useTranslation();
@@ -20,11 +21,7 @@ export function EditProfilePage() {
     } = useQuery(currentUserQueryOptions);
 
     if (isPending) {
-        return (
-            <div className={styles.page}>
-                {t('profile.loading')}
-            </div>
-        );
+        return <PageLoader />
     }
 
     if (isError || !user) {

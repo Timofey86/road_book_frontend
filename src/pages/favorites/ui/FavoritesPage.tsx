@@ -5,6 +5,7 @@ import {RouteCard} from '../../../entities/route';
 import styles from './FavoritesPage.module.css';
 import {Pagination} from "../../../shared/ui/pagination";
 import {useTranslation} from 'react-i18next';
+import {PageLoader} from "../../../shared/ui/PageLoader";
 
 interface FavoritesPageProps {
     page: number;
@@ -18,11 +19,7 @@ export function FavoritesPage({page, onPageChange}: FavoritesPageProps) {
     );
 
     if (isPending) {
-        return (
-            <div className={styles.page}>
-                <p>{t('favorites.loading')}</p>
-            </div>
-        );
+        return <PageLoader />
     }
 
     if (isError) {

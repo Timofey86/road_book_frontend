@@ -24,6 +24,7 @@ import {ArrowLeft} from "lucide-react";
 import {appRoutes} from "../../../shared/lib/routes.ts";
 import {currentUserQueryOptions} from "../../../entities/user";
 import {useTranslation} from 'react-i18next';
+import {PageLoader} from "../../../shared/ui/PageLoader";
 
 interface EditRouteStopsPageProps {
     routeId: number;
@@ -116,11 +117,7 @@ export function EditRouteStopsPage({routeId}: EditRouteStopsPageProps) {
     };
 
     if (isPending || isCurrentUserPending) {
-        return (
-            <div className={styles.page}>
-                {t('editRouteStops.loading')}
-            </div>
-        );
+        return <PageLoader />
     }
 
     if (isError || !route) {

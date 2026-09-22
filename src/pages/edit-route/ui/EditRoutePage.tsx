@@ -6,6 +6,7 @@ import {appRoutes} from "../../../shared/lib/routes.ts";
 import {currentUserQueryOptions} from '../../../entities/user';
 import {EditRouteForm} from "./EditRouteForm.tsx";
 import {useTranslation} from 'react-i18next';
+import {PageLoader} from "../../../shared/ui/PageLoader";
 
 interface EditRoutePageProps {
     routeId: number;
@@ -27,11 +28,7 @@ export function EditRoutePage({routeId}: EditRoutePageProps) {
 
 
     if (isPending || isCurrentUserPending) {
-        return (
-            <div className={styles.page}>
-                {t('editRoute.loading')}
-            </div>
-        );
+        return <PageLoader />
     }
 
     if (isError || !route) {

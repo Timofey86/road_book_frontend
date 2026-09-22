@@ -13,6 +13,7 @@ import {RoutePhotos} from "./RoutePhotos.tsx";
 import {RouteComments} from "./RouteComments.tsx";
 import type {RouteDetailsTab} from "../model/types.ts";
 import {useTranslation} from 'react-i18next';
+import {PageLoader} from "../../../shared/ui/PageLoader";
 
 interface RouteDetailsPageProps {
     routeId: number;
@@ -35,11 +36,7 @@ export function RouteDetailsPage({routeId, activeTab, onTabChange}: RouteDetails
     );
 
     if (isPending) {
-        return (
-            <div className={styles.page}>
-                {t('routeDetails.loading')}
-            </div>
-        );
+        return <PageLoader />
     }
 
     if (isError || !route) {

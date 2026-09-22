@@ -7,6 +7,7 @@ import {publicUserQueryOptions} from '../../../entities/user';
 import styles from './PublicProfilePage.module.css';
 import {router} from "../../../app/router.ts";
 import {useTranslation} from 'react-i18next';
+import {PageLoader} from "../../../shared/ui/PageLoader";
 
 interface PublicProfilePageProps {
     userId: number;
@@ -23,11 +24,7 @@ export function PublicProfilePage({userId}: PublicProfilePageProps) {
     } = useQuery(publicUserQueryOptions(userId));
 
     if (isPending) {
-        return (
-            <div className={styles.page}>
-                {t('profile.loading')}
-            </div>
-        );
+        return <PageLoader />
     }
 
     if (isError) {

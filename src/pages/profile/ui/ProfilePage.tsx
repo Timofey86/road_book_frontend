@@ -15,6 +15,7 @@ import Lightbox from "yet-another-react-lightbox";
 import 'yet-another-react-lightbox/styles.css';
 import {useTranslation} from 'react-i18next';
 import {router} from "../../../app/router.ts";
+import {PageLoader} from "../../../shared/ui/PageLoader";
 
 export function ProfilePage() {
     const {t, i18n} = useTranslation();
@@ -26,11 +27,7 @@ export function ProfilePage() {
     } = useQuery(currentUserQueryOptions);
 
     if (isPending) {
-        return (
-            <div className={styles.page}>
-                {t('profile.loading')}
-            </div>
-        );
+        return <PageLoader />
     }
 
     if (isError || !user) {
