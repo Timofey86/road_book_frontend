@@ -7,13 +7,19 @@ interface RouteLikeButtonProps {
     routeId: number;
     isLiked: boolean;
     likesCount: number;
+    onAuthRequired?: () => void;
 }
 
-export function RouteLikeButton({routeId, isLiked, likesCount}: RouteLikeButtonProps) {
+export function RouteLikeButton({routeId, isLiked, likesCount, onAuthRequired}: RouteLikeButtonProps) {
     const mutation = useToggleRouteLikeMutation();
     const {t} = useTranslation();
 
     const handleClick = () => {
+        if (onAuthRequired) {
+            onAuthRequired();
+            return;
+        }
+
         mutation.mutate({
             routeId,
             isLiked,

@@ -1,13 +1,15 @@
 import type {RouteDetails} from "../../../entities/route";
 import styles from './RouteDetailsPage.module.css';
 import {RouteMap} from "../../../features/route-map";
-import {Clock3, Heart, MapPin, RouteIcon, Star} from "lucide-react";
+import {Clock3, MapPin, RouteIcon} from "lucide-react";
 import {RouteLikeButton} from "../../../features/toggle-route-like";
 import {RouteFavoriteButton} from "../../../features/toggle-route-favorite";
 import {formatDuration} from "../../../shared/lib/formatDuration.ts";
 import {useQuery} from "@tanstack/react-query";
 import {currentUserQueryOptions} from "../../../entities/user";
 import {useTranslation} from 'react-i18next';
+import {useState} from "react";
+import {AuthRequiredModal} from "../../../features/auth-required-modal";
 
 interface RouteOverviewProps {
     route: RouteDetails;
@@ -15,6 +17,8 @@ interface RouteOverviewProps {
 
 export function RouteOverview({route}: RouteOverviewProps) {
     const {t} = useTranslation();
+
+    const [authModalOpen, setAuthModalOpen] = useState(false);
 
     const distance =
         route.totalDistanceMeters !== null
@@ -165,37 +169,34 @@ export function RouteOverview({route}: RouteOverviewProps) {
                     </section>
 
                     <section className={styles.activityCard}>
-                        {currentUser ? (
-                            <RouteLikeButton
-                                routeId={route.id}
-                                isLiked={route.isLiked}
-                                likesCount={route.likesCount}
-                            />
-                        ) : (
-                            <div className={styles.activityRow}>
-                                <Heart size={18} />
-                                <span>
-                                    {t('routeDetails.overview.like', {
-                                        count: route.likesCount,
-                                    })}
-                                </span>
-                            </div>
-                        )}
+                        <RouteLikeButton
+                            routeId={route.id}
+                            isLiked={currentUser ? route.isLiked : false}
+                            likesCount={route.likesCount}
+                            onAuthRequired={
+                                currentUser
+                                    ? undefined
+                                    : () => setAuthModalOpen(true)
+                            }
+                        />
 
-                        {currentUser ? (
-                            <RouteFavoriteButton
-                                routeId={route.id}
-                                isFavorite={route.isFavorite}
-                            />
-                        ) : (
-                            <div className={styles.activityRow}>
-                                <Star size={18}/>
-                                <span>{t('routeDetails.overview.addToFavorites')}</span>
-                            </div>
-                        )}
+                        <RouteFavoriteButton
+                            routeId={route.id}
+                            isFavorite={currentUser ? route.isFavorite : false}
+                            onAuthRequired={
+                                currentUser
+                                    ? undefined
+                                    : () => setAuthModalOpen(true)
+                            }
+                        />
                     </section>
                 </aside>
             </div>
+            <AuthRequiredModal
+                open={authModalOpen}
+                onClose={() => setAuthModalOpen(false)}
+                description={t('authRequired.description')}
+            />
         </>
     )
 }

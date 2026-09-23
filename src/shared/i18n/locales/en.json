@@ -464,6 +464,14 @@
     "description": "The page you're looking for doesn't exist or may have been moved.",
     "backHome": "Back to Explore"
   },
+  "authRequired": {
+    "title": "Sign in required",
+    "description": "Sign in or create an account to like routes and save them to your favorites.",
+    "comment": "Sign in or create an account to leave comments.",
+    "login": "Sign in",
+    "register": "Create account"
+  },
+  "leaveComment": "Leave a comment",
 
   "pagination": {
     "previous": "Previous",

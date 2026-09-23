@@ -7,6 +7,7 @@ import {RouteComment} from "./RouteComment.tsx";
 import {useState} from "react";
 import {Pagination} from "../../../shared/ui/pagination";
 import {useTranslation} from 'react-i18next';
+import {AuthRequiredModal} from "../../../features/auth-required-modal";
 
 interface RouteCommentsProps {
     routeId: number;
@@ -15,6 +16,7 @@ interface RouteCommentsProps {
 
 export function RouteComments({routeId, currentUserId}: RouteCommentsProps) {
     const [page, setPage] = useState(1);
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const {t} = useTranslation();
     const {
         data,
@@ -35,12 +37,23 @@ export function RouteComments({routeId, currentUserId}: RouteCommentsProps) {
 
 
     return (
+        <>
         <div className={styles.comments}>
-            {currentUserId !== null && (
+            {currentUserId !== null ? (
                 <CreateRouteCommentForm
                     routeId={routeId}
                 />
+            ) : (
+                <button
+                    type="button"
+                    className={styles.guestCommentButton}
+                    onClick={() => setIsAuthModalOpen(true)}
+                >
+                    <MessageCircle size={18}/>
+                    {t('leaveComment')}
+                </button>
             )}
+
 
             {data.meta.totalItems === 0 ? (
                 <div className={styles.emptyComments}>
@@ -87,5 +100,11 @@ export function RouteComments({routeId, currentUserId}: RouteCommentsProps) {
                 </section>
             )}
         </div>
+            <AuthRequiredModal
+                open={isAuthModalOpen}
+                onClose={() => setIsAuthModalOpen(false)}
+                description={t('authRequired.comment')}
+            />
+        </>
     );
 }

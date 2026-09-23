@@ -639,7 +639,7 @@
 /* Comments */
 
 .commentsSection {
-    margin-top: 16px;
+    margin-top: 10px;
     padding: 18px;
     border: 1px solid #e5e7eb;
     border-radius: 14px;
@@ -695,7 +695,7 @@
 
 .emptyComments {
     min-height: 240px;
-    margin-top: 16px;
+    margin-top: 10px;
     padding: 40px 24px;
     display: flex;
     flex-direction: column;
@@ -814,6 +814,31 @@
 
 .editCommentButton:hover {
     background: #f3f4f6;
+}
+
+.guestCommentButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    margin: 20px 0;
+    padding: 0 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #374151;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.guestCommentButton:hover {
+    border-color: #047857;
+    background: #ecfdf5;
+    color: #047857;
 }
 
 .deleteCommentButton {
@@ -1055,5 +1080,13 @@
 
     .header h1 {
         font-size: 30px;
+    }
+
+    .authModalActions {
+        flex-direction: column;
+    }
+    .guestCommentButton {
+        width: 100%;
+        margin: 16px 0;
     }
 }
