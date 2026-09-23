@@ -469,7 +469,8 @@
     "description": "Sign in or create an account to like routes and save them to your favorites.",
     "comment": "Sign in or create an account to leave comments.",
     "login": "Sign in",
-    "register": "Create account"
+    "register": "Create account",
+    "createRoute": "Sign in or create an account to create your own routes."
   },
   "leaveComment": "Leave a comment",
 
