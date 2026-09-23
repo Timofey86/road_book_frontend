@@ -2,6 +2,10 @@
 
 Frontend application for **RoadBook**, a web application for planning, documenting, discovering, and sharing road trips.
 
+The production frontend is deployed on **Vercel**.
+
+🌐 **Live Demo:** https://roadbooktravel.com
+
 The application provides a responsive interface for exploring community routes, creating and editing personal routes, managing stops and photos, viewing routes on a map, and interacting through comments, likes, and favorites.
 
 ## Features
