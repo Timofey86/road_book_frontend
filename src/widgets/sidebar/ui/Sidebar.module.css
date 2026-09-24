@@ -195,6 +195,28 @@
     cursor: default;
 }
 
+.footer {
+    margin-top: auto;
+    padding: 20px 12px 4px;
+    color: #9ca3af;
+    font-size: 12px;
+    text-align: center;
+}
+
+.footer a {
+    color: #6b7280;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #047857;
+}
+
+.heart {
+    color: #047857;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         position: fixed;

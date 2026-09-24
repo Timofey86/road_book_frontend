@@ -203,6 +203,18 @@ export function Sidebar({isOpen, onClose}: SidebarProps) {
                         </button>
                     </>
                 )}
+                <footer className={styles.footer}>
+                    <span>
+                    Made with <span className={styles.heart}>♥</span> by{' '}
+                    <a
+                        href="https://github.com/Timofey86"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        Timofej Mukhin
+                    </a>
+                    </span>
+                </footer>
             </aside>
 
             <AuthRequiredModal
