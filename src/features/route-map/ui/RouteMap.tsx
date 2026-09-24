@@ -17,10 +17,15 @@ import type {
     RouteStop,
 } from '../../../entities/route';
 
-L.Icon.Default.mergeOptions({
+const defaultMarkerIcon = L.icon({
     iconUrl: markerIcon,
     iconRetinaUrl: markerIcon2x,
     shadowUrl: markerShadow,
+
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
 });
 
 
@@ -96,6 +101,7 @@ export function RouteMap({geometry, stops}: RouteMapProps) {
                             stop.latitude,
                             stop.longitude,
                         ]}
+                        icon={defaultMarkerIcon}
                     >
                         <Popup>
                             <strong>
