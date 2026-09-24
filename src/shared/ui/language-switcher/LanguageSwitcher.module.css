@@ -91,3 +91,29 @@
     background: #ecfdf5;
     color: #047857;
 }
+
+.compact {
+    width: auto;
+}
+
+.compact .trigger {
+    width: auto;
+    min-height: 32px;
+    padding: 0 6px;
+    border: 0;
+    background: transparent;
+}
+
+.compact .trigger:hover {
+    border-color: transparent;
+    background: #ecf7f2;
+}
+
+.compact .value {
+    color: #047857;
+    font-weight: 600;
+}
+
+.compact .menu {
+    top: calc(100% + 8px);
+}

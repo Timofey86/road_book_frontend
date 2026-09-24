@@ -5,7 +5,11 @@ import type { SupportedLanguage } from '../../i18n/types';
 import styles from './LanguageSwitcher.module.css';
 import { useUpdatePreferredLanguageMutation } from '../../../entities/user';
 
-export function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+    variant?: 'default' | 'compact';
+}
+
+export function LanguageSwitcher({variant = 'default'}: LanguageSwitcherProps) {
     const { t, i18n } = useTranslation();
 
     const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +50,7 @@ export function LanguageSwitcher() {
 
     return (
         <div
-            className={styles.wrapper}
+            className={`${styles.wrapper} ${variant === 'compact' ? styles.compact : ''}`}
             ref={wrapperRef}
         >
             <button
@@ -57,9 +61,11 @@ export function LanguageSwitcher() {
                 aria-haspopup="listbox"
                 disabled={updateLanguageMutation.isPending}
             >
-                <span className={styles.label}>
-                    {t('sidebar.language')}
-                </span>
+                {variant === 'default' && (
+                    <span className={styles.label}>
+                        {t('sidebar.language')}
+                    </span>
+                )}
 
                 <span className={styles.value}>
                     {currentLanguage.toUpperCase()}

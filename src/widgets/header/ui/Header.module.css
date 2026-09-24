@@ -61,6 +61,21 @@
     background: #ecf7f2;
 }
 
+.mobileLanguage {
+    display: none;
+}
+
+.avatarLink {
+    display: flex;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.avatarLink:focus-visible {
+    outline: 2px solid #047857;
+    outline-offset: 2px;
+}
+
 @media (max-width: 768px) {
     .header {
         height: 60px;
@@ -73,5 +88,9 @@
         width: 40px;
         height: 40px;
         cursor: pointer;
+    }
+
+    .mobileLanguage {
+        display: block;
     }
 }

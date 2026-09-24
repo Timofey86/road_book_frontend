@@ -112,15 +112,6 @@ export function Sidebar({isOpen, onClose}: SidebarProps) {
                                 <Heart size={20}/>
                                 {t('navigation.favorites')}
                             </Link>
-
-                            {/*<Link*/}
-                            {/*    to={appRoutes.createRoute}*/}
-                            {/*    className={styles.createButton}*/}
-                            {/*    onClick={onClose}*/}
-                            {/*>*/}
-                            {/*    <Plus size={18}/>*/}
-                            {/*    {t('navigation.createRoute')}*/}
-                            {/*</Link>*/}
                         </>
                     )}
 
